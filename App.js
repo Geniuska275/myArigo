@@ -1,11 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View ,Image} from 'react-native';
+import {logo} from "./arigo-logo.png"
+import SignupScreen from './Screens/SignupScreen';
+import LoginScreen from './Screens/LoginScreen';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+       <LoginScreen/>
+       
+      <StatusBar  barStyle="light-content" backgroundColor='white'/>
     </View>
   );
 }
@@ -13,7 +17,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#243c56',
     alignItems: 'center',
     justifyContent: 'center',
   },
