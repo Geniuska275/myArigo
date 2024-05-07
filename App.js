@@ -3,14 +3,19 @@ import { StyleSheet, Text, View ,Image} from 'react-native';
 import {logo} from "./arigo-logo.png"
 import SignupScreen from './Screens/SignupScreen';
 import LoginScreen from './Screens/LoginScreen';
-
+import { NavigationContainer } from '@react-navigation/native';
+import AuthStack from './navigations/AuthNavigator';
 export default function App() {
   return (
+    <NavigationContainer>
+{/* 
     <View style={styles.container}>
        <LoginScreen/>
        
+    </View> */}
+    <AuthStack/>
       <StatusBar  barStyle="light-content" backgroundColor='white'/>
-    </View>
+    </NavigationContainer>
   );
 }
 

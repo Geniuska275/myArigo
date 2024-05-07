@@ -9,7 +9,7 @@ import { Divider } from 'react-native-elements';
 import RadioGroup from 'react-native-radio-buttons-group';
 import Radio from '../Components/Inputs/Radio';
 
-const SignupScreen = () => {
+const SignupScreen = ({navigation}) => {
   const [Email,setEmail]=useState("")
   const [fullname,setFullName]=useState("")
   const [Phone,setPhone]=useState()
@@ -91,7 +91,7 @@ const Options=[
               <Text style={{color:"#fefefe",fontWeight:"bold",lineHeight:22,marginHorizontal:30,marginTop:20}}>Hello,Welcome to Myarigo ,the first Business platform for verified brands ,service and Business.Arigo perfectly illustrate the characteristics of a ladder that aids the process of climbing.We Connect Business,Brands and Services together. </Text>
                <Text style={{color:"#fefefe",fontWeight:"bold",marginHorizontal:30,marginTop:30}} >Don't have an account ?</Text>
             <View style={{flexDirection:"row",gap:4,marginHorizontal:30}}>
-            <TouchableOpacity onPress={{}} style={{backgroundColor:"#6c757d",padding:10,borderRadius:10,marginTop:5}}>
+            <TouchableOpacity onPress={()=>navigation.navigate("Login")} style={{backgroundColor:"#6c757d",padding:10,borderRadius:10,marginTop:5}}>
             <Text style={{color:"white",fontWeight:"bold"}}>Login</Text>
            </TouchableOpacity>
            {/* <TouchableOpacity onPress={{}} style={{backgroundColor:"#6c757d",padding:10,borderRadius:10}}>

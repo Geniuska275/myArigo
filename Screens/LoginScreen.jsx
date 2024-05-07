@@ -6,10 +6,11 @@ import AppButton from '../Components/AppButton';
 import { FontAwesome } from '@expo/vector-icons';
 import { Divider } from 'react-native-elements';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const [Email,setEmail]=useState("")
   const [Password,setPassword]=useState("")
   const [Secure,setSecure]=useState(false)
+  const {navigate}=navigation;
 
 
 
@@ -47,7 +48,7 @@ const LoginScreen = () => {
   setSecure(true)  
 }}/>
 }      
-          <AppButton title={"Login"}/>
+          <AppButton title={"Login"} navigation={navigation}/>
            <View style={{position:"relative"}}>
 
           <Divider style={{ backgroundColor: 'black' ,marginHorizontal:40,marginTop:20}} />
@@ -62,7 +63,7 @@ const LoginScreen = () => {
               <Text style={{color:"#fefefe",fontWeight:"bold",padding:"20",lineHeight:25,marginHorizontal:30,marginTop:30}}>Hello,Welcome to Myarigo ,the first Business platform for verified brands ,service and Business.Arigo perfectly illustrate the characteristics of a ladder that aids the process of climbing.We Connect Business,Brands and Services together. </Text>
                <Text style={{color:"#fefefe",fontWeight:"bold",marginHorizontal:30,marginTop:30}} >Don't have an account ?</Text>
             <View style={{flexDirection:"row",gap:4,marginHorizontal:30,marginTop:20}}>
-            <TouchableOpacity onPress={{}} style={{backgroundColor:"#6c757d",padding:10,borderRadius:10}}>
+            <TouchableOpacity onPress={()=>navigation.navigate("Signup")} style={{backgroundColor:"#6c757d",padding:10,borderRadius:10}}>
             <Text style={{color:"white",fontWeight:"bold"}}>Register</Text>
            </TouchableOpacity>
            <TouchableOpacity onPress={{}} style={{backgroundColor:"#6c757d",padding:10,borderRadius:10}}>
