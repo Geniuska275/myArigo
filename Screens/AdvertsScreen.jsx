@@ -2,11 +2,20 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Header from '../Components/Header'
 import constants from "expo-constants";
+import Displays from '../Components/Displays';
+import { ScrollView } from 'react-native';
 const AdvertsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header/>
-      <Text style={{color:"red"}}>AdvertsScreen</Text>
+      <ScrollView>
+
+      <Displays route={"Post"} name={"Posts"}/>
+      <Displays route={"Adverts"} name={"Adverts"}/>
+      <Displays/>
+      </ScrollView>
+
+
     </SafeAreaView>
   )
 }

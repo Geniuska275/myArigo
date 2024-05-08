@@ -6,6 +6,7 @@ import PostScreen from '../Screens/PostScreen';
 import Services from '../Screens/Services';
 import Products from '../Screens/Products';
 import Icon from "react-native-vector-icons/Ionicons"
+import ProductCategoryDetails from '../Screens/ProductCategoryDetails';
 
 
 const Tab = createBottomTabNavigator();
@@ -34,6 +35,12 @@ function BottomTabs() {
               }else if(route.name=="Products"){
                 iconName= focused? "home":"home-outline"
                  
+              }else if(route.name=="Homes."){
+                iconName= focused? "home":"home-outline"
+                 
+              }else if(route.name=="Homes"){
+                iconName= focused? "home":"home-outline"
+                 
               }
             return <Icon name={iconName} color={color} size={22}/>
           },
@@ -41,9 +48,13 @@ function BottomTabs() {
           
     )
     }>
-      {/* <Tab.Screen name="Home" component={Home} /> */}
-      <Tab.Screen name="Adverts" component={AdvertsScreen} />
-      <Tab.Screen name="Auctions" component={AuctionScreen} />
+      {/* <Tab.Screen name="Homes" component={Home} /> */}
+      <Tab.Screen name="Home" component={ProductCategoryDetails} />
+
+      {/* <Tab.Screen name="Home" component={AdvertsScreen} /> */}
+
+       <Tab.Screen name="Adverts" component={AdvertsScreen} />
+      <Tab.Screen name="Auctions" component={AuctionScreen} /> 
       <Tab.Screen name="Post" component={PostScreen} />
       <Tab.Screen name="Services" component={Services} />
       <Tab.Screen name="Products" component={Products} />

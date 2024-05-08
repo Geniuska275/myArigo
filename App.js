@@ -14,7 +14,7 @@ export default function App() {
        
     </View> */}
     <AuthStack/>
-      <StatusBar  barStyle="light-content" backgroundColor='white'/>
+      <StatusBar  barStyle="light-content" backgroundColor="#243c56"/>
     </NavigationContainer>
   );
 }
