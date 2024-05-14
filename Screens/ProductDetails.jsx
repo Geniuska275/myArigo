@@ -15,12 +15,14 @@ import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 import Display from '../Components/Display';
 import Related from '../Components/Related';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 const ProductDetails = () => {
-  const [Secure,setSecure]=useState(false);
-  const [num,setNum]=useState(3)
+  const navigation = useNavigation()
+  const [Secure, setSecure] = useState(false);
+  const [num, setNum]= useState(3)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -240,7 +242,9 @@ const ProductDetails = () => {
                  marginHorizontal:20,
                  marginVertical:10,
                  alignSelf:"center"
-                 }}>
+                 }} 
+                 onPress={()=>navigation.navigate("StoreDetails")}
+                 >
             <Text 
             style={{
               fontWeight:"bold",
@@ -264,19 +268,15 @@ const ProductDetails = () => {
               marginVertical:10,
               borderRadius:5
               }}> 
+
               <View style={{
                 width:250,
                 height:240,
-                flex:1,
-                
-                
+                flex:1,                
                 backgroundColor:"#f9f9f9",
                 alignSelf:"center", 
                 borderRadius:5,
                 marginVertical:20
-                // padding:60,
-
-                // marginHorizontal:40
               }}>
                     <TouchableOpacity 
            style={{
