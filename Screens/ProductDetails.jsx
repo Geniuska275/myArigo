@@ -13,6 +13,8 @@ import { FontAwesome6 } from '@expo/vector-icons';
 // import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
+import Display from '../Components/Display';
+import Related from '../Components/Related';
 
 
 
@@ -451,9 +453,25 @@ const ProductDetails = () => {
          
               </View>
             </View>
+            <Text style={{
+              marginHorizontal:30,
+              marginVertical:10
+            }}>Related Products</Text>
             
-            
+           <View style={{
+              marginHorizontal:30,
+              flexDirection:"row",
+              justifyContent:"space-around",
+              alignItems:"center"
+            }}>
+              <Related/>
+              <Related/>
 
+
+
+            </View>
+            
+ 
 
 
 
