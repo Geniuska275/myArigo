@@ -8,6 +8,7 @@ const AdvertsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header/>
+      <Text style={styles.text}>Adverts</Text>
       <ScrollView>
 
       <Displays route={"Post"} name={"Posts"}/>
@@ -27,4 +28,18 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginTop: constants.statusBarHeight,
   },
+  text:{
+    textAlign:"center",
+    shadowOffset: { width: 2, height: 2 },
+    shadowColor: "black",
+    shadowOpacity: 0.1,
+    elevation:1,
+    
+    paddingVertical:15,
+    marginTop:-3,
+    fontWeight:"bold",
+    color:"#243c56",
+    // marginBottom:10
+    textTransform:"uppercase"
+  }
 })

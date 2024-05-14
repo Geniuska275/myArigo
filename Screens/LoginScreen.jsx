@@ -25,34 +25,65 @@ const LoginScreen = ({navigation}) => {
             <View style={styles.login}>
               <Text style={styles.text}>Login to Arigo</Text>
               <View style={{marginTop:30}}>
-
               <TextInput
-             style={{ height: 40, borderBottomWidth: 1, borderColor:"gray",marginHorizontal:40,marginVertical:10 }}
-             onChangeText={text => setEmail(text)}
-             placeholder='Email'
-             value={Email}
+              style={{ 
+              height: 40, 
+              borderBottomWidth: 1,
+              borderColor:"gray",
+              marginHorizontal:40,
+              marginVertical:10 }}
+              onChangeText={text => setEmail(text)}
+              placeholder='Email'
+              value={Email}
              />
            <View style={{position:"relative"}}>
            <TextInput
-             style={{ height: 40, borderBottomWidth: 1, borderColor:"gray",marginHorizontal:40,marginVertical:10 }}
-             onChangeText={text => setPassword(text)}
-             placeholder='Password'
-             value={Password}
-             secureTextEntry={Secure}
+              style={{ 
+              height: 40, 
+              borderBottomWidth: 1,
+              borderColor:"gray",
+              marginHorizontal:40,
+              marginVertical:10 }}
+              onChangeText={text => setPassword(text)}
+              placeholder='Password'
+              value={Password}
+              secureTextEntry={Secure}
              />
  {Secure ? 
-<FontAwesome name="eye" size={24} color="black"  style={{position:"absolute",top:20,right:40}} onPress={()=>{
+<FontAwesome name="eye" size={24} color="black"  
+  style={{
+  position:"absolute",
+  top:20,
+  right:40}} onPress={()=>{
   setSecure(false)
 }}/>:
-<Entypo name="eye-with-line" size={24} color="black" style={{position:"absolute",top:20,right:40}} onPress={()=>{
+<Entypo name="eye-with-line" size={24} color="black" 
+  style={{
+  position:"absolute",
+  top:20,
+  right:40
+  }} 
+
+
+  onPress={()=>{
   setSecure(true)  
 }}/>
 }      
           <AppButton title={"Login"} navigation={navigation}/>
            <View style={{position:"relative"}}>
 
-          <Divider style={{ backgroundColor: 'black' ,marginHorizontal:40,marginTop:20}} />
-          <Text style={{backgroundColor:"#f9f9f9",width:70,position:"absolute",top:10,left:140}}>login with</Text>
+          <Divider 
+            style={{ 
+            backgroundColor: 'black' ,
+            marginHorizontal:40,
+            marginTop:20}} />
+          <Text 
+            style={{
+            backgroundColor:"#f9f9f9",
+            width:70,
+            position:"absolute",
+            top:10,
+            left:140}}>login with</Text>
            </View>
             </View>      
 
@@ -60,7 +91,14 @@ const LoginScreen = ({navigation}) => {
             </View>
             <View style={styles.intro}>
 
-              <Text style={{color:"#fefefe",fontWeight:"bold",padding:"20",lineHeight:25,marginHorizontal:30,marginTop:30}}>Hello,Welcome to Myarigo ,the first Business platform for verified brands ,service and Business.Arigo perfectly illustrate the characteristics of a ladder that aids the process of climbing.We Connect Business,Brands and Services together. </Text>
+              <Text 
+                style={{
+                color:"#fefefe",
+                fontWeight:"bold",
+                padding:"20",
+                lineHeight:25,
+                marginHorizontal:30,
+                marginTop:30}}>Hello,Welcome to Myarigo ,the first Business platform for verified brands ,service and Business.Arigo perfectly illustrate the characteristics of a ladder that aids the process of climbing.We Connect Business,Brands and Services together. </Text>
                <Text style={{color:"#fefefe",fontWeight:"bold",marginHorizontal:30,marginTop:30}} >Don't have an account ?</Text>
             <View style={{flexDirection:"row",gap:4,marginHorizontal:30,marginTop:20}}>
             <TouchableOpacity onPress={()=>navigation.navigate("Signup")} style={{backgroundColor:"#6c757d",padding:10,borderRadius:10}}>

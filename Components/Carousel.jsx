@@ -1,17 +1,28 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { useNavigation } from '@react-navigation/native';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import { FlatList } from 'react-native';
-import img1 from "./unsplash1.jpg";
-import img2 from "./unsplash2.jpg";
-import img3 from "./unsplash3.jpg";
-import Display from './Display';
+import { StyleSheet, Text, View ,Animated} from 'react-native'
+import React, { useRef } from 'react'
+import { FlatList } from 'react-native'
+import SlideItem from './SlideItem'
+import Pagination from './pagination'
+
+const Carousel = () => {
+
+    const ScrollX=useRef(new Animated.Value(0)).current
+    const handleOnScroll=event=>{
+        Animated.event([
+            {
+                nativeEvent:{
+                    contentOffset:{
+                        x:ScrollX,
+                    }
+                }
+            }
+        ],{
+            useNativeDriver:false,
+        }
+    )(event)
 
 
-const Displays = ({name,route}) => {
-    const navigation=useNavigation()
-
+    }
     const data=[
         {    id:1,
             desc:"A very nice outfit from myArigo",
@@ -61,48 +72,25 @@ const Displays = ({name,route}) => {
             price:"#3000",
             date:"8th may,2024",
             time:"03:13pm"
-        },
-
+        }
 
     ]
-    const renderItem = ({ item }) =><Display item={item}/>
-
   return (
-    <View style={styles.container}>
-        <View style={{ flexDirection:"row",alignItems:"center",justifyContent:"space-between"}}>
-            <Text style={{fontSize:18,fontWeight:"bold"}}>{name}</Text>
-            <TouchableOpacity  onPress={()=>navigation.navigate(`${route}`)} style={{flexDirection:"row",gap:3}}>
-
-                <Text style={{color:"#243c56"}}>View all</Text>
-                
-                <AntDesign name="arrowright" size={20} color="#243c56" />
-            </TouchableOpacity>
-        </View>
-
-        <FlatList
+    <View>
+      <FlatList
       data={data}
-      horizontal={true}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
+      renderItem={({item})=><SlideItem item={item}/>}
+      horizontal
       showsHorizontalScrollIndicator={false}
-       />
-    
+      pagingEnabled
+      snapToAlignment='center'
+      onScroll={handleOnScroll}
+      />
+      <Pagination data={data} ScrollX={ScrollX}/>
     </View>
   )
 }
 
-export default Displays
+export default Carousel
 
-const styles = StyleSheet.create({
-    container:{
-        backgroundColor:"white",
-        shadowOffset: { width: 2, height: 2 },
-        shadowColor: "black",
-        shadowOpacity: 0.1,
-        elevation:4,
-        padding:10,
-        height:340,
-        marginTop:10
-        
-    }
-})
+const styles = StyleSheet.create({})

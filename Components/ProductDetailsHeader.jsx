@@ -45,7 +45,6 @@ const ProductHeader = (props) => {
                 {
                     subCategories.map((cat) => {
                         return (
-
                             <TouchableOpacity
                                 key={cat.id}
                                 style={[
