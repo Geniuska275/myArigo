@@ -4,6 +4,8 @@ import SignupScreen from "../Screens/SignupScreen";
 import BottomTabs from "./BottomTabNavigator";
 import ProductDetails from "../Screens/ProductDetails";
 import StoreScreen from "../Screens/StoreScreen";
+import Messages from "../Screens/Messages";
+import Notification from "../Screens/Notification";
 
 const Stack=createStackNavigator()
 
@@ -21,6 +23,9 @@ function AuthStack(){
             <Stack.Screen name="Signup"  component={SignupScreen}/>
             <Stack.Screen name="ProductDetails"  component={ProductDetails}/>
             <Stack.Screen name="StoreDetails"  component={StoreScreen}/>
+            <Stack.Screen name="messages"  component={Messages}/>
+            <Stack.Screen name="notification"  component={Notification}/>
+
 
             
             

@@ -25,7 +25,10 @@
     "react-native-screens": "~3.29.0",
     "react-native-super-grid": "^5.1.0",
     "react-native-vector-icons": "^10.1.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "expo-router": "~3.4.10",
+    "expo-linking": "~6.2.2",
+    "expo-constants": "~15.4.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

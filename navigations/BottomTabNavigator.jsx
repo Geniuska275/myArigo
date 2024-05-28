@@ -7,6 +7,8 @@ import Services from '../Screens/Services';
 import Products from '../Screens/Products';
 import Icon from "react-native-vector-icons/Ionicons"
 import ProductCategoryDetails from '../Screens/ProductCategoryDetails';
+import DashboardScreen from '../Screens/DashboardScreen';
+import Subscriptions from '../Screens/Subscriptions';
 
 
 const Tab = createBottomTabNavigator();
@@ -58,6 +60,9 @@ function BottomTabs() {
       <Tab.Screen name="Post" component={PostScreen} />
       <Tab.Screen name="Services" component={Services} />
       <Tab.Screen name="Products" component={Products} />
+      {/* <Tab.Screen name="Subscription" component={Subscriptions}/> */}
+      <Tab.Screen name="Dashboard" component={DashboardScreen} />
+
     </Tab.Navigator>
   );
 }
