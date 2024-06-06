@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View ,ImageBackground} from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View ,ImageBackground, Image} from 'react-native'
 import React,{useState} from 'react'
 import { SafeAreaView } from 'react-native'
 import Header from '../Components/Header'
@@ -7,6 +7,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import SelectDropdown from 'react-native-select-dropdown'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatGrid } from 'react-native-super-grid';
+import { AntDesign } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 
 
@@ -22,12 +23,14 @@ const Products = () => {
   ];
 
   const [items, setItems] = React.useState([
-    { name: 'Business Wyze', img:"",image:"https://images.unsplash.com/photo-1717313860625-4d4311b5f9d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" },
-    { name: 'imperatrice', img:"",image:"https://images.unsplash.com/photo-1716916959437-c904cdabd0f3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHx8" },
-    { name: 'Sqe holdings', img:"",image:"https://images.unsplash.com/photo-1717318104110-d8ef457d9c2e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D" },
-    { name: 'Swift Exchange', img:"",image:"https://images.unsplash.com/photo-1717328802573-a7cc71415e8b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D" },
-    { name: 'Brains Technologies.', img:"",image:"https://plus.unsplash.com/premium_photo-1717563132740-6903bac2cf85?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNXx8fGVufDB8fHx8fA%3D%3D" },
-    { name: 'EMERALD', img:"",image:"https://images.unsplash.com/photo-1717501218511-768944e2c325?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNnx8fGVufDB8fHx8fA%3D%3D" },
+    { name: 'Business Wyze',store:"Imperatrice Wristhub", date:"28th June,2024",price:"# 6,000,000",time:"14:00 PM", img:"https://images.unsplash.com/photo-1717630297768-bbbd8dd16b4f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8fA%3D%3D ",image:"https://images.unsplash.com/photo-1717313860625-4d4311b5f9d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" },
+    { name: 'imperatrice',store:"My Arigo", date:"28th June,2024",price:"# 6,000,000",time:"14:00 PM", img:"https://plus.unsplash.com/premium_photo-1714839369468-cceb97dc742f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzN3x8fGVufDB8fHx8fA%3D%3D",image:"https://images.unsplash.com/photo-1716916959437-c904cdabd0f3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHx8" },
+    { name: 'Business Wyze',store:"SQE HOLDINGS LTD", date:"28th June,2024",price:"# 6,000,000",time:"14:00 PM", img:"https://images.unsplash.com/photo-1717630297768-bbbd8dd16b4f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8fA%3D%3D ",image:"https://images.unsplash.com/photo-1717511140034-2fff4e952dc1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzNnx8fGVufDB8fHx8fA%3D%3D" },
+    { name: 'Business Wyze',store:"Imperatrice Wristhub", date:"28th June,2024",price:"# 6,000,000",time:"14:00 PM", img:"https://images.unsplash.com/photo-1717630297768-bbbd8dd16b4f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8fA%3D%3D ",image:"https://images.unsplash.com/photo-1717509048735-3cd938174f6e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0MHx8fGVufDB8fHx8fA%3D%3D" },
+    { name: 'Business Wyze',store:"Imperatrice Wristhub", date:"28th June,2024",price:"# 6,000,000",time:"14:00 PM", img:"https://images.unsplash.com/photo-1717630297768-bbbd8dd16b4f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8fA%3D%3D ",image:"https://images.unsplash.com/photo-1716724854567-9ec995836d19?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0OXx8fGVufDB8fHx8fA%3D%3D" },
+    { name: 'Business Wyze',store:"Imperatrice Wristhub", date:"28th June,2024",price:"# 6,000,000",time:"14:00 PM", img:"https://images.unsplash.com/photo-1717630297768-bbbd8dd16b4f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8fA%3D%3D ",image:"https://images.unsplash.com/photo-1717451061024-5a74a0a112de?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1NXx8fGVufDB8fHx8fA%3D%3D" },
+    { name: 'Business Wyze',store:"Imperatrice Wristhub", date:"28th June,2024",price:"# 6,000,000",time:"14:00 PM", img:"https://images.unsplash.com/photo-1717630297768-bbbd8dd16b4f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8fA%3D%3D ",image:"https://images.unsplash.com/photo-1712025853995-d59634cf286e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1OXx8fGVufDB8fHx8fA%3D%3D" },
+   
  
     // Add more items as needed
   ]);
@@ -253,16 +256,92 @@ const Products = () => {
       itemDimension={130}
       data={items}
       style={styles.gridView}
-      spacing={15}
+      spacing={2}
       renderItem={({ item }) => (
-        <ImageBackground source={{uri:item.image}} style={styles.backgroundImage}>
-        <View style={{position:"absolute",top:15,left:10,flexDirection:"row",borderRadius:"20px",backgroundColor:"white",padding:5,gap:10,alignItems:"center"}}>
-        <Octicons name="dot-fill" size={24} color="blue" />
-          <Text  style={{fontWeight:"bold",color:"black",width:100}}
-          numberOfLines={1}
-          >{item.name}</Text>
+       <View style={{
+         width:160,
+         height:220,
+         borderWidth:0.5,
+         borderColor:"gray",
+         borderRadius:10,
+         margin:10,
+         position:"relative"
+       
+       }}>
+        <Image 
+        source={{
+          uri:item.image
+        }} 
+        style={{
+          width:"100%",
+          height:"50%",
+          borderTopLeftRadius:10,
+          borderTopRightRadius:10,
+          }}/>
+        <Text numberOfLines={1} style={{
+          textAlign:"center",
+          marginVertical:4,
+          fontWeight:"bold"
+        }}>HOUSES AND SALES</Text>
+        <Text 
+        style={{
+          textAlign:"center",
+          marginVertical:4,
+          fontWeight:"bold"
+        }}
+        >{item.price}</Text>
+      
+        <Text style={{
+          textAlign:"center",
+          fontSize:12,
+          marginBottom:4
+        }}>{item.date} {item.time}</Text>
+        <View style={{
+          flexDirection:"row",
+          gap:10,
+          alignSelf:"center"
+        }}>
+        <AntDesign name="star" size={18} color="orange" />
+        <AntDesign name="star" size={18} color="orange" />
+        <AntDesign name="star" size={18} color="orange" />
+        <AntDesign name="star" size={18} color="orange" />
+        <AntDesign name="star" size={18} color="orange" />
+
         </View>
-      </ImageBackground>
+        <Image source={{uri:item.img}} style={{
+          width:40,
+          height:40,
+          borderRadius:20,
+          position:"absolute",
+          top:10,
+          left:10
+        }}/>
+        <TouchableOpacity style={{
+          borderRadius:10,
+          position:"absolute",
+          top:70,
+          left:20,
+        }}>
+
+        <Text numberOfLines={1} 
+        style={{
+          width:120,
+          fontWeight:"bold",
+          paddingHorizontal:10,
+          paddingVertical:5,
+          backgroundColor:"#337bb7",
+          color:"white",
+          borderRaius:20,
+          textTransform:"uppercase"
+          
+        }}>{item.store}</Text>
+        </TouchableOpacity>
+
+
+
+
+
+       </View>
       )}
     />
 
