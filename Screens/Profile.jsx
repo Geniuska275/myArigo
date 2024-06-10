@@ -1,4 +1,4 @@
-import { View, Text,StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native'
+import { View, Text,StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native'
 import React from 'react'
 import constants from "expo-constants";
 import Header from '../Components/Header';
@@ -17,6 +17,8 @@ const Profile = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header/>
+      <ScrollView>
+
       <View style={{
         flexDirection:"row",
         alignItems:"center",
@@ -25,127 +27,127 @@ const Profile = () => {
         marginVertical:10
       }}>
         <View style={{
-            width:120,
-            height:120,
-            backgroundColor:"black",
-            justifyContent:"center",
-            alignItems:"center",
-            borderRadius:10
+          width:120,
+          height:120,
+          backgroundColor:"black",
+          justifyContent:"center",
+          alignItems:"center",
+          borderRadius:10
         }}>
         <Feather name="camera" size={60} color="white" />
         </View>
         <View>
             <Text style={{
-                fontWeight:"bold",
-                marginBottom:5,
+              fontWeight:"bold",
+              marginBottom:5,
             }}>Timilehin Aigbojie</Text>
             <Text style={{
-                color:"gray"
+              color:"gray"
             }}> Max file size is 5Mb</Text>
             <TouchableOpacity style={{
-                paddingHorizontal:10,
-                backgroundColor:"#337bb7",
-                borderRadius:10,
-                marginVertical:10
-
+              paddingHorizontal:10,
+              backgroundColor:"#337bb7",
+              borderRadius:10,
+              marginVertical:10
+              
             }}>
                 <Text style={{
-                    color:"white",
-                    fontWeight:"bold",
-                    textTransform:"uppercase",
-                    textAlign:"center",
-                    paddingVertical:10,
-                    paddingHorizontal:10,
-                    borderRadius:10,
-                    textTransform:"uppercase"
+                  color:"white",
+                  fontWeight:"bold",
+                  textTransform:"uppercase",
+                  textAlign:"center",
+                  paddingVertical:10,
+                  paddingHorizontal:10,
+                  borderRadius:10,
+                  textTransform:"uppercase"
                 }}>Change</Text>
             </TouchableOpacity>
         </View>
 
       </View>
       <Text style={{
-            fontStyle:"bold",
-            marginHorizontal:20,
-            marginVertical:5,
-            color:"#565b64",
-            
-        }}>Name</Text> 
+        fontStyle:"bold",
+        marginHorizontal:20,
+        marginVertical:5,
+        color:"#565b64",
+        
+      }}>Name</Text> 
         <TextInput
               style={{ 
                   height: 40, 
-              borderWidth: 1,
-              width:350,
-              borderRadius:10,
-              borderColor:"gray",
-              marginHorizontal:20,
-              marginVertical:5 }}
-              onChangeText={text =>(text)}
-              value={""}
-              />
+                  borderWidth: 1,
+                  width:350,
+                  borderRadius:10,
+                  borderColor:"gray",
+                  marginHorizontal:20,
+                  marginVertical:5 }}
+                  onChangeText={text =>(text)}
+                  value={""}
+                  />
+               <Text style={{
+                 fontStyle:"bold",
+                 marginHorizontal:20,
+                 marginVertical:5,
+                 color:"#565b64",
+                 
+                }}>Email</Text> 
+        <TextInput
+              style={{ 
+                height: 40, 
+                borderWidth: 1,
+                width:350,
+                borderRadius:10,
+                borderColor:"gray",
+                marginHorizontal:20,
+                marginVertical:5 }}
+                onChangeText={text =>(text)}
+                value={""}
+                />
+               <Text style={{
+                 fontStyle:"bold",
+                 marginHorizontal:20,
+                 marginVertical:5,
+                 color:"#565b64",
+                 
+                }}>Mobile Number</Text> 
+        <TextInput
+              style={{ 
+                height: 40, 
+                borderWidth: 1,
+                width:350,
+                borderRadius:10,
+                borderColor:"gray",
+                marginHorizontal:20,
+                marginVertical:5 }}
+                onChangeText={text =>(text)}
+                value={""}
+                />
                <Text style={{
             fontStyle:"bold",
             marginHorizontal:20,
             marginVertical:5,
             color:"#565b64",
             
-        }}>Email</Text> 
+          }}>Address</Text> 
         <TextInput
               style={{ 
-                  height: 40, 
-              borderWidth: 1,
-              width:350,
-              borderRadius:10,
-              borderColor:"gray",
-              marginHorizontal:20,
-              marginVertical:5 }}
-              onChangeText={text =>(text)}
-              value={""}
-              />
-               <Text style={{
-            fontStyle:"bold",
-            marginHorizontal:20,
-            marginVertical:5,
-            color:"#565b64",
-            
-        }}>Mobile Number</Text> 
-        <TextInput
-              style={{ 
-                  height: 40, 
-              borderWidth: 1,
-              width:350,
-              borderRadius:10,
-              borderColor:"gray",
-              marginHorizontal:20,
-              marginVertical:5 }}
-              onChangeText={text =>(text)}
-              value={""}
-              />
-               <Text style={{
-            fontStyle:"bold",
-            marginHorizontal:20,
-            marginVertical:5,
-            color:"#565b64",
-            
-        }}>Address</Text> 
-        <TextInput
-              style={{ 
-                  height: 40, 
-              borderWidth: 1,
-              width:350,
-              borderRadius:10,
-              borderColor:"gray",
-              marginHorizontal:20,
-              marginVertical:5 }}
-              onChangeText={text =>(text)}
-              value={""}
-              />
+                height: 40, 
+                borderWidth: 1,
+                width:350,
+                borderRadius:10,
+                borderColor:"gray",
+                marginHorizontal:20,
+                marginVertical:5 }}
+                onChangeText={text =>(text)}
+                value={""}
+                />
                           <Text style={{
-            fontStyle:"bold",
-            marginHorizontal:20,
-            marginVertical:5,
-            color:"#565b64",
-            
-        }}>State</Text> 
+                            fontStyle:"bold",
+                            marginHorizontal:20,
+                            marginVertical:5,
+                            color:"#565b64",
+                            
+                          }}>State</Text> 
                 <SelectDropdown
     data={emojisWithIcons}
     onSelect={(selectedItem, index) => {
@@ -171,15 +173,15 @@ const Profile = () => {
     }}
     showsVerticalScrollIndicator={false}
     dropdownStyle={styles.dropdownMenuStyle}
-  />
+    />
  
                           <Text style={{
-            fontStyle:"bold",
-            marginHorizontal:20,
-            marginVertical:10,
-            color:"#565b64",
-            
-        }}>City</Text> 
+                            fontStyle:"bold",
+                            marginHorizontal:20,
+                            marginVertical:10,
+                            color:"#565b64",
+                            
+                          }}>City</Text> 
                 <SelectDropdown
     data={emojisWithIcons}
     onSelect={(selectedItem, index) => {
@@ -205,30 +207,31 @@ const Profile = () => {
     }}
     showsVerticalScrollIndicator={false}
     dropdownStyle={styles.dropdownMenuStyle}
-  />
+    />
        <TouchableOpacity style={{
-                paddingHorizontal:10,
-                backgroundColor:"#337bb7",
-                borderRadius:10,
-                marginVertical:10,
-                width:200,
-                marginHorizontal:20,
-                marginVertical:20
-
-            }}>
+         paddingHorizontal:10,
+         backgroundColor:"#337bb7",
+         borderRadius:10,
+         marginVertical:10,
+         width:200,
+         marginHorizontal:20,
+         marginVertical:20
+         
+        }}>
                 <Text style={{
-                    color:"white",
-                    fontWeight:"bold",
-                    textTransform:"uppercase",
-                    textAlign:"center",
-                    paddingVertical:10,
-                    paddingHorizontal:10,
-                    borderRadius:10,
-                    textTransform:"uppercase"
+                  color:"white",
+                  fontWeight:"bold",
+                  textTransform:"uppercase",
+                  textAlign:"center",
+                  paddingVertical:10,
+                  paddingHorizontal:10,
+                  borderRadius:10,
+                  textTransform:"uppercase"
                 }}>Update</Text>
             </TouchableOpacity>
      
       
+</ScrollView>
     </SafeAreaView>
   )
 }
