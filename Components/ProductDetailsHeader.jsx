@@ -25,7 +25,7 @@ const ProductHeader = (props) => {
 
     return (
         <View style={{ marginHorizontal: 20, }}>
-            <Text style={{fontSize:30,color:"#243c56",marginTop:10}}>Categories</Text>
+            <Text style={{fontSize:20,color:"#243c56",marginTop:10}}>Categories</Text>
 
             <ScrollView
                 showsHorizontalScrollIndicator={false}
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         marginEnd: 15
     },
     subCatName: {
-        fontSize: 18,
+        fontSize: 12,
         fontWeight: 'bold',
     },
     opacityView: {

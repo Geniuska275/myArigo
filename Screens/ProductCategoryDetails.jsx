@@ -48,11 +48,7 @@ const ProductCategoryDetails = ({navigation}) => {
                 subCategories={subCategories}
                 />
 
-            {
-                isLoading && (
-                    <ActivityIndicator size="large" />
-                )
-            }
+           
             <FlatGrid
                 showsVerticalScrollIndicator={false}
                 itemDimension={130}

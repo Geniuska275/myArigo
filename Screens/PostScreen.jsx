@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View ,ImageBackground, Image} from 'react-native'
+import { ScrollView, StyleSheet, Text,Platform, TextInput, TouchableOpacity, View ,ImageBackground, Image} from 'react-native'
 import React,{useState} from 'react'
 import { SafeAreaView } from 'react-native'
 import Header from '../Components/Header'
@@ -236,11 +236,12 @@ const PostScreen = ({navigation}) => {
       <TouchableOpacity 
            style={{
                  backgroundColor:"#337bb7",
-                 width:370,
+                 width:Platform.OS==="ios" ?350:340,
                  paddingVertical:8,
                  borderRadius:8,
                  marginHorizontal:20,
                  marginVertical:10,
+                 marginLeft:Platform.OS==="ios" ?30:25
                
                  }}>
                 

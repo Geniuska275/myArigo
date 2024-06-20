@@ -40,19 +40,19 @@ const styles = StyleSheet.create({
     },
     productImage: {
         width: 150,
-        height: 150,
+        height: 100,
         backgroundColor: AppColors.grey,
         borderRadius: 10,
     },
     brand: {
         marginVertical: 5,
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 'bold',
         color: '#8793A1'
     },
     productNamePrice: {
         marginVertical: 5,
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 'bold',
         color: '#000'
     }

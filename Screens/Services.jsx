@@ -238,7 +238,7 @@ const Services = ({navigation}) => {
       <TouchableOpacity 
            style={{
                  backgroundColor:"#337bb7",
-                 width:370,
+                 width:350,
                  paddingVertical:8,
                  borderRadius:8,
                  marginHorizontal:20,

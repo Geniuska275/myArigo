@@ -30,7 +30,7 @@ const AdvertsScreen = ({navigation}) => {
       spacing={15}
       renderItem={({ item }) => (
         <ImageBackground source={{uri:item.image}} style={styles.backgroundImage}>
-        <View style={{position:"absolute",top:15,left:10,flexDirection:"row",borderRadius:"20px",backgroundColor:"white",padding:5,gap:10,alignItems:"center"}}>
+        <View style={{position:"absolute",top:15,left:10,flexDirection:"row",borderRadius:20,backgroundColor:"white",padding:5,gap:10,alignItems:"center"}}>
         <Octicons name="dot-fill" size={24} color="blue" />
           <Text  style={{fontWeight:"bold",color:"black",width:100}}
           numberOfLines={1}

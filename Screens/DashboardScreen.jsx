@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, ScrollView,Platform } from 'react-native'
 import React from 'react'
 import Header from '../Components/Header'
 import { useNavigation } from '@react-navigation/native';
@@ -157,18 +157,13 @@ const styles=StyleSheet.create({
         marginVertical:10
      },
      box:{
-        width:370,
+        width:Platform.OS==="ios" ?370:340,
         marginTop:30,
+        marginBottom:30,
         marginHorizontal:20,
-        height:340,
+        height:Platform.OS==="ios" ?340:370,
         borderWidth:0.5,
-        borderColor:"grey",
         borderRadius:5,
-        xOffset:-2,
-        yOffset:4,
-        shadowColorIos:"#171717",
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
         elevation:4,
      }
 })

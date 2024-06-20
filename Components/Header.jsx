@@ -12,7 +12,7 @@ const Header = ({navigation}) => {
   
   return (
     <View style={styles.Header}>
-      <Image source={require("./logos.png")} style={{width:90,height:50,marginLeft:25}}/>
+      <Image source={require("./logos.png")} style={{width:90,height:35,marginLeft:25}}/>
       {/* <Text style={{fontWeight:"bold",color:"white",marginLeft:25}}>MyArigo</Text> */}
       <View style={{
         flexDirection:"row",
