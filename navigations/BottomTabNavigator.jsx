@@ -8,7 +8,7 @@ import Products from '../Screens/Products';
 import Icon from "react-native-vector-icons/Ionicons"
 import ProductCategoryDetails from '../Screens/ProductCategoryDetails';
 import DashboardScreen from '../Screens/DashboardScreen';
-
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 
@@ -24,30 +24,30 @@ function BottomTabs() {
 
           tabBarIcon:({color,size,focused})=>{
               let iconName;
-              if(route.name=="Home"){
-                 iconName= focused? "home":"home-outline"
-              }else if(route.name=="Adverts"){
-                iconName= focused? "home":"home-outline"
+              if(route.name=="Dashboard"){
+                 iconName= focused? "dashboard":"dashboard"
+              }else if(route.name=="Categories"){
+                iconName= focused? "category":"category"
                  
               }else if(route.name=="Auctions"){
-                iconName= focused? "home":"home-outline"
+                iconName= focused? "sell":"sell"
                 
-              }else if(route.name=="Post"){
-                iconName= focused? "home":"home-outline"
+              }else if(route.name=="Adverts"){
+                iconName= focused? "ads-click":"ads-click"
                  
-              }else if(route.name=="Services"){
-                iconName= focused? "home":"home-outline"              
+              }else if(route.name=="Post"){
+                iconName= focused? "post-add":"post-add"              
               }else if(route.name=="Products"){
                 iconName= focused? "home":"home-outline"
                  
-              }else if(route.name=="Homes."){
-                iconName= focused? "home":"home-outline"
+              }else if(route.name=="Services"){
+                iconName= focused? "workspaces-filled":"workspaces-outline"
                  
-              }else if(route.name=="Homes"){
-                iconName= focused? "home":"home-outline"
+              }else if(route.name=="Auction"){
+                iconName= focused? "sell":"sell"
                  
               }
-            return <Icon name={iconName} color={color} size={22}/>
+            return <MaterialIcons name={iconName} color={color} size={22}/>
           },
       }
           

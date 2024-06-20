@@ -2,10 +2,11 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native'
 import Header from '../Components/Header'
+import constants from "expo-constants";
 
 const Notification = ({navigation}) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView  style={styles.container}>
         <Header navigation={navigation}/>
       <Text>Notification</Text>
     </SafeAreaView>
@@ -14,4 +15,9 @@ const Notification = ({navigation}) => {
 
 export default Notification
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container:{flex: 1,
+    backgroundColor: "white",
+    marginTop: constants.statusBarHeight,
+  },
+})
