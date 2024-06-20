@@ -19,14 +19,14 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const ProductDetails = () => {
-  const navigation = useNavigation()
+const ProductDetails = ({navigation}) => {
+  const Navigation = useNavigation()
   const [Secure, setSecure] = useState(false);
   const [num, setNum]= useState(3)
 
   return (
     <SafeAreaView style={styles.container}>
-    <Header/>
+    <Header navigation={navigation}/>
     <ScrollView>
       <Text 
         style={{
@@ -243,7 +243,7 @@ const ProductDetails = () => {
                  marginVertical:10,
                  alignSelf:"center"
                  }} 
-                 onPress={()=>navigation.navigate("StoreDetails")}
+                 onPress={()=>Navigation.navigate("StoreDetails")}
                  >
             <Text 
             style={{

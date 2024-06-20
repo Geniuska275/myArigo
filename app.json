@@ -13,23 +13,30 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ], 
+    ],
     "ios": {
       "supportsTablet": true
     },
-    
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.brains_23.myarigo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "fd477695-9867-428a-8ce6-fa4af656d383"
+      }
+    }
   }
-  
 }

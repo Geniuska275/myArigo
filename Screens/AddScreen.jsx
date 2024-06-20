@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View,Alert, Image } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View,Alert, Image,KeyboardAvoidingView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../Components/Header'
@@ -10,8 +10,8 @@ import * as ImagePicker from "expo-image-picker"
 import { ActivityIndicator } from 'react-native'
 import SelectDropdown from 'react-native-select-dropdown'
 
-const AddScreen = () => {
-    const navigation=useNavigation();
+const AddScreen = ({navigation}) => {
+    const Navigation=useNavigation();
     const {category, setCategory}=useState("");
     const {firstName, setFirstName}=useState("");
     const {phoneNumber, setPhoneNumber}=useState("");
@@ -69,7 +69,7 @@ const AddScreen = () => {
                 }
                 const loader=()=>{
                   setLoading(false)
-                  navigation.navigate("messages")
+                  Navigation.navigate("messages")
                  }
                
                 
@@ -77,7 +77,7 @@ const AddScreen = () => {
   return (
 
     <SafeAreaView>
-        <Header/>
+        <Header navigation={navigation}/>
         {loading &&(
         <View style={[StyleSheet.absoluteFill,{
           backgroundColor:"rgba(0,0,0,0.6)",
@@ -88,7 +88,7 @@ const AddScreen = () => {
        ]}>
        <ActivityIndicator  color={"#243c56"} animating size={180}/>
      </View>)}
-        
+     <KeyboardAvoidingView behavior="padding" >
         <ScrollView>
 
 
@@ -107,7 +107,7 @@ const AddScreen = () => {
         <Text style={{
             color:"#565b64"
         }}>Category </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:300,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:270,top:-10}}>*</Text>       
       </View>
       <TextInput
               style={{ 
@@ -122,7 +122,7 @@ const AddScreen = () => {
               value={category}
               />
         <Text style={{
-            fontStyle:"bold",
+            fontWeight:"bold",
             marginHorizontal:20,
             marginVertical:5,
             color:"#565b64",
@@ -136,7 +136,8 @@ const AddScreen = () => {
               borderRadius:10,
               borderColor:"gray",
               marginHorizontal:20,
-              marginVertical:5 }}
+              marginVertical:5 
+            }}
               onChangeText={text => setFirstName(text)}
               value={firstName}
               />
@@ -168,7 +169,7 @@ const AddScreen = () => {
         <Text style={{
             color:"#565b64"
         }}>Age </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:330,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:300,top:-10}}>*</Text>       
       </View>
       <TextInput
               style={{ 
@@ -197,7 +198,7 @@ const AddScreen = () => {
         <Text style={{
             color:"#565b64"
         }}>Job Title </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:300,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:270,top:-10}}>*</Text>       
       </View>
       
       <TextInput
@@ -221,7 +222,7 @@ const AddScreen = () => {
         <Text style={{
             color:"#565b64"
         }}>Job Type </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:300,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:270,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={emojisWithIcons}
@@ -259,7 +260,7 @@ const AddScreen = () => {
         <Text style={{
             color:"#565b64"
         }}>Gender</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:310,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:280,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={emojisWithIcons}
@@ -297,7 +298,7 @@ const AddScreen = () => {
         <Text style={{
             color:"#565b64"
         }}>State </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:330,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:290,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={emojisWithIcons}
@@ -334,7 +335,7 @@ const AddScreen = () => {
         <Text style={{
             color:"#565b64"
         }}>City </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:330,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:300,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={emojisWithIcons}
@@ -381,7 +382,7 @@ const AddScreen = () => {
         <Text style={{
             color:"#565b64"
         }}>Experience on this Role </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:200,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:180,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={emojisWithIcons}
@@ -632,7 +633,7 @@ const AddScreen = () => {
         <Text style={{
             color:"#565b64"
         }}>About You </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:290,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:260,top:-10}}>*</Text>       
       </View>
       <TextInput
               style={{ 
@@ -731,7 +732,7 @@ const AddScreen = () => {
         <Text style={{
             color:"#565b64"
         }}>Profile Image </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:280,top:-10}}>*</Text>   
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:240,top:-10}}>*</Text>   
       </View>
         <TouchableOpacity onPress={()=>pickImage()} 
         style={{ 
@@ -767,6 +768,8 @@ const AddScreen = () => {
      
       
         </ScrollView>
+        </KeyboardAvoidingView>
+
     </SafeAreaView>
   )
 }

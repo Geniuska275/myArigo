@@ -7,8 +7,9 @@ import { useNavigation } from '@react-navigation/native';
 // import {logo} from "./logos.png";
 
 
-const Header = () => {
-  const Navigation=useNavigation()
+const Header = ({navigation}) => {
+  const Navigation = useNavigation();
+  
   return (
     <View style={styles.Header}>
       <Image source={require("./logos.png")} style={{width:90,height:50,marginLeft:25}}/>
@@ -24,7 +25,10 @@ const Header = () => {
 
       <SimpleLineIcons name="bell" size={24} color="white" />
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=>navigation.openDrawer("Home")}>
+
       <Icon name="reorder-three" color="white" size={32}  style={{marginRight:25}}/>
+        </TouchableOpacity>
       </View>
     </View>
   )

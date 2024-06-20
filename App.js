@@ -5,7 +5,11 @@ import SignupScreen from './Screens/SignupScreen';
 import LoginScreen from './Screens/LoginScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthStack from './navigations/AuthNavigator';
+import 'react-native-gesture-handler';
+import DrawerStack from './navigations/DrawerNavigator';
+import { useState } from 'react';
 export default function App() {
+  const [user,setUser]=useState(true)
   return (
     <NavigationContainer>
 {/* 
@@ -13,7 +17,11 @@ export default function App() {
        <LoginScreen/>
        
     </View> */}
-    <AuthStack/>
+    <>
+    {user ? <LoginScreen setUser={setUser}/> :<DrawerStack/> }
+
+    </>
+    
       <StatusBar  barStyle="light-content" backgroundColor="#243c56"/>
     </NavigationContainer>
   );

@@ -5,12 +5,12 @@ import { Entypo } from '@expo/vector-icons';
 import AppButton from '../Components/AppButton';
 import { FontAwesome } from '@expo/vector-icons';
 import { Divider } from 'react-native-elements';
-
-const LoginScreen = ({navigation}) => {
+import { useNavigation } from '@react-navigation/native';
+const LoginScreen = ({setUser }) => {
   const [Email,setEmail]=useState("")
   const [Password,setPassword]=useState("")
   const [Secure,setSecure]=useState(false)
-  const {navigate}=navigation;
+  const navigation=useNavigation();
 
 
 
@@ -69,7 +69,7 @@ const LoginScreen = ({navigation}) => {
   setSecure(true)  
 }}/>
 }      
-          <AppButton title={"Login"} navigation={navigation}/>
+          <AppButton title={"Login"} setUser={setUser}/>
            <View style={{position:"relative"}}>
 
           <Divider 

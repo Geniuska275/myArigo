@@ -10,10 +10,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
-const StoreScreen = () => {
+const StoreScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-        <Header/>
+        <Header navigation={navigation}/>
         <ScrollView>
             <View style={{
                 width:340,

@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View ,SafeAreaView, TouchableOpacity,Alert, ScrollView} from 'react-native'
+import { StyleSheet, Text, View ,SafeAreaView, KeyboardAvoidingView,TouchableOpacity,Alert, ScrollView} from 'react-native'
 import React from 'react'
 import Header from '../Components/Header'
 import { AntDesign } from '@expo/vector-icons';
 import { TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import constants from "expo-constants";
 
 
-const Request = () => {
+const Request = ({navigation}) => {
+  const {touch,container,touchy,touches}=styles;
 
   const Delete = ()=> {
    
@@ -25,10 +27,10 @@ Alert.alert(
 );
   }
   return (
-    <SafeAreaView>
-        <Header/>
+    <SafeAreaView style={container}>
+        <Header navigation={navigation}/>
+        <KeyboardAvoidingView behavior="padding" >
         <ScrollView>
-
         <View style={{
           borderColor:"gray",
           borderWidth:0.4,
@@ -102,16 +104,20 @@ Alert.alert(
 
         </View>
         </ScrollView>
+        
+ 
+ 
         <View style={{
-          marginHorizontal:10,
+          marginHorizontal:20,
           marginTop:230,
-          flexDirection:"row"
+          flexDirection:"row",
+          marginBottom:30
         }}>
           <TextInput 
           style={{
             backgroundColor:"#e4e4e4",
             padding:20,
-            width:320,
+            width:300,
             borderTopLeftRadius:5,
             borderBottomLeftRadius:5
           }}
@@ -127,6 +133,7 @@ Alert.alert(
           <FontAwesome name="send" size={24} color="white" />
           </TouchableOpacity>
         </View>
+        </KeyboardAvoidingView>
 
     </SafeAreaView>
   )
@@ -135,5 +142,9 @@ Alert.alert(
 export default Request
 
 const styles = StyleSheet.create({
+  container:{flex: 1,
+    backgroundColor: "white",
+    marginTop: constants.statusBarHeight,
+  },
 
 })

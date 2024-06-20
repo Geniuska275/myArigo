@@ -1,16 +1,19 @@
-import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import React from 'react'
 import Header from '../Components/Header'
 import { useNavigation } from '@react-navigation/native';
+import constants from "expo-constants";
 
-const DashboardScreen = () => {
+const DashboardScreen = ({navigation}) => {
     const {touch,container,touchy,touches}=styles;
-    const navigation=useNavigation()
+    const Navigation=useNavigation()
   return (
    <SafeAreaView style={container}>
-    <Header/>
+    <Header navigation={navigation}/>
+    <ScrollView>
+
     <View>
-        <TouchableOpacity style={touch} onPress={()=>navigation.navigate("Products")}>
+        <TouchableOpacity style={touch} onPress={()=>Navigation.navigate("Products")}>
             <View style={{
                 width:40,
                 height:40,
@@ -40,7 +43,7 @@ const DashboardScreen = () => {
             <Text style={{fontWeight:"bold",color:"#fefefe"}}>Refferals</Text>
 
         </TouchableOpacity>
-        <TouchableOpacity style={touches}>
+        <TouchableOpacity style={touches} onPress={()=>Navigation.navigate("messages")}>
             <View style={{
                 width:40,
                 height:40,
@@ -80,10 +83,7 @@ const DashboardScreen = () => {
         </TouchableOpacity>
 
     </View>
-
-
-
-
+  </ScrollView>
 
    </SafeAreaView>
   )
@@ -94,7 +94,9 @@ export default DashboardScreen
 const styles=StyleSheet.create({
     container:{
      flex:1,
-     backgroundColor:"#fefefe"
+     backgroundColor:"#fefefe",
+     marginTop: constants.statusBarHeight,
+    
     },
     button:{
      backgroundColor:"#337bb7",

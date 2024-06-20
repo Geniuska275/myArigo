@@ -14,6 +14,9 @@ import Profile from '../Screens/Profile';
 import Request from '../Screens/Request';
 
 
+
+
+
 const Tab = createBottomTabNavigator();
 
 function BottomTabs() {
@@ -54,7 +57,10 @@ function BottomTabs() {
     )
     }>
       {/* <Tab.Screen name="Homes" component={Home} /> */}
-      <Tab.Screen name="Home" component={ProductCategoryDetails} />
+      {/* <Tab.Screen name="Home" component={ProductCategoryDetails} /> */}
+      <Tab.Screen name="Dashboard" component={DashboardScreen} />
+
+
 
       {/* <Tab.Screen name="Home" component={AdvertsScreen} /> */}
 
@@ -62,8 +68,9 @@ function BottomTabs() {
       <Tab.Screen name="Auctions" component={AuctionScreen} /> 
       <Tab.Screen name="Post" component={PostScreen} />
       <Tab.Screen name="Services" component={Services} />
-      <Tab.Screen name='Request' component={Request}/>
+      {/* <Tab.Screen name='Request' component={Request}/> */}
        <Tab.Screen name="Products" component={Products} /> 
+     
       {/* <Tab.Screen name='Mycv' component={Mycv}/> */}
       {/* <Tab.Screen name="Profile" component={Profile}/> */}
        {/* <Tab.Screen name="Subscription" component={Subscriptions}/>  */}

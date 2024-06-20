@@ -1,13 +1,13 @@
 import { SafeAreaView, StyleSheet, Text, View,ImageBackground } from 'react-native'
 import { Octicons } from '@expo/vector-icons';
-import React from 'react'
+import React,{useState} from 'react'
 import Header from '../Components/Header'
 import constants from "expo-constants";
 import Displays from '../Components/Displays';
 import { ScrollView } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-const AdvertsScreen = () => {
-  const [items, setItems] = React.useState([
+const AdvertsScreen = ({navigation}) => {
+  const [items, setItems] =useState([
     { name: 'Business Wyze', img:"",image:"https://images.unsplash.com/photo-1717313860625-4d4311b5f9d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" },
     { name: 'imperatrice', img:"",image:"https://images.unsplash.com/photo-1716916959437-c904cdabd0f3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHx8" },
     { name: 'Sqe holdings', img:"",image:"https://images.unsplash.com/photo-1717318104110-d8ef457d9c2e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D" },
@@ -20,7 +20,7 @@ const AdvertsScreen = () => {
 
   return (  
     <SafeAreaView style={styles.container}>
-      <Header/>
+      <Header navigation={navigation}/>
       <Text style={styles.text}>Adverts</Text>
       <ScrollView>
       <FlatGrid
@@ -51,7 +51,8 @@ const AdvertsScreen = () => {
 export default AdvertsScreen
 
 const styles = StyleSheet.create({
-  container:{flex: 1,
+  container:{
+    flex: 1,
     backgroundColor: "white",
     marginTop: constants.statusBarHeight,
   },

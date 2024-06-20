@@ -4,11 +4,13 @@ import Header from '../Components/Header'
 import { ScrollView } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
+import constants from "expo-constants";
 
-const Subscriptions = () => {
+const Subscriptions = ({navigation}) => {
+    const {touch,container,touchy,touches}=styles;
   return (
-    <SafeAreaView>
-        <Header/>
+    <SafeAreaView style={container}>
+        <Header navigation={navigation}/>
         <Text style={styles.text}>Subscriptions</Text>
         <ScrollView>
             <View style={{
@@ -1055,6 +1057,12 @@ const Subscriptions = () => {
 export default Subscriptions
 
 const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        backgroundColor:"#fefefe",
+        marginTop: constants.statusBarHeight,
+       
+       },
     text:{
         textAlign:"center",
         shadowOffset: { width: 2, height: 2 },

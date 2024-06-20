@@ -13,7 +13,7 @@ import { Octicons } from '@expo/vector-icons';
 
 
 
-const Services = () => {
+const Services = ({navigation}) => {
   const [service, setService] = useState("");
   const emojisWithIcons = [{
     title:"Sort By"
@@ -38,7 +38,7 @@ const Services = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header/>
+      <Header navigation={navigation}/>
      
       <Text style={styles.text}>Services</Text>
     <ScrollView>

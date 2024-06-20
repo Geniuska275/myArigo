@@ -13,7 +13,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 
 
-const PostScreen = () => {
+const PostScreen = ({navigation}) => {
   const [service, setService] = useState("");
   const emojisWithIcons = [{
     title:"Sort By"
@@ -37,7 +37,7 @@ const PostScreen = () => {
   ]);
   return (
     <SafeAreaView style={styles.container}>
-    <Header/>
+    <Header navigation={navigation}/>
     <Text style={styles.text}>All Posts</Text>
     <ScrollView>
       <Text style={{

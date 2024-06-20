@@ -12,7 +12,7 @@ import Displays from '../Components/Displays'
 
 
 
-const ProductCategoryDetails = (props) => {
+const ProductCategoryDetails = ({navigation}) => {
 
     const productService = new ProductService()
 
@@ -21,11 +21,12 @@ const ProductCategoryDetails = (props) => {
     const [prodList, setProdList] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
+    
     useEffect(() => {
         setIsLoading(true)
         // Using set time out to mock http requests
-        setTimeout(() => {
-            setProdList(productService.getAllProducts())
+        setTimeout(() => {                               
+            setProdList(productService.getAllProducts());
             setIsLoading(false)
         }, 2000);
     }, [])
@@ -35,7 +36,7 @@ const ProductCategoryDetails = (props) => {
 
     return (
         <SafeAreaView style={styles.container}>
-        <Header/>
+        <Header navigation={navigation}/>
         <ScrollView>
 
             <ProductHeader

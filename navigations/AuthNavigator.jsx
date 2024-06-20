@@ -7,6 +7,15 @@ import StoreScreen from "../Screens/StoreScreen";
 import Messages from "../Screens/Messages";
 import Notification from "../Screens/Notification";
 import AddScreen from "../Screens/AddScreen";
+import DashboardScreen from "../Screens/DashboardScreen";
+
+
+
+
+
+
+
+
 
 const Stack=createStackNavigator()
 
@@ -20,19 +29,19 @@ function AuthStack(){
             // headerTintColor:"white",
             // headerBackTitleVisible:'back'
         }} initialRouteName="Login">
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Signup"  component={SignupScreen}/>
+          <Stack.Screen name="Home"  component={BottomTabs}/>
             <Stack.Screen name="ProductDetails"  component={ProductDetails}/>
             <Stack.Screen name="StoreDetails"  component={StoreScreen}/>
             <Stack.Screen name="messages"  component={Messages}/>
             <Stack.Screen name="notification"  component={Notification}/>
             <Stack.Screen name="AddScreen"  component={AddScreen}/>
+           
+
 
 
 
             
             
-            <Stack.Screen name="Home"  component={BottomTabs}/>
 
         </Stack.Navigator>
     )

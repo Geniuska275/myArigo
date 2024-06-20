@@ -3,10 +3,10 @@ import React from 'react'
 import { SafeAreaView } from 'react-native'
 import Header from '../Components/Header'
 
-const Notification = () => {
+const Notification = ({navigation}) => {
   return (
     <SafeAreaView>
-        <Header/>
+        <Header navigation={navigation}/>
       <Text>Notification</Text>
     </SafeAreaView>
   )

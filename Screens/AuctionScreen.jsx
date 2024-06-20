@@ -15,7 +15,7 @@ import { FontAwesome6 } from '@expo/vector-icons';
 
 
 
-const AuctionScreen = () => {
+const AuctionScreen = ({navigation}) => {
 
   const data=[
     { id :1,img:"./a.png",text:"Exclusive Products",desc:"Products Available on the Arigo Auction are exclusive to our brand."},
@@ -24,7 +24,7 @@ const AuctionScreen = () => {
   ]
   return (
     <SafeAreaView style={styles.container}>
-    <Header/>
+    <Header navigation={navigation}/>
     <Text style={styles.text}>Auctions</Text>
     <ScrollView>
 

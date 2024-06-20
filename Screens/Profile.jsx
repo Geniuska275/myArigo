@@ -3,10 +3,10 @@ import React from 'react'
 import constants from "expo-constants";
 import Header from '../Components/Header';
 import { Feather } from '@expo/vector-icons';
-import { ArrowBackIcon } from 'native-base';
+
 import { TextInput } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
-const Profile = () => {
+const Profile = ({navigation}) => {
     const emojisWithIcons = [{
         title:"Sort By"
       },
@@ -16,7 +16,7 @@ const Profile = () => {
       ];
   return (
     <SafeAreaView style={styles.container}>
-      <Header/>
+      <Header navigation={navigation}/>
       <ScrollView>
 
       <View style={{
