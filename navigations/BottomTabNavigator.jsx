@@ -8,10 +8,7 @@ import Products from '../Screens/Products';
 import Icon from "react-native-vector-icons/Ionicons"
 import ProductCategoryDetails from '../Screens/ProductCategoryDetails';
 import DashboardScreen from '../Screens/DashboardScreen';
-import Subscriptions from '../Screens/Subscriptions';
-import Mycv from '../Screens/mycv';
-import Profile from '../Screens/Profile';
-import Request from '../Screens/Request';
+
 
 
 
@@ -56,15 +53,9 @@ function BottomTabs() {
           
     )
     }>
-      {/* <Tab.Screen name="Homes" component={Home} /> */}
-      {/* <Tab.Screen name="Home" component={ProductCategoryDetails} /> */}
       <Tab.Screen name="Dashboard" component={DashboardScreen} />
 
-
       <Tab.Screen name="Category" component={ProductCategoryDetails} />
-
-      {/* <Tab.Screen name="Home" component={AdvertsScreen} /> */}
-
        <Tab.Screen name="Adverts" component={AdvertsScreen} />
       <Tab.Screen name="Auctions" component={AuctionScreen} /> 
       <Tab.Screen name="Post" component={PostScreen} />

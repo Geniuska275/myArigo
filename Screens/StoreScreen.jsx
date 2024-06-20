@@ -17,7 +17,7 @@ const StoreScreen = ({navigation}) => {
         <ScrollView>
             <View style={{
                 width:340,
-                height:650,
+                height:660,
                 marginVertical:10,
                 alignSelf:"center",
                 borderColor:"black",
