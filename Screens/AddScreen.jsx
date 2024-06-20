@@ -1,4 +1,13 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View,Alert, Image,KeyboardAvoidingView } from 'react-native'
+import { 
+  ScrollView, 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity,
+   View,
+   Alert, 
+   Image,
+   KeyboardAvoidingView,
+   Platform } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../Components/Header'
@@ -107,7 +116,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{
             color:"#565b64"
         }}>Category </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:270,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 300:270,top:-10}}>*</Text>       
       </View>
       <TextInput
               style={{ 
@@ -169,7 +178,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{
             color:"#565b64"
         }}>Age </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:300,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?330:300,top:-10}}>*</Text>       
       </View>
       <TextInput
               style={{ 
@@ -198,7 +207,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{
             color:"#565b64"
         }}>Job Title </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:270,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 305:270,top:-10}}>*</Text>       
       </View>
       
       <TextInput
@@ -222,7 +231,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{
             color:"#565b64"
         }}>Job Type </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:270,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?305:270,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={emojisWithIcons}
@@ -260,7 +269,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{
             color:"#565b64"
         }}>Gender</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:280,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?310:280,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={emojisWithIcons}
@@ -298,7 +307,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{
             color:"#565b64"
         }}>State </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:290,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?320:290,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={emojisWithIcons}
@@ -335,7 +344,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{
             color:"#565b64"
         }}>City </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:300,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?320:300,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={emojisWithIcons}
@@ -382,7 +391,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{
             color:"#565b64"
         }}>Experience on this Role </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:180,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?200:180,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={emojisWithIcons}
@@ -633,7 +642,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{
             color:"#565b64"
         }}>About You </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:260,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?290:260,top:-10}}>*</Text>       
       </View>
       <TextInput
               style={{ 
@@ -732,7 +741,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{
             color:"#565b64"
         }}>Profile Image </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:240,top:-10}}>*</Text>   
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?270:240,top:-10}}>*</Text>   
       </View>
         <TouchableOpacity onPress={()=>pickImage()} 
         style={{ 
