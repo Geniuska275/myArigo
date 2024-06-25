@@ -8,20 +8,15 @@ import AuthStack from './navigations/AuthNavigator';
 import 'react-native-gesture-handler';
 import DrawerStack from './navigations/DrawerNavigator';
 import { useState } from 'react';
-export default function App() {
-  const [user,setUser]=useState(true)
-  return (
-    <NavigationContainer>
-{/* 
-    <View style={styles.container}>
-       <LoginScreen/>
-       
-    </View> */}
-    <>
-    {user ? <LoginScreen setUser={setUser}/> :<DrawerStack/> }
 
-    </>
-    
+
+export default function App() {
+
+   const [user,setUser]=useState(false)
+  return (
+  
+    <NavigationContainer>   
+    <AuthStack/>
       <StatusBar  barStyle="light-content" backgroundColor="#243c56"/>
     </NavigationContainer>
   );

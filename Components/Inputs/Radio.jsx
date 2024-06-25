@@ -54,7 +54,7 @@ const styles=StyleSheet.create({
     text:{
         fontSize:16,
         marginLeft:15,
-        color:"6b7280"
+        color:"#6b7280"
     },
     activeText:{
         color:"#374151"

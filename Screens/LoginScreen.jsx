@@ -1,21 +1,43 @@
-import { ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import { ImageBackground, SafeAreaView, Alert,ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useContext, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import AppButton from '../Components/AppButton';
 import { FontAwesome } from '@expo/vector-icons';
 import { Divider } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-const LoginScreen = ({setUser }) => {
-  const [Email,setEmail]=useState("")
-  const [Password,setPassword]=useState("")
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+const LoginScreen = () => {
+ 
+  const [Email,setEmail]=useState("akinrinsoyetimi@gmail.com")
+  const [Password,setPassword]=useState("Debbie2025#")
   const [Secure,setSecure]=useState(false)
   const navigation=useNavigation();
 
 
-
-
-  
+  const handleSubmit= async ()=>{
+    const baseUrl='https://app.myarigo.com/api/login';
+    const userData={
+      email:Email,
+      password:Password
+    }
+    try {
+       const response = await axios.post(baseUrl,userData);
+      await AsyncStorage.setItem("token", response.data.token)
+      Alert.alert(
+        'Login',
+        'Signedin successfully',
+        navigation.navigate("Home")
+      );
+    } catch (error) {
+      console.log(error.message)
+      Alert.alert(
+        'Error',
+        `${error.message}`,  
+      );
+    }
+  }
 
   return (
         
@@ -63,13 +85,11 @@ const LoginScreen = ({setUser }) => {
   top:20,
   right:40
   }} 
-
-
   onPress={()=>{
   setSecure(true)  
 }}/>
 }      
-          <AppButton title={"Login"} setUser={setUser}/>
+          <AppButton title={"Login"} handleSubmit={handleSubmit}/>
            <View style={{position:"relative"}}>
 
           <Divider 

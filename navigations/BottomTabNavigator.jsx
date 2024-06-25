@@ -21,7 +21,6 @@ function BottomTabs() {
       <Tab.Navigator screenOptions={({route})=>({
           headerShown:false,
           tabBarActiveTintColor:"#243c56",
-
           tabBarIcon:({color,size,focused})=>{
               let iconName;
               if(route.name=="Dashboard"){
@@ -53,15 +52,12 @@ function BottomTabs() {
           
     )
     }>
-      <Tab.Screen name="Dashboard" component={DashboardScreen} />
-      <Tab.Screen name="Categories" component={ProductCategoryDetails} />
+       <Tab.Screen name="Dashboard" component={DashboardScreen} />
+       <Tab.Screen name="Categories" component={ProductCategoryDetails} />
        <Tab.Screen name="Adverts" component={AdvertsScreen} />
-      <Tab.Screen name="Auctions" component={AuctionScreen} /> 
-      <Tab.Screen name="Post" component={PostScreen} />
-      <Tab.Screen name="Services" component={Services} />
-
-    
-
+       <Tab.Screen name="Auctions" component={AuctionScreen} /> 
+       <Tab.Screen name="Post" component={PostScreen} />
+       <Tab.Screen name="Services" component={Services} />
     </Tab.Navigator>
   );
 }

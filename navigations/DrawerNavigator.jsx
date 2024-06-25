@@ -7,6 +7,8 @@ import Request from '../Screens/Request';
 import Subscriptions from '../Screens/Subscriptions';
 import Messages from '../Screens/Messages';
 import Mycv from '../Screens/mycv';
+import { MaterialIcons } from '@expo/vector-icons';
+import BottomTabs from './BottomTabNavigator';
 const Drawer = createDrawerNavigator();
 
 export default function DrawerStack() {
@@ -17,10 +19,9 @@ export default function DrawerStack() {
         headerShown: false,
     }}
     >
-      <Drawer.Screen name="Dashboard" component={AuthStack} />
+      <Drawer.Screen name="Dashboard" component={BottomTabs} />
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Request" component={Request} />
-
       <Drawer.Screen name="Subscription" component={Subscriptions} />
       <Drawer.Screen name="Messsages" component={Messages} />
       <Drawer.Screen name="My Cv" component={Mycv} />

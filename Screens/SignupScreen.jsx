@@ -1,5 +1,5 @@
 
-import { ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ImageBackground, SafeAreaView, Alert,ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -8,21 +8,50 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Divider } from 'react-native-elements';
 import RadioGroup from 'react-native-radio-buttons-group';
 import Radio from '../Components/Inputs/Radio';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 const SignupScreen = ({navigation}) => {
-  const [Email,setEmail]=useState("")
-  const [fullname,setFullName]=useState("")
-  const [Phone,setPhone]=useState()
+  const Navigation=useNavigation()
+  const [email, setEmail] = useState("");
+  const [fullname, setFullName] = useState("");
+  const [phone, setPhone] = useState();
+  const [password, setPassword]= useState("");
+  const [accountType, setAccountType] = useState("");
+  const [firstname, setFirstName]= useState("");
+  const [lastname, setLastName]= useState("");
+  const [Secure, setSecure] = useState(false)
+  const [Seller, setSeller] = useState("")
 
-  const [Password,setPassword]=useState("")
-
-  const [Secure,setSecure]=useState(false)
-  const [Seller,setSeller]=useState("")
-
+const handleSubmit= async ()=>{
+  const baseUrl="https://app.myarigo.com/api/register"
+  const userData={
+    fullname,
+    email,
+    phone,
+    password,
+    firstname,
+    lastname,
+    account_type:accountType
+  } 
+  console.log(userData)
+  try {
+    const response = await axios.post(baseUrl,userData)
+    console.log(response.data)
+    Alert.alert(
+      'Registration',
+      'Registered successfully',
+    
+    );
+    Navigation.navigate("Login")
+  } catch (error) {
+    console.log(error)    
+  }
+}
 
 const Options=[
-  {label:"Seller",value:"Seller"},
-  {label:"Buyer",value:"Buyer"}
+  {label:"seller",value:"seller"},
+  {label:"buyer",value:"buyer"}
 ]
 
 
@@ -38,18 +67,32 @@ const Options=[
               onChangeText={text => setFullName(text)}
               placeholder='First & Last Name'
                value={fullname}
-      />
+             />
+            
+            <TextInput
+             style={{ height: 40, borderBottomWidth: 1, borderColor:"gray",marginHorizontal:40,marginVertical:8 }}
+              onChangeText={text => setFirstName(text)}
+              placeholder='FirstName'
+               value={firstname}
+             />
+             
+             <TextInput
+             style={{ height: 40, borderBottomWidth: 1, borderColor:"gray",marginHorizontal:40,marginVertical:8 }}
+              onChangeText={text => setLastName(text)}
+              placeholder='LastName'
+               value={lastname}
+             />
              <TextInput
              style={{ height: 40, borderBottomWidth: 1, borderColor:"gray",marginHorizontal:40,marginVertical:8 }}
               onChangeText={text => setEmail(text)}
               placeholder='Email'
-               value={Email}
+               value={email}
       />  
        <TextInput
              style={{ height: 40, borderBottomWidth: 1, borderColor:"gray",marginHorizontal:40,marginVertical:8 }}
               onChangeText={text => setPhone(text)}
               placeholder='Phone'
-               value={Phone}
+               value={phone}
       />
            
 
@@ -59,14 +102,23 @@ const Options=[
              style={{ height: 40, borderBottomWidth: 1, borderColor:"gray",marginHorizontal:40,marginVertical:10 }}
               onChangeText={text => setPassword(text)}
               placeholder='Password'
-               value={Password}
+               value={password}
                secureTextEntry={Secure}
       />
  {Secure ? 
 <FontAwesome name="eye" size={24} color="black"  style={{position:"absolute",top:20,right:40}} onPress={()=>{
   setSecure(false)
 }}/>:
-<Entypo name="eye-with-line" size={24} color="black" style={{position:"absolute",top:20,right:40,fontWeight:"bold",fontSize:20}} onPress={()=>{
+<Entypo 
+name="eye-with-line" 
+size={24} 
+color="black" 
+style={{
+  position:"absolute",
+  top:20,
+  right:40,
+  fontWeight:"bold",
+  fontSize:20}} onPress={()=>{
  setSecure(true)  
 }}/>
 
@@ -76,22 +128,32 @@ const Options=[
           <Radio Options={Options}
            CheckedValue={Seller} 
           style={{marginBottom:15}}
-          onChange={setSeller}/>
-          <AppButton title={"Signup as a seller"}/>
+          onChange={setAccountType}/>
+          <AppButton title={"Signup as a seller"} handleSubmit={handleSubmit}/>
            <View style={{position:"relative"}}>
 
           <Divider style={{ backgroundColor: 'black' ,marginHorizontal:40,marginTop:20}} />
-          <Text style={{backgroundColor:"#f9f9f9",width:90,position:"absolute",top:10,left:140}}>signup with</Text>
+          <TouchableOpacity >
+          <Text style={{backgroundColor:"#f9f9f9",width:90,position:"absolute",top:10,left:140}}>
+            signup with</Text>
+          </TouchableOpacity>
            </View>
             </View>      
 
             </View>
             <View style={styles.intro}>
 
-              <Text style={{color:"#fefefe",fontWeight:"bold",lineHeight:22,marginHorizontal:30,marginTop:20}}>Hello,Welcome to Myarigo ,the first Business platform for verified brands ,service and Business.Arigo perfectly illustrate the characteristics of a ladder that aids the process of climbing.We Connect Business,Brands and Services together. </Text>
-               <Text style={{color:"#fefefe",fontWeight:"bold",marginHorizontal:30,marginTop:30}} >Don't have an account ?</Text>
+
+               <Text style={{color:"#fefefe",fontWeight:"bold",marginHorizontal:30,marginTop:30}} >
+                Already have an account ?</Text>
             <View style={{flexDirection:"row",gap:4,marginHorizontal:30}}>
-            <TouchableOpacity onPress={()=>navigation.navigate("Login")} style={{backgroundColor:"#6c757d",padding:10,borderRadius:10,marginTop:5}}>
+            <TouchableOpacity onPress={()=>Navigation.navigate("Login")} 
+            style={{
+              backgroundColor:"#6c757d",
+              padding:10,
+              borderRadius:10,
+              marginTop:5
+              }}>
             <Text style={{color:"white",fontWeight:"bold"}}>Login</Text>
            </TouchableOpacity>
            {/* <TouchableOpacity onPress={{}} style={{backgroundColor:"#6c757d",padding:10,borderRadius:10}}>
@@ -117,7 +179,6 @@ const styles = StyleSheet.create({
       borderWidth:1,
       borderRadius:10,
       backgroundColor:"gray"
-
      },
      outer:{
       justifyContent:"center",
@@ -126,7 +187,6 @@ const styles = StyleSheet.create({
       height:30,
       borderWidth:1,
       borderRadius:15
-
      },
     backgroundImage: {
       flex: 1,
@@ -147,12 +207,12 @@ const styles = StyleSheet.create({
       marginHorizontal:30,
       marginTop:40,
       xOffset:-2,
-  yOffset:4,
-  shadowColorIos:"#171717",
-  shadowOpacity: 0.2,
-  shadowRadius: 3,
-  elevation:4,
-  shadowColorAndroid:"#171717",
+     yOffset:4,
+     shadowColorIos:"#171717",
+     shadowOpacity: 0.2,
+     shadowRadius: 3,
+     elevation:4,
+     shadowColorAndroid:"#171717",
     },
     login:{
       flex:2,
@@ -161,12 +221,10 @@ const styles = StyleSheet.create({
       borderTopRightRadius:10
     },
     intro:{
-    
-      height:280,
+      height:100,
       borderBottomLeftRadius:10,
       borderBottomRightRadius:10,
       backgroundColor:"#243c56"
-
     },
     text:{
       textAlign:"center",
