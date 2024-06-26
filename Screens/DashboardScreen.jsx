@@ -1,12 +1,34 @@
 import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, ScrollView,Platform } from 'react-native'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Header from '../Components/Header'
 import { useNavigation } from '@react-navigation/native';
 import constants from "expo-constants";
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {USER_ENDPOINT} from "@env"
 
 const DashboardScreen = ({navigation}) => {
     const {touch,container,touchy,touches}=styles;
     const Navigation=useNavigation()
+
+    const [userData, setUserData] =useState({})
+    async function getUserData(){
+      const baseUrl = USER_ENDPOINT
+      const token = await AsyncStorage.getItem("token")
+      const response = await axios.get(baseUrl,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      })
+    
+      setUserData(response.data.user)
+    }
+    
+    useEffect(()=>{
+      getUserData()
+
+    }, [])
+    console.log(userData.referral)
   return (
    <SafeAreaView style={container}>
     <Header navigation={navigation}/>
@@ -38,7 +60,7 @@ const DashboardScreen = ({navigation}) => {
                 alignItems:"center",
                 borderWidth:2
             }}>
-                <Text style={{color:"white"}}>0</Text>
+                <Text style={{color:"white"}}>{userData.referral}</Text>
             </View>
             <Text style={{fontWeight:"bold",color:"#fefefe"}}>Refferals</Text>
 

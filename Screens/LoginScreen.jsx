@@ -8,6 +8,7 @@ import { Divider } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import {LOGIN_ENDPOINT} from "@env"
 const LoginScreen = () => {
  
   const [Email,setEmail]=useState("akinrinsoyetimi@gmail.com")
@@ -17,7 +18,7 @@ const LoginScreen = () => {
 
 
   const handleSubmit= async ()=>{
-    const baseUrl='https://app.myarigo.com/api/login';
+    const baseUrl=LOGIN_ENDPOINT;
     const userData={
       email:Email,
       password:Password

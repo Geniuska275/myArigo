@@ -30,7 +30,7 @@ const Profile = ({navigation}) => {
     getUserData()
     console.log("useEffect")
   }, [])
-  console.log(userData.email)
+  console.log(userData)
   const [email, setEmail] = useState(userData.email)
   const [phone, setPhone] = useState(userData.phone)
   const [name, setName] = useState(userData.name)
