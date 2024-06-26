@@ -25,6 +25,7 @@ const LoginScreen = () => {
     try {
        const response = await axios.post(baseUrl,userData);
       await AsyncStorage.setItem("token", response.data.token)
+      AsyncStorage.setItem("isLoggeedIn",JSON.stringify(true))
       Alert.alert(
         'Login',
         'Signedin successfully',

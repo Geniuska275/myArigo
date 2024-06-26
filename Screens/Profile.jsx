@@ -1,12 +1,41 @@
 import { View, Text,StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import constants from "expo-constants";
 import Header from '../Components/Header';
 import { Feather } from '@expo/vector-icons';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import { TextInput } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 const Profile = ({navigation}) => {
+  
+  
+  
+  const [userData, setUserData] =useState({})
+  async function getUserData(){
+    const baseUrl = "https://app.myarigo.com/api/user"
+    const token = await AsyncStorage.getItem("token")
+    const response = await axios.get(baseUrl,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    console.log("called")
+    setUserData(response.data.user)
+  }
+  
+  useEffect(()=>{
+    getUserData()
+    console.log("useEffect")
+  }, [])
+  console.log(userData.email)
+  const [email, setEmail] = useState(userData.email)
+  const [phone, setPhone] = useState(userData.phone)
+  const [name, setName] = useState(userData.name)
+
+
     const emojisWithIcons = [{
         title:"Sort By"
       },
@@ -40,7 +69,7 @@ const Profile = ({navigation}) => {
             <Text style={{
               fontWeight:"bold",
               marginBottom:5,
-            }}>Timilehin Aigbojie</Text>
+            }}>{userData.name}</Text>
             <Text style={{
               color:"gray"
             }}> Max file size is 5Mb</Text>
@@ -66,7 +95,7 @@ const Profile = ({navigation}) => {
 
       </View>
       <Text style={{
-        fontStyle:"bold",
+        fontWeight:"bold",
         marginHorizontal:20,
         marginVertical:5,
         color:"#565b64",
@@ -78,14 +107,15 @@ const Profile = ({navigation}) => {
                   borderWidth: 1,
                   width:350,
                   borderRadius:10,
+                  padding:5,
                   borderColor:"gray",
                   marginHorizontal:20,
                   marginVertical:5 }}
-                  onChangeText={text =>(text)}
-                  value={""}
+                  onChangeText={text =>setName(text)}
+                  value={userData.name}
                   />
                <Text style={{
-                 fontStyle:"bold",
+                 fontWeight:"bold",
                  marginHorizontal:20,
                  marginVertical:5,
                  color:"#565b64",
@@ -99,12 +129,13 @@ const Profile = ({navigation}) => {
                 borderRadius:10,
                 borderColor:"gray",
                 marginHorizontal:20,
+                padding:5,
                 marginVertical:5 }}
-                onChangeText={text =>(text)}
-                value={""}
+                onChangeText={text =>setEmail(text)}
+                value={userData.email}
                 />
                <Text style={{
-                 fontStyle:"bold",
+                 fontWeight:"bold",
                  marginHorizontal:20,
                  marginVertical:5,
                  color:"#565b64",
@@ -116,14 +147,15 @@ const Profile = ({navigation}) => {
                 borderWidth: 1,
                 width:350,
                 borderRadius:10,
+                padding:5,
                 borderColor:"gray",
                 marginHorizontal:20,
                 marginVertical:5 }}
-                onChangeText={text =>(text)}
-                value={""}
+                onChangeText={text =>setPhone(text)}
+                value={userData.phone}
                 />
                <Text style={{
-            fontStyle:"bold",
+            fontWeight:"bold",
             marginHorizontal:20,
             marginVertical:5,
             color:"#565b64",
@@ -142,7 +174,7 @@ const Profile = ({navigation}) => {
                 value={""}
                 />
                           <Text style={{
-                            fontStyle:"bold",
+                            fontWeight:"bold",
                             marginHorizontal:20,
                             marginVertical:5,
                             color:"#565b64",
@@ -176,7 +208,7 @@ const Profile = ({navigation}) => {
     />
  
                           <Text style={{
-                            fontStyle:"bold",
+                            fontWeight:"bold",
                             marginHorizontal:20,
                             marginVertical:10,
                             color:"#565b64",

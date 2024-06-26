@@ -3,18 +3,55 @@ import {
     Text,
     ImageBackground,
     Image,
+    Alert,
     TouchableOpacity,
   } from "react-native";
   import { MaterialIcons, FontAwesome5, Entypo } from "@expo/vector-icons";
   
-  import React, { useContext } from "react";
+  import axios from "axios";
+  import React, { useEffect,useState } from "react";
   import {
     DrawerContentScrollView,
     DrawerItemList,
   } from "@react-navigation/drawer";
   import { Divider } from "react-native-elements";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
   
   export default function CustomDrawer(props) {
+    const [userData, setUserData] =useState({})
+    const navigation = useNavigation();
+    async function getUserData(){
+    const baseUrl = "https://app.myarigo.com/api/user"
+    const token = await AsyncStorage.getItem("token")
+    const response = await axios.get(baseUrl,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    console.log("called")
+    setUserData(response.data.user)
+  }
+  
+  useEffect(()=>{
+    getUserData()
+    console.log("useEffect")
+  }, [])
+
+  async function logOut(){
+    const baseUrl = "https://app.myarigo.com/api/user/logout";
+    const token = await AsyncStorage.getItem("token")
+   const res =   await axios.get(baseUrl,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    Alert.alert(
+      'Logged out',
+      navigation.navigate("Login")
+    );
+    console.log(res)
+  }
   
     return (
       <View style={{ flex: 1 }}>
@@ -69,7 +106,7 @@ import {
                 
               }}
             >
-              Timilehin Aigbojie
+              {userData.name}
             </Text>
           </View>
           <Divider width={0.5} />
@@ -92,11 +129,11 @@ import {
               alignItems: "center",
               marginVertical: 5,
             }}
-            onPress={()=>{}}
+            onPress={logOut}
           >
             <Text
               style={{
-                fontFamily: "Grotesk",
+             
                 fontSize: 18,
                 fontWeight: "bold",
                 color: "#243c56",

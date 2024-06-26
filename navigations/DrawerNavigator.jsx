@@ -19,7 +19,7 @@ export default function DrawerStack() {
         headerShown: false,
     }}
     >
-      <Drawer.Screen name="Dashboard" component={BottomTabs} />
+      <Drawer.Screen name="Home" component={BottomTabs} />
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Request" component={Request} />
       <Drawer.Screen name="Subscription" component={Subscriptions} />
