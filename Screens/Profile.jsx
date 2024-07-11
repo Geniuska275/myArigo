@@ -17,32 +17,60 @@ const Profile = ({navigation}) => {
   async function getUserData(){
     const baseUrl = "https://app.myarigo.com/api/user"
     const token = await AsyncStorage.getItem("token")
+    console.log(token)
     const response = await axios.get(baseUrl,{
       headers:{
         Authorization: `Bearer ${token}`
       }
     })
-    console.log("called")
     setUserData(response.data.user)
   }
   
   useEffect(()=>{
     getUserData()
-    console.log("useEffect")
+
   }, [])
-  console.log(userData)
-  const [email, setEmail] = useState(userData.email)
-  const [phone, setPhone] = useState(userData.phone)
-  const [name, setName] = useState(userData.name)
+
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [name, setName] = useState("")
+  const [city, setCity] = useState("")
+  const [address, setAddress] = useState("")
+  const [state, setState] = useState("")
+
+
 
 
     const emojisWithIcons = [{
-        title:"Sort By"
+        title:"Edo State"
       },
       {
-        title:"Sort By"
+        title:"Benin City"
       },
       ];
+
+      async function EditProfile(){
+        const data={
+          email,
+          name,
+          phone,
+          state,
+          city,
+          address
+        }
+        console.log(data)
+        const baseUrl = "https://myarigo.com/api/user/profile/edit"
+        const response = await axios.post(baseUrl,{
+          headers:{
+            'Authorization': 'Bearer '+ await AsyncStorage.getItem('token')
+          },
+          body:JSON.stringify(data)
+        })
+        console.log(response)
+      
+      }
+
+
   return (
     <SafeAreaView style={styles.container}>
       <Header navigation={navigation}/>
@@ -112,7 +140,7 @@ const Profile = ({navigation}) => {
                   marginHorizontal:20,
                   marginVertical:5 }}
                   onChangeText={text =>setName(text)}
-                  value={userData.name}
+                  value={name}
                   />
                <Text style={{
                  fontWeight:"bold",
@@ -132,7 +160,7 @@ const Profile = ({navigation}) => {
                 padding:5,
                 marginVertical:5 }}
                 onChangeText={text =>setEmail(text)}
-                value={userData.email}
+                value={email}
                 />
                <Text style={{
                  fontWeight:"bold",
@@ -152,7 +180,7 @@ const Profile = ({navigation}) => {
                 marginHorizontal:20,
                 marginVertical:5 }}
                 onChangeText={text =>setPhone(text)}
-                value={userData.phone}
+                value={phone}
                 />
                <Text style={{
             fontWeight:"bold",
@@ -170,8 +198,8 @@ const Profile = ({navigation}) => {
                 borderColor:"gray",
                 marginHorizontal:20,
                 marginVertical:5 }}
-                onChangeText={text =>(text)}
-                value={""}
+                onChangeText={(text) =>setAddress(text)}
+                value={address}
                 />
                           <Text style={{
                             fontWeight:"bold",
@@ -184,6 +212,7 @@ const Profile = ({navigation}) => {
     data={emojisWithIcons}
     onSelect={(selectedItem, index) => {
       console.log(selectedItem, index);
+      setState(selectedItem.title)
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -217,7 +246,8 @@ const Profile = ({navigation}) => {
                 <SelectDropdown
     data={emojisWithIcons}
     onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
+      console.log(selectedItem.title);
+      setCity(selectedItem.title)
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -240,7 +270,9 @@ const Profile = ({navigation}) => {
     showsVerticalScrollIndicator={false}
     dropdownStyle={styles.dropdownMenuStyle}
     />
-       <TouchableOpacity style={{
+       <TouchableOpacity
+       onPress={EditProfile} 
+       style={{
          paddingHorizontal:10,
          backgroundColor:"#337bb7",
          borderRadius:10,

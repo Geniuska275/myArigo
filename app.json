@@ -1,16 +1,12 @@
 {
   "expo": {
-    "name": "myarigo",
+    "name": "my Arigo",     
     "slug": "myarigo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./Components/logos.png",
+    "icon": "./Components/ar.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./Components/logos.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#243c56"
-    },
+    
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -19,8 +15,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./Components/ar.png",
+        "backgroundColor": "#243c56"
       },
       "package": "com.brains_23.myarigo"
     },

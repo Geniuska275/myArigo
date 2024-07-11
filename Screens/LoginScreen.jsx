@@ -33,10 +33,11 @@ const LoginScreen = () => {
         navigation.navigate("Home")
       );
     } catch (error) {
+      console.log(error)
       console.log(error.message)
       Alert.alert(
         'Error',
-        `${error.message}`,  
+        `Invalid login detaiils`,  
       );
     }
   }

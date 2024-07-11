@@ -10,6 +10,7 @@ import AddScreen from "../Screens/AddScreen";
 import DashboardScreen from "../Screens/DashboardScreen";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DrawerStack from "./DrawerNavigator";
+import Products from "../Screens/Products";
 
 
 
@@ -34,6 +35,8 @@ function AuthStack(){
             <Stack.Screen name="messages"  component={Messages}/>
             <Stack.Screen name="notification"  component={Notification}/>
             <Stack.Screen name="AddScreen"  component={AddScreen}/>
+            <Stack.Screen name="Products"  component={Products}/>
+
                 
 
         </Stack.Navigator>

@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View ,Platform,ImageBackground, Image} from 'react-native'
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { SafeAreaView } from 'react-native'
 import Header from '../Components/Header'
 import constants from "expo-constants";
@@ -9,10 +9,32 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatGrid } from 'react-native-super-grid';
 import { AntDesign } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
-
-
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {CV_ENDPOINT} from "@env"
 
 const Products = ({navigation}) => {
+
+ useEffect(()=>{
+   getProducts()
+ },[])
+
+  const getProducts = async ()=>{
+    const baseUrl=CV_ENDPOINT;
+    try {
+       const response = await axios.get(baseUrl,{
+        headers: {
+          'Authorization': 'Bearer '+ await AsyncStorage.getItem('token')
+        }
+       });   
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+      console.log(error.message)
+    }
+  }
+
+
   const [service, setService] = useState("");
   const emojisWithIcons = [{
     title:"Sort By"
