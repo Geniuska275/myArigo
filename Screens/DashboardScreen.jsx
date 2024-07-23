@@ -8,10 +8,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {USER_ENDPOINT} from "@env"
 
 const DashboardScreen = ({navigation}) => {
-    const {touch,container,touchy,touches}=styles;
-    const Navigation=useNavigation()
+    const {touch, container, touchy, touches} = styles;
+    const Navigation = useNavigation()
 
-    const [userData, setUserData] =useState({})
+    const [userData, setUserData] = useState({})
+
     async function getUserData(){
       const baseUrl = USER_ENDPOINT
       const token = await AsyncStorage.getItem("token")
@@ -26,7 +27,6 @@ const DashboardScreen = ({navigation}) => {
     
     useEffect(()=>{
       getUserData()
-
     }, [])
     console.log(userData.referral)
   return (
@@ -187,5 +187,6 @@ const styles=StyleSheet.create({
         borderWidth:0.5,
         borderRadius:5,
         elevation:4,
+        alignSelf:"center"
      }
 })

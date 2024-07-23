@@ -11,6 +11,9 @@ import DashboardScreen from "../Screens/DashboardScreen";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DrawerStack from "./DrawerNavigator";
 import Products from "../Screens/Products";
+import HomeScreen from "../Screens/HomeScreen";
+import AdvertsScreen from "../Screens/AdvertsScreen";
+import AdvertScreen from "../Screens/AdvertScreen";
 
 
 
@@ -26,7 +29,9 @@ function AuthStack(){
     return (
         <Stack.Navigator screenOptions={{
             headerShown:false
-        }} initialRouteName="Login">
+        }} initialRouteName="HomeScreen">
+            <Stack.Screen name="HomeScreen"  component={HomeScreen}/>
+
             <Stack.Screen name="Signup"  component={SignupScreen}/>
             <Stack.Screen name="Login"  component={LoginScreen}/>
             <Stack.Screen name="Home"  component={DrawerStack}/>
@@ -36,6 +41,7 @@ function AuthStack(){
             <Stack.Screen name="notification"  component={Notification}/>
             <Stack.Screen name="AddScreen"  component={AddScreen}/>
             <Stack.Screen name="Products"  component={Products}/>
+            <Stack.Screen name="Advert" component={AdvertScreen} />
 
                 
 

@@ -1,5 +1,5 @@
 
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View ,ImageBackground, Image} from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View ,ImageBackground, Image, FlatList} from 'react-native'
 import React,{useState} from 'react'
 import { SafeAreaView } from 'react-native'
 import Header from '../Components/Header'
@@ -52,7 +52,7 @@ const Services = ({navigation}) => {
       }}>Search Filter</Text>
       <View style={{
         marginHorizontal:20,
-        flexDirection:"row",
+        flexDirection:"column",
         justifyContent:"space-between",
         alignItems:"center"
 
@@ -60,9 +60,10 @@ const Services = ({navigation}) => {
         <TextInput style={{
           borderWidth:1,
           borderColor:"black",
-          width:150,
+          width:350,
           height:40,
-          marginVertical:10
+          marginVertical:10,
+          borderRadius:10,
           
         }}/>
         <SelectDropdown
@@ -100,7 +101,7 @@ const Services = ({navigation}) => {
       <View style={{
         marginHorizontal:20,
         marginVertical:10,
-        flexDirection:"row",
+        flexDirection:"column",
         justifyContent:"space-between",
         alignItems:"center"
 
@@ -170,7 +171,7 @@ const Services = ({navigation}) => {
       <View style={{
         marginHorizontal:20,
         marginVertical:20,
-        flexDirection:"row",
+        flexDirection:"column",
         justifyContent:"space-between",
         alignItems:"center"
 
@@ -243,6 +244,7 @@ const Services = ({navigation}) => {
                  borderRadius:8,
                  marginHorizontal:20,
                  marginVertical:10,
+                 alignSelf:"center"
                
                  }}>
                 
@@ -254,100 +256,97 @@ const Services = ({navigation}) => {
           }}>Search</Text>
        </TouchableOpacity>
          
+       <FlatList
+         data={items}
+         keyExtractor={(item, index) => index.toString()}
+         renderItem={({ item }) => (
+          <View style={{
+            width:360,
+            height:220,
+            borderWidth:0.5,
+            borderColor:"gray",
+            borderRadius:10,
+            marginHorizontal:20,
+            marginBottom:10,
+            alignSelf:"center",
 
-       <FlatGrid
-      itemDimension={130}
-      data={items}
-      style={styles.gridView}
-      spacing={2}
-      renderItem={({ item }) => (
-       <View style={{
-         width:160,
-         height:220,
-         borderWidth:0.5,
-         borderColor:"gray",
-         borderRadius:10,
-         margin:10,
-         position:"relative"
-       
-       }}>
-        <Image 
-        source={{
-          uri:item.image
-        }} 
-        style={{
-          width:"100%",
-          height:"50%",
-          borderTopLeftRadius:10,
-          borderTopRightRadius:10,
-          }}/>
-        <Text numberOfLines={1} style={{
-          textAlign:"center",
-          marginVertical:4,
-          fontWeight:"bold"
-        }}>HOUSES AND SALES</Text>
-        <Text 
-        style={{
-          textAlign:"center",
-          marginVertical:4,
-          fontWeight:"bold"
-        }}
-        >{item.price}</Text>
-      
-        <Text style={{
-          textAlign:"center",
-          fontSize:12,
-          marginBottom:4
-        }}>{item.date} {item.time}</Text>
-        <View style={{
-          flexDirection:"row",
-          gap:10,
-          alignSelf:"center"
-        }}>
-        <AntDesign name="star" size={18} color="orange" />
-        <AntDesign name="star" size={18} color="orange" />
-        <AntDesign name="star" size={18} color="orange" />
-        <AntDesign name="star" size={18} color="orange" />
-        <AntDesign name="star" size={18} color="orange" />
-
-        </View>
-        <Image source={{uri:item.img}} style={{
-          width:40,
-          height:40,
-          borderRadius:20,
-          position:"absolute",
-          top:10,
-          left:10
-        }}/>
-        <TouchableOpacity style={{
-          borderRadius:10,
-          position:"absolute",
-          top:70,
-          left:20,
-        }}>
-
-        <Text numberOfLines={1} 
-        style={{
-          width:120,
-          fontWeight:"bold",
-          paddingHorizontal:10,
-          paddingVertical:5,
-          backgroundColor:"#337bb7",
-          color:"white",
-          borderRaius:20,
-          textTransform:"uppercase"
+            position:"relative"
           
-        }}>{item.store}</Text>
-        </TouchableOpacity>
+          }}>
+           <Image 
+           source={{
+             uri:item.image
+           }} 
+           style={{
+             width:"100%",
+             height:"50%",
+             borderTopLeftRadius:10,
+             borderTopRightRadius:10,
+             }}/>
+           <Text numberOfLines={1} style={{
+             textAlign:"center",
+             marginVertical:4,
+             fontWeight:"bold"
+           }}>HOUSES AND SALES</Text>
+           <Text 
+           style={{
+             textAlign:"center",
+             marginVertical:4,
+             fontWeight:"bold"
+           }}
+           >{item.price}</Text>
+         
+           <Text style={{
+             textAlign:"center",
+             fontSize:12,
+             marginBottom:4
+           }}>{item.date} {item.time}</Text>
+           <View style={{
+             flexDirection:"row",
+             gap:10,
+             alignSelf:"center"
+           }}>
+           <AntDesign name="star" size={18} color="orange" />
+           <AntDesign name="star" size={18} color="orange" />
+           <AntDesign name="star" size={18} color="orange" />
+           <AntDesign name="star" size={18} color="orange" />
+           <AntDesign name="star" size={18} color="orange" />
+   
+           </View>
+           <Image source={{uri:item.img}} style={{
+             width:40,
+             height:40,
+             borderRadius:20,
+             position:"absolute",
+             top:10,
+             left:10
+           }}/>
+           <TouchableOpacity style={{
+             borderRadius:10,
+             position:"absolute",
+             top:70,
+             left:20,
+           }}>
+   
+           <Text numberOfLines={1} 
+           style={{
+             width:120,
+             fontWeight:"bold",
+             paddingHorizontal:10,
+             paddingVertical:5,
+             backgroundColor:"#337bb7",
+             color:"white",
+             borderRaius:20,
+             textTransform:"uppercase"
+             
+           }}>{item.store}</Text>
+           </TouchableOpacity>
+          </View>
 
 
-
-
-
-       </View>
-      )}
-    />
-
+         )} />
+         
+     
 
     </ScrollView>
     </SafeAreaView>
@@ -455,7 +454,7 @@ common: {
     backgroundColor:"#fafafa"
   },
   dropdownButtonStyle: {
-    width: 160,
+    width: 260,
     height: 50,
     backgroundColor: '#E9ECEF',
     borderRadius: 12,
@@ -463,6 +462,7 @@ common: {
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 8,
+    marginBottom: 10,
   },
   dropdownButtonTxtStyle: {
     flex: 1,

@@ -10,6 +10,7 @@ import DrawerStack from './navigations/DrawerNavigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import SplashScreen from './Screens/SplashScreen';
+import HomeScreen from './Screens/HomeScreen';
 
 
 

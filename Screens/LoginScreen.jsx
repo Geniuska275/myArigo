@@ -9,12 +9,14 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {LOGIN_ENDPOINT} from "@env"
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import NewHeader from '../Components/NewHeader';
 const LoginScreen = () => {
  
-  const [Email,setEmail]=useState("akinrinsoyetimi@gmail.com")
-  const [Password,setPassword]=useState("Debbie2025#")
-  const [Secure,setSecure]=useState(false)
-  const navigation=useNavigation();
+  const [Email, setEmail] = useState("aigbojie2020@gmail.com")
+  const [Password, setPassword] = useState("Debbie2025")
+  const [Secure, setSecure] = useState(false)
+  const navigation = useNavigation();
 
 
   const handleSubmit= async ()=>{
@@ -46,6 +48,21 @@ const LoginScreen = () => {
         
         <ImageBackground source={require('./login-bg.jpg')} style={styles.backgroundImage}>
          <SafeAreaView>
+          <TouchableOpacity style={{
+            width:60,
+            height:60,
+            position:"absolute",
+            bottom:-10,
+            right:20,
+            zIndex:10,
+            backgroundColor:"#337ab7",
+            justifyContent:"center",
+            alignItems:"center"
+          }}
+          
+          onPress={()=>navigation.navigate("HomeScreen")}>
+           <MaterialCommunityIcons name="home" size={24} color="white" />
+          </TouchableOpacity>
            <View style={styles.form}>
             <View style={styles.login}>
               <Text style={styles.text}>Login to Arigo</Text>
@@ -164,13 +181,15 @@ const styles = StyleSheet.create({
       marginHorizontal:20,
       marginTop:40,
       xOffset:-2,
-  yOffset:4,
-  shadowColorIos:"#171717",
-  shadowOpacity: 0.2,
-  shadowRadius: 3,
-  elevation:4,
-  shadowColorAndroid:"#171717",
+      yOffset:4,
+      shadowColorIos:"#171717",
+      shadowOpacity: 0.2,
+      shadowRadius: 3,
+      elevation:4,
+      shadowColorAndroid:"#171717",
+      alignSelf:"center"
     },
+
     login:{
       flex:2,
       backgroundColor:"#f9f9f9",

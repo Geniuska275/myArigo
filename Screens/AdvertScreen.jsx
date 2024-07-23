@@ -6,7 +6,8 @@ import constants from "expo-constants";
 import Displays from '../Components/Displays';
 import { ScrollView } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-const AdvertsScreen = ({navigation}) => {
+import NewHeader from '../Components/NewHeader';
+const AdvertScreen = ({navigation}) => {
   const [items, setItems] =useState([
     { name: 'Business Wyze', img:"",image:"https://images.unsplash.com/photo-1717313860625-4d4311b5f9d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" },
     { name: 'imperatrice', img:"",image:"https://images.unsplash.com/photo-1716916959437-c904cdabd0f3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHx8" },
@@ -20,7 +21,7 @@ const AdvertsScreen = ({navigation}) => {
 
   return (  
     <SafeAreaView style={styles.container}>
-      <Header navigation={navigation}/>
+      <NewHeader navigation={navigation}/>
       <Text style={styles.text}>Adverts</Text>
       <ScrollView>
         <FlatList 
@@ -48,7 +49,7 @@ const AdvertsScreen = ({navigation}) => {
   )
 }
 
-export default AdvertsScreen
+export default AdvertScreen
 
 const styles = StyleSheet.create({
   container:{

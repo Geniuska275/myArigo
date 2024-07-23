@@ -15,9 +15,8 @@ const Profile = ({navigation}) => {
   
   const [userData, setUserData] =useState({})
   async function getUserData(){
-    const baseUrl = "https://app.myarigo.com/api/user"
+    const baseUrl = "https://app.myarigo.com/api/user/profile"
     const token = await AsyncStorage.getItem("token")
-    console.log(token)
     const response = await axios.get(baseUrl,{
       headers:{
         Authorization: `Bearer ${token}`
@@ -39,7 +38,7 @@ const Profile = ({navigation}) => {
   const [state, setState] = useState("")
 
 
-
+     console.log(userData)
 
     const emojisWithIcons = [{
         title:"Edo State"

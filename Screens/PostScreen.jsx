@@ -1,5 +1,5 @@
-import { ScrollView, StyleSheet, Text,Platform, TextInput, TouchableOpacity, View ,ImageBackground, Image} from 'react-native'
-import React,{useState} from 'react'
+import { ScrollView, StyleSheet, Text,Platform, TextInput, TouchableOpacity, View ,ImageBackground, Image, FlatList} from 'react-native'
+import React,{useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native'
 import Header from '../Components/Header'
 import constants from "expo-constants";
@@ -11,10 +11,12 @@ import { AntDesign } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
-
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PostScreen = ({navigation}) => {
   const [service, setService] = useState("");
+  const [posts,setPosts]= useState([])
   const emojisWithIcons = [{
     title:"Sort By"
   },
@@ -35,6 +37,27 @@ const PostScreen = ({navigation}) => {
  
     // Add more items as needed
   ]);
+
+  const getAllPost = async ()=>{
+    const baseUrl = "https://app.myarigo.com/api/posts"
+    try {
+      const token = await AsyncStorage.getItem("token")
+      const response = await axios.get(baseUrl,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setPosts(response.data.data.posts.data)
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  useEffect(()=>{
+    getAllPost();
+  },[])
+
+  console.log(posts)
   return (
     <SafeAreaView style={styles.container}>
     <Header navigation={navigation}/>
@@ -50,7 +73,7 @@ const PostScreen = ({navigation}) => {
       }}>Search Filter</Text>
       <View style={{
         marginHorizontal:20,
-        flexDirection:"row",
+        flexDirection:"column",
         justifyContent:"space-between",
         alignItems:"center"
 
@@ -58,7 +81,7 @@ const PostScreen = ({navigation}) => {
         <TextInput style={{
           borderWidth:1,
           borderColor:"black",
-          width:150,
+          width:350,
           height:40,
           marginVertical:10
           
@@ -97,9 +120,8 @@ const PostScreen = ({navigation}) => {
 
       <View style={{
         marginHorizontal:20,
-        marginVertical:10,
-        flexDirection:"row",
-        justifyContent:"space-between",
+        margin:10,
+        flexDirection:"column",
         alignItems:"center"
 
       }}>
@@ -168,7 +190,7 @@ const PostScreen = ({navigation}) => {
       <View style={{
         marginHorizontal:20,
         marginVertical:20,
-        flexDirection:"row",
+        flexDirection:"column",
         justifyContent:"space-between",
         alignItems:"center"
 
@@ -253,71 +275,82 @@ const PostScreen = ({navigation}) => {
           }}>Search</Text>
        </TouchableOpacity>
          
-
-       <FlatGrid
-      itemDimension={130}
-      data={items}
-      style={styles.gridView}
-      spacing={2}
-      renderItem={({ item }) => (
-       <View style={{
-         width:160,
-         height:220,
-         borderWidth:0.5,
-         borderColor:"gray",
-         borderRadius:10,
-         margin:10,
-         position:"relative"
-       
-       }}>
-        <Image 
-        source={{
-          uri:item.image
-        }} 
-        style={{
-          width:"100%",
-          height:"100%",
-          borderTopLeftRadius:10,
-          borderTopRightRadius:10,
-          }}/>
+       <FlatList
+        data={posts}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
           <View style={{
-            position:"absolute",
-            width:"90%",
-            height:80,
+            width:360,
+            marginHorizontal:20,
+            marginBottom:40,
             backgroundColor:"#ffffff",
-            marginHorizontal:10,
-            bottom:2,
+            shadowColor: "#000",
+          
+            height:220,
+            borderWidth:0.5,
+            borderColor:"gray",
             borderRadius:10,
+            margin:10,
+            position:"relative"
+          
           }}>
-            <Text style={{
-              fontWeight:"bold",
-              alignItems:"center",
-              fontSize:12,
-              marginHorizontal:10,
-              marginVertical:5
-            }}>Body Beauty Care</Text>
-            <View style={{flexDirection:"row",justifyContent:"space-around",alignItems:"center",marginVertical:10}}>
-              <View style={{flexDirection:"row",alignItems:"center"}}>
-              <AntDesign name="like2" size={24} color="black" />
-              <Text>0</Text>
-              </View>
-              <View style={{flexDirection:"row",alignItems:"center"}}>
-              <EvilIcons name="comment" size={24} color="black" />
-              <Text>0</Text>
-              </View>
-              <View style={{flexDirection:"row",alignItems:"center"}}>
-              <FontAwesome name="eye" size={24} color="black" />
-              <Text>12</Text>
-              </View>
-
-
-            </View>
-
+           {item.images.map((image)=>(
+             
+            <Image 
+             source={{
+               uri:image.image_url
+             }} 
+             style={{
+               width:"100%",
+               height:"100%",
+               borderTopLeftRadius:10,
+               borderTopRightRadius:10,
+             }}/>
+   
+           ))
+         
+         
+         
+         }
+             <View style={{
+               position:"absolute",
+               width:"90%",
+               height:80,
+               backgroundColor:"#ffffff",
+               marginHorizontal:10,
+               bottom:2,
+               borderRadius:10,
+             }}>
+               <Text style={{
+                 fontWeight:"bold",
+                 alignItems:"center",
+                 fontSize:12,
+                 marginHorizontal:10,
+                 marginVertical:5
+               }}>{item.title}</Text>
+               <View style={{flexDirection:"row",justifyContent:"space-around",alignItems:"center",marginVertical:10}}>
+                 <View style={{flexDirection:"row",alignItems:"center"}}>
+                 <AntDesign name="like2" size={24} color="black" />
+                 <Text>0</Text>
+                 </View>
+                 <View style={{flexDirection:"row",alignItems:"center"}}>
+                 <EvilIcons name="comment" size={24} color="black" />
+                 <Text>0</Text>
+                 </View>
+                 <View style={{flexDirection:"row",alignItems:"center"}}>
+                 <FontAwesome name="eye" size={24} color="black" />
+                 <Text>{item.view}</Text>
+                 </View>
+   
+   
+               </View>
+   
+             </View>
+         
           </View>
-      
-       </View>
-      )}
-    />
+        )}
+       
+       />
 
 
 
@@ -429,7 +462,7 @@ common: {
     backgroundColor:"#fafafa"
   },
   dropdownButtonStyle: {
-    width: 160,
+    width: 260,
     height: 50,
     backgroundColor: '#E9ECEF',
     borderRadius: 12,
@@ -437,6 +470,7 @@ common: {
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 8,
+    marginBottom:10
   },
   dropdownButtonTxtStyle: {
     flex: 1,

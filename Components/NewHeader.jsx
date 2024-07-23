@@ -7,33 +7,42 @@ import { useNavigation } from '@react-navigation/native';
 // import {logo} from "./logos.png";
 
 
-const Header = ({navigation}) => {
+const NewHeader = ({navigation}) => {
   const Navigation = useNavigation();
   
   return (
     <View style={styles.Header}>
-      <Image source={require("./logos.png")} style={{width:90,height:36,marginLeft:25}}/>
+      <TouchableOpacity onPress={()=>Navigation.navigate("HomeScreen")}>
+
+      <Image source={require("./logos.png")}  style={{width:90,height:36,marginLeft:25}}/>
+      </TouchableOpacity>
       {/* <Text style={{fontWeight:"bold",color:"white",marginLeft:25}}>MyArigo</Text> */}
       <View style={{
         flexDirection:"row",
         gap:20
       }}>
-        <TouchableOpacity onPress={()=>Navigation.navigate("messages")}>
-      <MaterialCommunityIcons name="email-outline" size={20} color="white" style={{marginTop:6}} />
+        <TouchableOpacity onPress={()=>Navigation.navigate("Signup")}>
+         <Text style={{
+            color:"white",
+            fontWeight:"bold",
+            fontSize:20
+         }}>Register</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>Navigation.navigate("notification")}>
+        <TouchableOpacity onPress={()=>Navigation.navigate("Login")}>
+        <Text style={{
+            color:"white",
+            fontWeight:"bold",
+            fontSize:20,
+            marginRight:20
 
-      <SimpleLineIcons name="bell" size={20} color="white" style={{marginTop:6}} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigation.openDrawer("Home")}>
-      <Icon name="reorder-three" color="white" size={32}  style={{marginRight:25}}/>
+         }}>Login</Text> 
         </TouchableOpacity>
       </View>
     </View>
   )
 }
 
-export default Header
+export default NewHeader
 
 const styles = StyleSheet.create({
     Header:{
