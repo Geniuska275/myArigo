@@ -4,6 +4,9 @@ import NewHeader from '../Components/NewHeader'
 import constants from "expo-constants";
 import { Entypo } from '@expo/vector-icons';
 import Sponsored from '../Components/Sponsored';
+import MyCarousel from '../Components/Carousels';
+import Product from '../Components/Product';
+import Enquires from '../Components/Enquires';
 
 
 const HomeScreen = () => {
@@ -24,7 +27,7 @@ const HomeScreen = () => {
            }}>
             <Text style={{
               fontWeight:"bold",
-              color:"black",
+              color:"white",
               fontSize:18
             }}>Fastest way to find anything in </Text>
             <View style={{
@@ -72,7 +75,8 @@ const HomeScreen = () => {
             position:"absolute",
             bottom:50
            }}>
-           <Text style={{fontWeight:"bold",color:"white",fontSize:16,marginHorizontal:20,marginBottom:10}}>Shop from any market in Nigeria from the comfort of your home and buy from verified sellers.</Text>
+           <Text style={{fontWeight:"bold",color:"white",fontSize:16,marginHorizontal:20,
+            }}>Shop from any market in Nigeria from the comfort of your home and buy from verified sellers.</Text>
            <TouchableOpacity style={{
             paddingHorizontal:10,
             backgroundColor:"#337ab7",
@@ -86,6 +90,25 @@ const HomeScreen = () => {
            </View>
         </ImageBackground>
         <Sponsored/>
+        <MyCarousel text={"Posts"} navigate={"Post"}/>
+
+        <MyCarousel  text={"Auction"} navigate={"Auction"}/>
+        <Product/>
+       <TouchableOpacity style={{
+        backgroundColor:"#337ab7",
+        padding:10,
+        borderRadius:10,
+        marginHorizontal:20,
+        paddingHorizontal:30,
+        marginVertical:30,
+        marginBottom:20,
+        alignSelf:"center"
+       }}>
+        <Text style={{color:"white",fontWeight:"bold"}}>More</Text>
+       </TouchableOpacity>
+       <Enquires/>
+        
+
 
         </ScrollView>
     </SafeAreaView>

@@ -48,7 +48,7 @@ import { useNavigation } from "@react-navigation/native";
     })
     Alert.alert(
       'Logged out',
-      navigation.navigate("Login")
+      navigation.navigate("HomeScreen")
     );
     console.log(res)
   }

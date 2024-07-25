@@ -51,8 +51,9 @@ const LoginScreen = () => {
           <TouchableOpacity style={{
             width:60,
             height:60,
+            borderRadius:30,
             position:"absolute",
-            bottom:-10,
+            bottom:35,
             right:20,
             zIndex:10,
             backgroundColor:"#337ab7",

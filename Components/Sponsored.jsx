@@ -9,11 +9,7 @@ const Sponsored = () => {
         { name: 'Business Wyze', img:"",image:"https://images.unsplash.com/photo-1717313860625-4d4311b5f9d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" },
         { name: 'imperatrice', img:"",image:"https://images.unsplash.com/photo-1716916959437-c904cdabd0f3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHx8" },
         { name: 'Sqe holdings', img:"",image:"https://images.unsplash.com/photo-1717318104110-d8ef457d9c2e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D" },
-        { name: 'Swift Exchange', img:"",image:"https://images.unsplash.com/photo-1717328802573-a7cc71415e8b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D" },
-        { name: 'Brains Technologies.', img:"",image:"https://plus.unsplash.com/premium_photo-1717563132740-6903bac2cf85?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNXx8fGVufDB8fHx8fA%3D%3D" },
-        { name: 'EMERALD', img:"",image:"https://images.unsplash.com/photo-1717501218511-768944e2c325?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNnx8fGVufDB8fHx8fA%3D%3D" },
-     
-        // Add more items as needed
+        
       ]);
   return (
     <View style={{
@@ -24,9 +20,7 @@ const Sponsored = () => {
             justifyContent:"space-between",
         alignItems:"center",
         marginTop:10,
-        paddingVertical:20  
-
-              
+        paddingVertical:20                
         }}>
       <Text style={{
         fontWeight:"bold",
@@ -54,7 +48,7 @@ const Sponsored = () => {
          renderItem={({ item }) => (
           <ImageBackground source={{uri:item.image}} style={styles.backgroundImage}>
           <View style={{position:"absolute",top:15,left:10,flexDirection:"row",borderRadius:20,backgroundColor:"white",padding:5,gap:10,alignItems:"center"}}>
-          <Octicons name="dot-fill" size={24} color="blue" />
+          <Octicons name="dot-fill" size={24} color="#337ab7" />
             <Text  style={{fontWeight:"bold",color:"black",width:150}}
             numberOfLines={1}
             >{item.name}</Text>

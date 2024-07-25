@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View,ImageBackground, FlatList } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View,ImageBackground, FlatList,TouchableOpacity } from 'react-native'
 import { Octicons } from '@expo/vector-icons';
 import React,{useState} from 'react'
 import Header from '../Components/Header'
@@ -7,7 +7,10 @@ import Displays from '../Components/Displays';
 import { ScrollView } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import NewHeader from '../Components/NewHeader';
-const AdvertScreen = ({navigation}) => {
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
+const AdvertScreen = ({}) => {
   const [items, setItems] =useState([
     { name: 'Business Wyze', img:"",image:"https://images.unsplash.com/photo-1717313860625-4d4311b5f9d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" },
     { name: 'imperatrice', img:"",image:"https://images.unsplash.com/photo-1716916959437-c904cdabd0f3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHx8" },
@@ -18,11 +21,29 @@ const AdvertScreen = ({navigation}) => {
  
     // Add more items as needed
   ]);
-
+  const navigation = useNavigation();
   return (  
     <SafeAreaView style={styles.container}>
       <NewHeader navigation={navigation}/>
+
+
       <Text style={styles.text}>Adverts</Text>
+      <TouchableOpacity style={{
+            width:60,
+            height:60,
+            borderRadius:30,
+            position:"absolute",
+            bottom:35,
+            right:20,
+            zIndex:10,
+            backgroundColor:"#337ab7",
+            justifyContent:"center",
+            alignItems:"center"
+          }}
+          
+          onPress={()=>navigation.navigate("HomeScreen")}>
+           <MaterialCommunityIcons name="home" size={24} color="white" />
+          </TouchableOpacity>
       <ScrollView>
         <FlatList 
          data={items}
