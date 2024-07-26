@@ -36,13 +36,12 @@ const MyCarousel = ({text , navigate}) => {
   },[])
 
   return (
-    <View style={{padding:20  }}>
+    <View style={{paddingVertical:20 }}>
       <View style={{
         flexDirection: 'row',
         justifyContent:'space-between',
          paddingVertical:20,
         marginBottom: 10,
-        padding:20
       }}>
          <Text style={{
         fontWeight:"bold",
@@ -67,7 +66,7 @@ const MyCarousel = ({text , navigate}) => {
       <Carousel
         loop
         width={width}
-        height={width / 2}
+        height={width/2}
         autoPlay
         data={posts} // Example data
         scrollAnimationDuration={1000}
@@ -75,16 +74,16 @@ const MyCarousel = ({text , navigate}) => {
         renderItem={({ item}) => (
           <View style={{
             width:360,
-            marginHorizontal:20,
-            marginBottom:40,
+            marginHorizontal:40,
+        
             backgroundColor:"#ffffff",
             shadowColor: "#000",
             height:220,
             borderWidth:0.5,
             borderColor:"gray",
             borderRadius:10,
-            margin:10,
-            position:"relative"
+            position:"relative",
+            alignSelf:"center"
           }}>
            {item.images.map((image)=>(
              
