@@ -59,7 +59,7 @@ const Post = () => {
    
       renderItem={({ item }) => (
         <View style={{
-            width:360,
+            width:320,
             marginHorizontal:20,
             marginBottom:40,
             backgroundColor:"#ffffff",
@@ -70,7 +70,8 @@ const Post = () => {
             borderColor:"gray",
             borderRadius:10,
             margin:10,
-            position:"relative"
+            position:"relative",
+            alignSelf:"center"
           
           }}>
            {item.images.map((image)=>(

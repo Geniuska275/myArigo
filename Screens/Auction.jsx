@@ -43,14 +43,15 @@ const Auction = () => {
    
       renderItem={({ item }) => (
        <View style={{
-         width:360,
+         width:320,
          height:220,
          borderWidth:0.5,
          borderColor:"gray",
          borderRadius:10,
          margin:10,
          position:"relative",
-         marginHorizontal:30
+         marginHorizontal:20,
+         alignSelf:"center"
        
        }}>
         <Image 
