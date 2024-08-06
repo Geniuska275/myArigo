@@ -47,7 +47,7 @@ const PostScreen = ({navigation}) => {
           Authorization: `Bearer ${token}`
         }
       })
-      setPosts(response.data.data.posts.data)
+      setPosts(response.data.data.posts.data[0])
 
     } catch (error) {
       console.error('Error:', error);
@@ -284,8 +284,7 @@ const PostScreen = ({navigation}) => {
             marginHorizontal:20,
             marginBottom:40,
             backgroundColor:"#ffffff",
-            shadowColor: "#000",
-          
+            shadowColor: "#000",       
             height:220,
             borderWidth:0.5,
             borderColor:"gray",

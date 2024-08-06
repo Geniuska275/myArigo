@@ -193,11 +193,6 @@ const AddScreen = ({navigation}) => {
                   value={phoneNumber}
                   />
       
-
-
-
-
-
            <View style={{
                flexDirection:"row",
                marginHorizontal:20,
@@ -222,6 +217,7 @@ const AddScreen = ({navigation}) => {
                   onChangeText={text => setCategory(text)}
                   value={category}
                   />
+                  
        <View style={{
                 flexDirection:"row",
                 marginHorizontal:20,

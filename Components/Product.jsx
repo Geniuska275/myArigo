@@ -1,11 +1,36 @@
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import { FlatGrid } from 'react-native-super-grid';
 import { FontAwesome6 } from '@expo/vector-icons';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Product = () => {
+  const [products, setProducts] = useState([])
    const navigation = useNavigation()
+
+
+   const getAllPost = async ()=>{
+    const baseUrl = "https://app.myarigo.com/api/posts"
+    try {
+      const token = await AsyncStorage.getItem("token")
+      const response = await axios.get(baseUrl,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      })
+      
+      setProducts(response.data.data.posts.data)
+
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  useEffect(()=>{
+    getAllPost();
+  },[])
 
   const [items, setItems] = React.useState([
     { name: 'Business Wyze',store:"Imperatrice Wristhub", date:"28th June,2024",price:"# 6,000,000",time:"14:00 PM", img:"https://images.unsplash.com/photo-1717630297768-bbbd8dd16b4f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8fA%3D%3D ",image:"https://images.unsplash.com/photo-1717313860625-4d4311b5f9d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" },
@@ -51,7 +76,7 @@ const Product = () => {
 
         <FlatGrid
      itemDimension={130}
-     data={items}
+     data={products}
      spacing={10}
   style={styles.gridView}
   renderItem={({ item }) => (
@@ -81,7 +106,7 @@ const Product = () => {
        textAlign:"center",
        marginVertical:4,
        fontWeight:"bold"
-     }}>HOUSES AND SALES</Text>
+     }}>{item.name}</Text>
      <Text 
      style={{
       position:"absolute",
@@ -136,6 +161,6 @@ const styles = StyleSheet.create({
  gridView: {
   marginTop: 10,
   flex: 1,
-},
+}, 
 
 })

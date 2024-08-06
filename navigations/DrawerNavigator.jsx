@@ -9,6 +9,9 @@ import Messages from '../Screens/Messages';
 import Mycv from '../Screens/mycv';
 import { MaterialIcons } from '@expo/vector-icons';
 import BottomTabs from './BottomTabNavigator';
+import Business from '../Screens/Business';
+import BusinessFollowed from '../Screens/BusinessFollowed';
+import FollowedBusiness from '../Screens/FollowedBusiness';
 const Drawer = createDrawerNavigator();
 
 export default function DrawerStack() {
@@ -23,6 +26,9 @@ export default function DrawerStack() {
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Request" component={Request} />
       <Drawer.Screen name="Subscription" component={Subscriptions} />
+      <Drawer.Screen name="Business" component={Business} />
+      <Drawer.Screen name="BusinessFollowed" component={BusinessFollowed} />
+      <Drawer.Screen name="FollowedBusiness" component={FollowedBusiness} />
       <Drawer.Screen name="Messsages" component={Messages} />
       <Drawer.Screen name="My Cv" component={Mycv} />
 

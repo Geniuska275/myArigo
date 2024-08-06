@@ -87,6 +87,8 @@ const Subscriptions = ({navigation}) => {
                     alignSelf:"center",
                     marginVertical:20
                   }}
+
+                  onPress={()=>navigation.navigate("Business")}
                 >
                     <Text style={{
                         alignSelf:"center",

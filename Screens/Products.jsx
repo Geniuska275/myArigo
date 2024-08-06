@@ -14,25 +14,28 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {CV_ENDPOINT} from "@env"
 
 const Products = ({navigation}) => {
+  const [products, setProducts] = useState([])
 
- useEffect(()=>{
-   getProducts()
- },[])
-
-  const getProducts = async ()=>{
-    const baseUrl=CV_ENDPOINT;
+  const getAllProducts = async ()=>{
+    const baseUrl = "https://app.myarigo.com/api/posts"
     try {
-       const response = await axios.get(baseUrl,{
-        headers: {
-          'Authorization': 'Bearer '+ await AsyncStorage.getItem('token')
+      const token = await AsyncStorage.getItem("token")
+      const response = await axios.get(baseUrl,{
+        headers:{
+          Authorization: `Bearer ${token}`
         }
-       });   
-      console.log(response)
+      })
+      
+      setProducts(response.data.data.posts.data)
+
+
     } catch (error) {
-      console.log(error)
-      console.log(error.message)
+      console.error('Error:', error);
     }
   }
+  useEffect(()=>{
+    getAllProducts();
+  },[])
 
 
   const [service, setService] = useState("");
@@ -56,6 +59,8 @@ const Products = ({navigation}) => {
  
     // Add more items as needed
   ]);
+
+  console.log(products[0].images[0])
   return (
     <SafeAreaView style={styles.container}>
     <Header navigation={navigation}/>
@@ -275,7 +280,7 @@ const Products = ({navigation}) => {
 
        <FlatGrid
       itemDimension={130}
-      data={items}
+      data={products}
       style={styles.gridView}
       spacing={2}
       renderItem={({ item }) => (
@@ -289,21 +294,26 @@ const Products = ({navigation}) => {
          position:"relative"
        
        }}>
-        <Image 
-        source={{
-          uri:item.image
-        }} 
-        style={{
-          width:"100%",
-          height:"50%",
-          borderTopLeftRadius:10,
-          borderTopRightRadius:10,
-          }}/>
+        {item.images.map((image)=>(
+
+          <Image 
+          source={{
+            uri:image.image_url
+          }} 
+          style={{
+            width:"100%",
+            height:"50%",
+            borderTopLeftRadius:10,
+            borderTopRightRadius:10,
+            }}/>
+  ))}
+
+
         <Text numberOfLines={1} style={{
           textAlign:"center",
           marginVertical:4,
           fontWeight:"bold"
-        }}>HOUSES AND SALES</Text>
+        }}>{item.body}</Text>
         <Text 
         style={{
           textAlign:"center",
@@ -355,7 +365,7 @@ const Products = ({navigation}) => {
           borderRaius:20,
           textTransform:"uppercase"
           
-        }}>{item.store}</Text>
+        }}>{item.title}</Text>
         </TouchableOpacity>
 
 
