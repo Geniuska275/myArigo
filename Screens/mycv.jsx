@@ -1,11 +1,34 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React ,{useEffect,useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../Components/Header'
 import { useNavigation } from '@react-navigation/native'
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Mycv = ({navigation}) => {
     const Navigation=useNavigation()
+    const [userData, setUserData] =useState({})
+    async function getUserData(){
+      const slug = await AsyncStorage.getItem("slug")
+
+
+      const baseUrl = `https://app.myarigo.com/api/cv/${slug}`
+      const token = await AsyncStorage.getItem("token")
+      const response = await axios.get(baseUrl,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log(response.data)
+      setUserData(response.data.user)
+    }
+    
+    useEffect(()=>{
+      getUserData()
+    }, [])
+
+
   return (
     <SafeAreaView>
         <Header navigation={navigation}/>

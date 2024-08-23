@@ -8,6 +8,7 @@ import {
    Image,
    KeyboardAvoidingView,
    Platform } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../Components/Header'
@@ -18,13 +19,18 @@ import { Entypo } from '@expo/vector-icons';
 import * as ImagePicker from "expo-image-picker"
 import { ActivityIndicator } from 'react-native'
 import SelectDropdown from 'react-native-select-dropdown'
+import axios from 'axios';
 
 const AddScreen = ({navigation}) => {
     const Navigation=useNavigation();
-    const {category, setCategory}=useState("");
-    const {firstName, setFirstName}=useState("");
-    const {phoneNumber, setPhoneNumber}=useState("");
-    const [images,setImages]=useState([])
+    const [category,  setCategory ] = useState("");
+    const [firstName,  setFirstName ] = useState("");
+    const [ title, setTitle ] = useState("");
+    const [ description, setDescription ] = useState("hello world");
+    const [ state, setState ] = useState(" ");
+    const [ city, setCity ] = useState(" ");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [images, setImages]= useState([])
     const[image,setImage]=useState(null)
     const[loading, setLoading]=useState(false);
     
@@ -69,10 +75,60 @@ const AddScreen = ({navigation}) => {
       title:"Sort By"
     },
     ];
-               const AddCv=()=>{
+    const Gender= [{
+      title:"Male"
+    },
+    {
+      title:"Female"
+    },
+    ];
+
+  const States= [{
+    title:"Lagos"
+  },
+  {
+    title:"Edo"
+  },
+  {
+    title:"Anambra"
+  },
+  {
+    title:"Delta"
+  },
+  ];
+  const cities=[
+    {}
+
+  ]  
+               const AddCv=async ()=>{
               
-                setLoading(true)
-                setTimeout(loader,4000)
+                // setLoading(true)
+                // setTimeout(loader,4000)
+                const baseUrl="https://app.myarigo.com/api/user/product/add"
+                const userData={
+                 category,
+                 title,
+                 description,
+                 state,
+                 city,
+                 phone_number:phoneNumber,
+                 photo:images[0]
+                } 
+
+               
+                try {
+                  const token = await AsyncStorage.getItem("token")
+                  const response = await axios.post(baseUrl,userData,{
+                    headers:{
+                      Authorization: `Bearer ${token}`
+                    }
+                  })
+                  console.log(response.data)
+                 
+                } catch (error) {
+                  console.log(error)    
+                }
+
                   
                   
                 }
@@ -125,10 +181,10 @@ const AddScreen = ({navigation}) => {
                   width:350,
                   borderRadius:10,
                   borderColor:"gray",
-              marginHorizontal:20,
-              marginVertical:5 }}
-              onChangeText={text => setCategory(text)}
-              value={category}
+                  marginHorizontal:20,
+                 marginVertical:5 }}
+                 onChangeText={(text) => setCategory(text)}
+                 value={category}
               />
         <Text style={{
             fontWeight:"bold",
@@ -233,6 +289,7 @@ const AddScreen = ({navigation}) => {
     data={emojisWithIcons}
     onSelect={(selectedItem, index) => {
       console.log(selectedItem, index);
+      setTitle(selectedItem.title)
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -268,7 +325,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?310:280,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
-    data={emojisWithIcons}
+    data={Gender}
     onSelect={(selectedItem, index) => {
       console.log(selectedItem, index);
     }}
@@ -308,7 +365,7 @@ const AddScreen = ({navigation}) => {
       <SelectDropdown
     data={emojisWithIcons}
     onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
+      setState(selectedItem.title)
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -345,7 +402,7 @@ const AddScreen = ({navigation}) => {
       <SelectDropdown
     data={emojisWithIcons}
     onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
+      setCity(selectedItem);
     }}
     renderButton={(selectedItem, isOpened) => {
       return (

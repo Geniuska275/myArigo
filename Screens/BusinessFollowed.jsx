@@ -1,8 +1,29 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React ,{useEffect,useState} from 'react'
 import Header from '../Components/Header'
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const BusinessFollowed = () => {
+  const [userData, setUserData] =useState({})
+  async function getUserData(){
+
+    const baseUrl = `https://app.myarigo.com/api/user/business_followers`
+    const token = await AsyncStorage.getItem("token")
+    const response = await axios.get(baseUrl,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    console.log(response.data)
+    setUserData(response.data)
+  }
+  
+  useEffect(()=>{
+    getUserData()
+  }, [])
+
+
   return (
     <SafeAreaView>
         <Header/>
