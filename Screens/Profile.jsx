@@ -5,6 +5,7 @@ import Header from '../Components/Header';
 import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as ImagePicker from "expo-image-picker"
 
 
 import { TextInput } from 'react-native';
@@ -12,7 +13,8 @@ import SelectDropdown from 'react-native-select-dropdown'
 const Profile = ({navigation}) => {
   
   
-  
+  const [images, setImages]= useState([])
+  const[image,setImage]=useState(null)
   const [userData, setUserData] =useState({})
   async function getUserData(){
     const baseUrl = "https://app.myarigo.com/api/user/profile"
@@ -22,7 +24,7 @@ const Profile = ({navigation}) => {
         Authorization: `Bearer ${token}`
       }
     })
-    setUserData(response.data.user)
+    setUserData(response.data.user);
   }
   
   useEffect(()=>{
@@ -70,6 +72,60 @@ const Profile = ({navigation}) => {
       }
 
 
+
+
+      useEffect(()=>{
+        (async()=>{
+          const galleryStatus=await ImagePicker.requestMediaLibraryPermissionsAsync();
+          setHasGalleryPermission(galleryStatus.status == "granted")
+        })()
+      },[]);
+
+      const pickImage=async ()=>{
+        if(images.length < 4){
+          let result=await ImagePicker.launchImageLibraryAsync({
+            mediaTypes:ImagePicker.MediaTypeOptions.Images,
+            allowsEditing:true,
+            aspect:[4,4],
+            quality:1
+         })
+         if(!result.canceled){
+            setImages(state=>[...state,result.assets[0].uri]);
+        }else{
+          Alert.alert("Invalid Input", "Can not upload more than 4 images", [
+            { text: "OK", onPress: () => console.log("OK Pressed") },
+          ]);
+        }
+      }
+
+
+      const fetchImageUri=async (uri)=>{
+       console.log("ran")
+       const response=await fetch(uri)
+       const blob= await response.blob()
+       const file= new File([blob], uri, { type: blob.type });
+       return file
+     }}
+     
+
+
+
+
+
+console.log(images[0])
+const updateProfile=async ()=>{
+
+  pickImage()
+  const baseurl="https://myarigo.com/api/user/profile/image"
+  const response = await axios.post(baseurl,{
+    headers:{
+      'Authorization': 'Bearer '+ await AsyncStorage.getItem('token')
+    },
+    body:images[0]
+  })
+  console.log(response)
+}
+
   return (
     <SafeAreaView style={styles.container}>
       <Header navigation={navigation}/>
@@ -106,7 +162,9 @@ const Profile = ({navigation}) => {
               borderRadius:10,
               marginVertical:10
               
-            }}>
+            }}
+            onPress={()=>updateProfile()} 
+            >
                 <Text style={{
                   color:"white",
                   fontWeight:"bold",

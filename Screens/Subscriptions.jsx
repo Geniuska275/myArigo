@@ -44,7 +44,7 @@ const Subscriptions = ({navigation}) => {
         <FlatList 
          data={Subscriptions}
          keyExtractor={(item,index)=>index.toString()}
-         renderItem={({item})=><Subscription item={item}/>}/>
+         renderItem={({item})=><Subscription item={item} navigation={navigation}/>}/>
           
     </SafeAreaView>
   )

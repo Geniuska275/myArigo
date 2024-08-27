@@ -17,16 +17,17 @@ const Products = ({navigation}) => {
   const [products, setProducts] = useState([])
 
   const getAllProducts = async ()=>{
-    const baseUrl = "https://app.myarigo.com/api/posts"
+    const baseUrl = "https://app.myarigo.com/api/products"
     try {
       const token = await AsyncStorage.getItem("token")
       const response = await axios.get(baseUrl,{
         headers:{
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          "Content-Type":"*/*"
         }
       })
-      
-      setProducts(response.data.data.posts.data)
+      console.log(response.data.data.list.data)
+      setProducts(response.data.data.list.data)
 
 
     } catch (error) {
@@ -36,6 +37,7 @@ const Products = ({navigation}) => {
   useEffect(()=>{
     getAllProducts();
   },[])
+  console.log(products)
 
 
   const [service, setService] = useState("");
@@ -59,13 +61,13 @@ const Products = ({navigation}) => {
  
     // Add more items as needed
   ]);
-
-  console.log(products[0].images[0])
+  const {container}=styles
+  
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={container}>
     <Header navigation={navigation}/>
     <Text style={styles.text}>Products</Text>
-    <ScrollView>
+  
       <Text style={{
         fontWeight:"bold",
         marginHorizontal:20,
@@ -313,62 +315,22 @@ const Products = ({navigation}) => {
           textAlign:"center",
           marginVertical:4,
           fontWeight:"bold"
-        }}>{item.body}</Text>
+        }}>{item.brand.business}</Text>
         <Text 
         style={{
           textAlign:"center",
           marginVertical:4,
           fontWeight:"bold"
         }}
-        >{item.price}</Text>
+        >#{item.price}</Text>
       
         <Text style={{
           textAlign:"center",
           fontSize:12,
           marginBottom:4
-        }}>{item.date} {item.time}</Text>
-        <View style={{
-          flexDirection:"row",
-          gap:10,
-          alignSelf:"center"
-        }}>
-        <AntDesign name="star" size={18} color="orange" />
-        <AntDesign name="star" size={18} color="orange" />
-        <AntDesign name="star" size={18} color="orange" />
-        <AntDesign name="star" size={18} color="orange" />
-        <AntDesign name="star" size={18} color="orange" />
-
-        </View>
-        <Image source={{uri:item.img}} style={{
-          width:40,
-          height:40,
-          borderRadius:20,
-          position:"absolute",
-          top:10,
-          left:10
-        }}/>
-        <TouchableOpacity style={{
-          borderRadius:10,
-          position:"absolute",
-          top:70,
-          left:20,
-        }}>
-
-        <Text numberOfLines={1} 
-        style={{
-          width:120,
-          fontWeight:"bold",
-          paddingHorizontal:10,
-          paddingVertical:5,
-          backgroundColor:"#337bb7",
-          color:"white",
-          borderRaius:20,
-          textTransform:"uppercase"
-          
-        }}>{item.title}</Text>
-        </TouchableOpacity>
-
-
+        }}>{item.view}</Text>
+       
+       
 
 
 
@@ -379,7 +341,7 @@ const Products = ({navigation}) => {
 
 
 
-    </ScrollView>
+    
     
   </SafeAreaView>
   )
@@ -387,6 +349,12 @@ const Products = ({navigation}) => {
 
 export default Products
 const styles = StyleSheet.create({
+  
+  container:{
+    flex: 1,
+    backgroundColor: "white",
+    marginTop: constants.statusBarHeight,
+  },
   subCatSelector: {
     borderRadius: 10,
     padding: 15,
@@ -449,10 +417,6 @@ common: {
     height: 170,
     borderRadius: 20,
 },
-  container:{flex: 1,
-    backgroundColor: "white",
-    marginTop: constants.statusBarHeight,
-  },
   text:{
     textAlign:"center",
     shadowOffset: { width: 2, height: 2 },

@@ -24,15 +24,48 @@ import axios from 'axios';
 const AddScreen = ({navigation}) => {
     const Navigation=useNavigation();
     const [category,  setCategory ] = useState("");
-    const [firstName,  setFirstName ] = useState("");
+    const [fullname,  setFirstName ] = useState("");
     const [ title, setTitle ] = useState("");
     const [ description, setDescription ] = useState("hello world");
     const [ state, setState ] = useState(" ");
     const [ city, setCity ] = useState(" ");
+    const [salary,setSalary]=useState(" ");
+    const [skills,setSkills]=useState("");
+    const [Language,setLanguage]=useState("")
     const [phoneNumber, setPhoneNumber] = useState("");
     const [images, setImages]= useState([])
     const[image,setImage]=useState(null)
     const[loading, setLoading]=useState(false);
+    const[show, setShow]=useState(false);
+    const[company, setCompany]=useState("");
+    const[endDate, setEnd]=useState("");
+    const[startDate, setStart]=useState("");
+    const[stillwork, setWork]=useState("");
+    const[experienceYear, setYear]=useState("");
+    const[type, setType]=useState("");
+    const[schooling, setSchooling]=useState("");
+    const[qualification, setQualification]=useState("");
+
+
+
+    const [age, setAge] = useState("")
+    const [experience, setExperience]=useState([]);
+    const [status, setStatus]=useState("");
+    const [marital, setMarital]=useState("");
+    const [certificate,setCert]=useState("")
+    const [gender,setGender]=useState("")
+
+
+
+    console.log(company)
+    console.log(endDate)
+    console.log(startDate)
+    console.log(experience)
+
+
+
+
+
     
     useEffect(()=>{
         (async()=>{
@@ -75,6 +108,60 @@ const AddScreen = ({navigation}) => {
       title:"Sort By"
     },
     ];
+
+    const State = [ {
+      title:"1"
+    },
+     {
+      title:"2"
+    },
+     {
+      title:"3"
+    },
+    ];
+    const City = [ 
+       {
+      title:"3"
+    },
+     {
+      title:"6"
+    },
+     {
+      title:"8"
+    },
+    ]
+   
+    const Data={
+      category,
+      title,
+      mobile:phoneNumber,
+      experienceYear,
+      jobType:type,
+      employmentStatus:status,
+      gender,
+      maritalStatus:marital,
+      age,
+      schooling,
+      qualification,
+      expectedSalary:salary,
+      state,
+      city,
+      workexperience:[],
+      certificate,
+      skills,
+      language:Language,
+      description,
+      photo:images[0]
+     } 
+
+     console.log(Data)
+    const qualify = [  {
+      title:"Degree "
+    },
+      {
+      title:" BSC"
+    },
+    ];
     const Gender= [{
       title:"Male"
     },
@@ -82,48 +169,53 @@ const AddScreen = ({navigation}) => {
       title:"Female"
     },
     ];
-
-  const States= [{
-    title:"Lagos"
+    const certificates = [ { title:"HND"},
+      { title:"BSC"},
+      { title:"MSC"},
+    ];
+    const ExpectedSalary = [  {
+      title:"below 5000"
+    },
+      {
+      title:"above 5000"
+    },
+    ];
+    
+  const Married= [{
+    title:"Single"
   },
   {
-    title:"Edo"
-  },
-  {
-    title:"Anambra"
-  },
-  {
-    title:"Delta"
+    title:"Married"
   },
   ];
-  const cities=[
-    {}
 
-  ]  
-               const AddCv=async ()=>{
-              
-                // setLoading(true)
-                // setTimeout(loader,4000)
-                const baseUrl="https://app.myarigo.com/api/user/product/add"
-                const userData={
-                 category,
-                 title,
-                 description,
-                 state,
-                 city,
-                 phone_number:phoneNumber,
-                 photo:images[0]
-                } 
+  const Schooling= [{
+    title:"Yes"
+  },
+  {
+    title:"No"
+  },
+  ];
 
-               
-                try {
-                  const token = await AsyncStorage.getItem("token")
-                  const response = await axios.post(baseUrl,userData,{
-                    headers:{
-                      Authorization: `Bearer ${token}`
-                    }
-                  })
-                  console.log(response.data)
+  const Employment= [{
+    title:"Yes"
+  },
+  {
+    title:"No"
+  },
+  ];
+  
+     const HandleSubmit=async ()=>{
+        console.log(Data)
+    const baseUrl="https://app.myarigo.com/api/user/product/add"    
+          try {
+              const token = await AsyncStorage.getItem("token")
+              const response = await axios.post(baseUrl,Data,{
+              headers:{
+              Authorization: `Bearer ${token}`
+                  }
+              })
+              console.log(response.data)
                  
                 } catch (error) {
                   console.log(error)    
@@ -192,7 +284,7 @@ const AddScreen = ({navigation}) => {
             marginVertical:5,
             color:"#565b64",
             
-        }}>First Name</Text> 
+        }}>Full Name</Text> 
         <TextInput
               style={{ 
                   height: 40, 
@@ -204,7 +296,7 @@ const AddScreen = ({navigation}) => {
               marginVertical:5 
             }}
               onChangeText={text => setFirstName(text)}
-              value={firstName}
+              value={fullname}
               />
          <Text style={{
              fontStyle:"bold",
@@ -245,10 +337,40 @@ const AddScreen = ({navigation}) => {
                   borderColor:"gray",
                   marginHorizontal:20,
                   marginVertical:5 }}
-                  onChangeText={text => setPhoneNumber(text)}
-                  value={phoneNumber}
+                  onChangeText={text => setAge(text)}
+                  value={setAge}
                   />
       
+      <View style={{
+               flexDirection:"row",
+               marginHorizontal:20,
+               marginVertical:10,
+               position:"relative"
+            }}>
+        <Text style={{
+            color:"#565b64"
+        }}>Experience Year </Text>
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 305:270,top:-10}}>*</Text>       
+      </View>
+      
+      <TextInput
+              style={{ 
+                  height: 40, 
+                  borderWidth: 1,
+                  width:350,
+                  borderRadius:10,
+                  borderColor:"gray",
+                  marginHorizontal:20,
+                  marginVertical:5 }}
+                  onChangeText={text => setYear(text)}
+                  value={experienceYear}
+                  />
+                  
+
+
+
+
+
            <View style={{
                flexDirection:"row",
                marginHorizontal:20,
@@ -270,8 +392,8 @@ const AddScreen = ({navigation}) => {
                   borderColor:"gray",
                   marginHorizontal:20,
                   marginVertical:5 }}
-                  onChangeText={text => setCategory(text)}
-                  value={category}
+                  onChangeText={text => setTitle(text)}
+                  value={title}
                   />
                   
        <View style={{
@@ -289,7 +411,7 @@ const AddScreen = ({navigation}) => {
     data={emojisWithIcons}
     onSelect={(selectedItem, index) => {
       console.log(selectedItem, index);
-      setTitle(selectedItem.title)
+      setType(selectedItem.title)
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -303,8 +425,7 @@ const AddScreen = ({navigation}) => {
     }}
     renderItem={(item, index, isSelected) => {
       return (
-        <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}>
-          
+        <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}> 
           <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
         </View>
       );
@@ -321,13 +442,14 @@ const AddScreen = ({navigation}) => {
             }}>
         <Text style={{
             color:"#565b64"
-        }}>Gender</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?310:280,top:-10}}>*</Text>       
+        }}>Employment Status </Text>
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?240:240,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
-    data={Gender}
+    data={emojisWithIcons}
     onSelect={(selectedItem, index) => {
       console.log(selectedItem, index);
+      setStatus(selectedItem.title)
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -340,6 +462,44 @@ const AddScreen = ({navigation}) => {
       );
     }}
     renderItem={(item, index, isSelected) => {
+      return (
+        <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}> 
+          <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
+        </View>
+      );
+    }}
+    showsVerticalScrollIndicator={false}
+    dropdownStyle={styles.dropdownMenuStyle}
+    />
+
+
+<View style={{
+                flexDirection:"row",
+                marginHorizontal:20,
+                marginVertical:10,
+                position:"relative"
+            }}>
+        <Text style={{
+            color:"#565b64"
+        }}>Gender</Text>
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?310:280,top:-10}}>*</Text>       
+      </View>
+      <SelectDropdown
+    data={Gender}
+    onSelect={(selectedItem, index) => {
+      setGender(selectedItem.title, index);
+    }}
+    renderButton={(selectedItem, isOpened) => {
+      return (
+        <View style={styles.dropdownButtonStyle}>
+          <Text style={styles.dropdownButtonTxtStyle}>
+            {(selectedItem && selectedItem.title) || 'Select'}
+          </Text>
+         
+        </View>
+      );
+    }}
+    renderItem={(item,index, isSelected) => {
       return (
         <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}>
           
@@ -363,7 +523,7 @@ const AddScreen = ({navigation}) => {
         <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?320:290,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
-    data={emojisWithIcons}
+    data={State}
     onSelect={(selectedItem, index) => {
       setState(selectedItem.title)
     }}
@@ -372,8 +532,7 @@ const AddScreen = ({navigation}) => {
         <View style={styles.dropdownButtonStyle}>
           <Text style={styles.dropdownButtonTxtStyle}>
             {(selectedItem && selectedItem.title) || 'Select'}
-          </Text>
-         
+          </Text>     
         </View>
       );
     }}
@@ -400,9 +559,9 @@ const AddScreen = ({navigation}) => {
         <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?320:300,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
-    data={emojisWithIcons}
+    data={City}
     onSelect={(selectedItem, index) => {
-      setCity(selectedItem);
+      setCity(selectedItem.title);
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -425,14 +584,7 @@ const AddScreen = ({navigation}) => {
     showsVerticalScrollIndicator={false}
     dropdownStyle={styles.dropdownMenuStyle}
     />
-     
-
-
-
-
-
-
-
+  
 
 
               <View style={{
@@ -443,13 +595,13 @@ const AddScreen = ({navigation}) => {
             }}>
         <Text style={{
             color:"#565b64"
-        }}>Experience on this Role </Text>
+        }}>Expected Salary </Text>
         <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?200:180,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
-    data={emojisWithIcons}
+    data={ExpectedSalary}
     onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
+      setSalary(selectedItem.title, index);
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -485,9 +637,9 @@ const AddScreen = ({navigation}) => {
         <Text style={{color:"red",fontSize:30,position:"absolute",display:"none",right:200,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
-    data={emojisWithIcons}
+    data={Employment}
     onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
+      console.log(selectedItem.title, index);
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -525,9 +677,9 @@ const AddScreen = ({navigation}) => {
         <Text style={{color:"red",fontSize:30,position:"absolute",display:"none",right:200,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
-    data={emojisWithIcons}
+    data={Married}
     onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
+      setMarital(selectedItem.title, index);
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -560,50 +712,13 @@ const AddScreen = ({navigation}) => {
             }}>
         <Text style={{
             color:"#565b64"
-        }}>Still Studying? </Text>
+        }}>Schooling? </Text>
         <Text style={{color:"red",fontSize:30,position:"absolute",display:"none",right:200,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
-    data={emojisWithIcons}
+    data={Schooling}
     onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
-    }}
-    renderButton={(selectedItem, isOpened) => {
-      return (
-        <View style={styles.dropdownButtonStyle}>
-          <Text style={styles.dropdownButtonTxtStyle}>
-            {(selectedItem && selectedItem.title) || 'Select'}
-          </Text>
-         
-        </View>
-      );
-    }}
-    renderItem={(item, index, isSelected) => {
-      return (
-        <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}>
-          
-          <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
-        </View>
-      );
-    }}
-    showsVerticalScrollIndicator={false}
-    dropdownStyle={styles.dropdownMenuStyle}
-    />
-     <View style={{
-                flexDirection:"row",
-                marginHorizontal:20,
-                marginVertical:10,
-                position:"relative"
-            }}>
-        <Text style={{
-            color:"#565b64"
-        }}>Expected Salary </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",display:"none",right:200,top:-10}}>*</Text>       
-      </View>
-      <SelectDropdown
-    data={emojisWithIcons}
-    onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
+      setSchooling(selectedItem.title, index);
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -641,9 +756,9 @@ const AddScreen = ({navigation}) => {
         <Text style={{color:"red",fontSize:30,position:"absolute",display:"none",right:200,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
-    data={emojisWithIcons}
+    data={qualify}
     onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
+      setQualification(selectedItem.title, index);
     }}
     renderButton={(selectedItem, isOpened) => {
       return (
@@ -671,44 +786,149 @@ const AddScreen = ({navigation}) => {
                         
              
                         
-
-
-
-
-
-             <View style={{
+             <TouchableOpacity style={{
                  marginHorizontal:20,
+                 marginVertical:10,
                  flexDirection:"row",
                  alignItems:"center",
                  gap:10
-                }}>
+                }}
+                onPress={()=>setShow(prev=>!prev)}
+                >
         <Entypo name="circle-with-plus" size={24} color="#243c56" />
         <Text style={{color:"#243c56",fontWeight:"bold"}}>Add Experience</Text>
-      </View>
+      </TouchableOpacity>
+           {show ? 
+           <View>
 
-             <View style={{
-                 flexDirection:"row",
-                 marginHorizontal:20,
-                 marginVertical:10,
-                 position:"relative"
-                }}>
+           <Text style={{textAlign:"center",marginTop:20}}>WORK EXPERIENCE</Text>
+           <View style={{
+          flexDirection:"row",
+          marginHorizontal:20,
+          position:"relative"
+        }}>
         <Text style={{
             color:"#565b64"
-        }}>About You </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?290:260,top:-10}}>*</Text>       
+        }}>Company </Text>
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 300:270,top:-10}}>*</Text>       
       </View>
       <TextInput
               style={{ 
-                  height: 100, 
+                  height: 40, 
                   borderWidth: 1,
                   width:350,
                   borderRadius:10,
                   borderColor:"gray",
                   marginHorizontal:20,
-                  marginVertical:5 }}
-                  onChangeText={text => setCategory(text)}
-                  value={category}
-                  />
+                  paddingHorizontal:10,
+                 marginVertical:15
+                 }}
+                 onChangeText={(text) => setCompany(text)}
+                 value={company}
+              />
+              <View style={{
+          flexDirection:"row",
+          marginHorizontal:20,
+          position:"relative"
+        }}>
+        <Text style={{
+            color:"#565b64"
+        }}>Start Date </Text>
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 300:270,top:-10}}>*</Text>       
+      </View>
+      <TextInput
+      placeholder='14-10-2020'
+              style={{ 
+                  height: 40, 
+                  borderWidth: 1,
+                  width:350,
+                  borderRadius:10,
+                  borderColor:"gray",
+                  marginHorizontal:20,
+                  paddingHorizontal:10,
+                 marginVertical:15 }}
+                 onChangeText={(text) => setStart(text)}
+                 value={startDate}
+              />
+               <View style={{
+          flexDirection:"row",
+          marginHorizontal:20,
+          position:"relative"
+        }}>
+        <Text style={{
+            color:"#565b64"
+        }}>End Date </Text>
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 300:270,top:-10}}>*</Text>       
+      </View>
+      <TextInput
+              placeholder='20-10-2025'
+              style={{ 
+                  height: 40, 
+                  borderWidth: 1,
+                  width:350,
+                  borderRadius:10,
+                  borderColor:"gray",
+                  marginHorizontal:20,
+                  paddingHorizontal:10,
+                  marginVertical:15
+                 }}
+                 onChangeText={(text) => setEnd(text)}
+                 value={endDate}
+              />
+               <View style={{
+          flexDirection:"row",
+          marginHorizontal:20,
+          position:"relative"
+        }}>
+        <Text style={{
+            color:"#565b64"
+        }}>Still Work </Text>
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 300:270,top:-10}}>*</Text>       
+      </View>
+      <TextInput
+              style={{ 
+                  height: 40, 
+                  borderWidth: 1,
+                  width:350,
+                  borderRadius:10,
+                  borderColor:"gray",
+                  marginHorizontal:20,
+                  marginBottom:10,
+                 marginVertical:5 }}
+                 onChangeText={(text) => setWork(text)}
+                 value={stillwork}
+              />
+
+
+
+           </View>
+           
+           
+           
+           :""}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
 
 <View style={{
                  flexDirection:"row",
@@ -730,8 +950,8 @@ const AddScreen = ({navigation}) => {
                   borderColor:"gray",
                   marginHorizontal:20,
                   marginVertical:5 }}
-                  onChangeText={text => setCategory(text)}
-                  value={category}
+                  onChangeText={text => setCert(text)}
+                  value={certificates}
                   />
       
 
@@ -755,8 +975,8 @@ const AddScreen = ({navigation}) => {
                   borderColor:"gray",
                   marginHorizontal:20,
                   marginVertical:5 }}
-                  onChangeText={text => setCategory(text)}
-                  value={category}
+                  onChangeText={text => setSkills(text)}
+                  value={skills}
                   />
 
 
@@ -781,8 +1001,8 @@ const AddScreen = ({navigation}) => {
                   borderColor:"gray",
                   marginHorizontal:20,
                   marginVertical:5 }}
-                  onChangeText={text => setCategory(text)}
-                  value={category}
+                  onChangeText={text => setLanguage(text)}
+                  value={Language}
                   />
 
                    <View style={{
@@ -805,7 +1025,7 @@ const AddScreen = ({navigation}) => {
     
       </TouchableOpacity>
     
-        <TouchableOpacity onPress={AddCv} style={{
+        <TouchableOpacity onPress={HandleSubmit} style={{
          paddingHorizontal:10,
          backgroundColor:"#337bb7",
          borderRadius:10,
