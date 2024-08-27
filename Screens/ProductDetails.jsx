@@ -9,7 +9,7 @@ import { Divider } from 'react-native-elements';
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
-
+import { Linking } from 'react-native';
 // import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
@@ -19,10 +19,27 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const ProductDetails = ({navigation}) => {
+const ProductDetails = ({navigation,route}) => {
   const Navigation = useNavigation()
   const [Secure, setSecure] = useState(false);
   const [num, setNum]= useState(3)
+  const product=route.params.product
+  
+ console.log(product)
+
+ const handleCall = async () => {
+  console.log("ran")
+  let phoneNumberValue = product.brand.business_number;
+  if (Platform.OS === 'android') {
+    phoneNumberValue = `tel:${product.brand.business_number}`;
+  } else {
+    phoneNumberValue = `telprompt:${product.brand.business_number}`;
+  }
+
+  await Linking.openURL(phoneNumberValue);
+};
+
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -34,11 +51,11 @@ const ProductDetails = ({navigation}) => {
         fontWeight:"bold",
         marginHorizontal:20,
         textTransform:"uppercase"
-        }}>patoworld</Text>
+        }}>{product.brand.business}</Text>
       <Image
       resizeMode="contain"
       style={{width:350,height:200,alignSelf:"center",marginVertical:10}} 
-     source={{uri:"https://images.unsplash.com/photo-1715114064407-152cc38dbf49?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOHx8fGVufDB8fHx8fA%3D%3D"}} />
+     source={{uri:`${product.images[0].image_url}`}} />
       <View style={{
         flexDirection:"row",
         gap:10,
@@ -65,7 +82,7 @@ const ProductDetails = ({navigation}) => {
 
       <View style={{flexDirection:"row",gap:3, fontWeight:"bold",marginHorizontal:20,alignItems:"center"}}>
       <FontAwesome name="send" size={16} color="#62666f" />
-      <Text>Lagos Island</Text>
+      <Text>{product.state}</Text>
       </View>
 
       <View style={{marginHorizontal:20,flexDirection:"row",gap:4,marginVertical:10}}>
@@ -162,7 +179,10 @@ const ProductDetails = ({navigation}) => {
           alignSelf:"center"}}>#45</Text>
        </TouchableOpacity>
           
-       <TouchableOpacity style={{
+       <TouchableOpacity 
+       onPress={handleCall}
+       
+       style={{
         borderWidth:2,
         borderColor:"#337bb7",
         width:160,
@@ -213,7 +233,7 @@ const ProductDetails = ({navigation}) => {
               }}>
                 <Image 
                 source={{
-                  uri:"https://images.unsplash.com/photo-1715114064407-152cc38dbf49?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0MHx8fGVufDB8fHx8fA%3D%3D"
+                  uri:`${product.images[0].image_url}`
                 }}
                 resizeMethod='contain'
                 style={{
@@ -223,7 +243,7 @@ const ProductDetails = ({navigation}) => {
                   borderRadius:40,
                 }}
                  />
-                 <Text>PATOWORLD</Text>
+                 <Text>{product.brand.business}</Text>
 
               </View>
               <Text
@@ -243,7 +263,7 @@ const ProductDetails = ({navigation}) => {
                  marginVertical:10,
                  alignSelf:"center"
                  }} 
-                 onPress={()=>Navigation.navigate("StoreDetails")}
+                 onPress={()=>Navigation.navigate("StoreDetails",{product:product})}
                  >
             <Text 
             style={{

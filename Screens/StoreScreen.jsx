@@ -2,22 +2,38 @@ import { SafeAreaView, StyleSheet, Text, View,TouchableOpacity } from 'react-nat
 import React from 'react'
 import Header from '../Components/Header'
 import constants from "expo-constants";
-import { ScrollView } from 'react-native';
+import { ScrollView,Platform } from 'react-native';
 import { Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { Linking } from 'react-native';
 
-const StoreScreen = ({navigation}) => {
+const StoreScreen = ({navigation,route}) => {
+    const product=route.params.product
+    console.log(product)
+
+    const handleCall = async () => {
+        console.log("ran")
+        let phoneNumberValue = product.brand.business_number;
+        if (Platform.OS === 'android') {
+          phoneNumberValue = `tel:${product.brand.business_number}`;
+        } else {
+          phoneNumberValue = `telprompt:${product.brand.business_number}`;
+        }
+    
+        await Linking.openURL(phoneNumberValue);
+      };
+   
   return (
     <SafeAreaView style={styles.container}>
         <Header navigation={navigation}/>
         <ScrollView>
             <View style={{
                 width:340,
-                height:660,
+                height:500,
                 marginVertical:10,
                 alignSelf:"center",
                 borderColor:"black",
@@ -31,99 +47,47 @@ const StoreScreen = ({navigation}) => {
                     alignSelf:"center"
                 }}>
                     <Image source={{
-                        uri:"https://images.unsplash.com/photo-1715114064378-b97c82f06856?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0N3x8fGVufDB8fHx8fA%3D%3D"
+                        uri:`${product.images[0].image_url}`
                     }}
                 
                 
                     style={{
-                        width:80,
-                        height:80,
-                        borderRadius:40
+                        width:100,
+                        alignSelf:"auto",
+                        height:100,
+                        borderRadius:50
                     }}/>
-                    <Text style={{fontWeight:"bold",marginTop:10}}>PATOWORLD</Text>
+                    <Text style={{fontWeight:"bold",marginTop:10}}>{product.brand.business}</Text>
                 </View>
                     <Text style={{textAlign:"center"}}>User Since April 26th,2024.</Text>
                 <View style={{marginLeft:10,marginTop:20}}>
                     <View style={{flexDirection:"row",gap:4,marginVertical:5}}>
                         <Text style={{fontWeight:"bold",color:"#a3a6ab"}}>Seller:</Text>
-                        <Text>Terkaa pato</Text>
+                        <Text>{product.brand.business_unique_name}</Text>
                     </View>
-                    <View style={{flexDirection:"row",gap:4,marginVertical:5}}>
-                        <Text style={{fontWeight:"bold",color:"#a3a6ab"}}>Email:</Text>
-                        <Text>Terkaapato@gmail.com</Text>
-                    </View>
+
                     <View style={{flexDirection:"row",gap:4,marginVertical:5}}>
                         <Text style={{fontWeight:"bold",color:"#a3a6ab"}}>Phone:</Text>
-                    <Text>+2348190903445</Text>
+                    <Text>{product.brand.business_number}</Text>
                     </View>
                     <View style={{flexDirection:"row",gap:4,marginVertical:5}}>
                         <Text style={{fontWeight:"bold",color:"#a3a6ab"}}>State:</Text>
                     <Text>
-                    Lagos
+                    {product.state}
                     </Text>
                     </View>
 
-                    <View style={{flexDirection:"row",gap:4,marginVertical:5}}>
-                        <Text style={{fontWeight:"bold",color:"#a3a6ab"}}>City:</Text>
-                    <Text>
-                    Lagos Island
-                    </Text>
-                    </View>
+                    
 
-                    <View style={{flexDirection:"row",gap:4,marginVertical:5}}>
-                        <Text style={{fontWeight:"bold",color:"#a3a6ab"}}>Address:</Text>
-                    <Text>
-                    Sulurele bode Thomas, oladipo albino
-                    </Text>
-                    </View>
-
-                    <View style={{flexDirection:"row",gap:4,marginVertical:5}}>
-                        <Text style={{fontWeight:"bold",color:"#a3a6ab"}}>Facebook:</Text>
-                    <Text>
-                 
-                    </Text>
-                    </View>
-
-                    <View style={{flexDirection:"row",gap:4,marginVertical:5}}>
-                        <Text style={{fontWeight:"bold",color:"#a3a6ab"}}>Twitter:</Text>
-                    <Text>
-                 
-                    </Text>
-                    </View>
-
-                    <View style={{flexDirection:"row",gap:4,marginVertical:5}}>
-                        <Text style={{fontWeight:"bold",color:"#a3a6ab"}}>Instagram:</Text>
-                    <Text>
-               
-                    </Text>
-                    </View>
-
-
-                    <View style={{flexDirection:"row",gap:4,marginVertical:5}}>
-                        <Text style={{fontWeight:"bold",color:"#a3a6ab"}}>RC-NUMBER:</Text>
-                    <Text>
-                   
-                    </Text>
-                    </View>
                     <View style={{
         flexDirection:"row",
         gap:4,
     
-        marginTop:5}}>
-       <AntDesign name="star" size={16} color="#dedfe0" />
-       <AntDesign name="star" size={16} color="#dedfe0" />
-       <AntDesign name="star" size={16} color="#dedfe0" />
-       <AntDesign name="star" size={16} color="#dedfe0" />
-       <AntDesign name="star" size={16} color="#dedfe0" />
-
+        marginTop:35}}>
+       
        </View>
 
-       <Text style={{
-        fontSize:17,
-        fontWeight:"bold",
-        color:"#5894c5",
-        marginVertical:10
-       }}>Rate this business</Text>
+     
                <View style={{
                 backgroundColor:"#f9f9f9",
                 borderRadius:10,
@@ -152,6 +116,7 @@ const StoreScreen = ({navigation}) => {
                     }}>login to follow business</Text>
             </TouchableOpacity>
             <TouchableOpacity 
+            onPress={handleCall}
            style={{
                  backgroundColor:"#337bb7",
                  width:240,
