@@ -1,4 +1,4 @@
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View,Button, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../Components/Header'
 import constants from "expo-constants";
@@ -10,6 +10,9 @@ import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { Linking } from 'react-native';
+
+import Modal from 'react-native-modal';
+
 // import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
@@ -20,15 +23,21 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const ProductDetails = ({navigation,route}) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [show,setShow]=useState(true)
   const Navigation = useNavigation()
   const [Secure, setSecure] = useState(false);
+  const [desc,setDesc]=useState("Drop a message for the seller")
+  const [place,setPlace]=useState("...write a message.")
+
   const [num, setNum]= useState(3)
   const product=route.params.product
-  
- console.log(product)
+  const toggleModal = () => setIsModalVisible(!isModalVisible);
+
+
 
  const handleCall = async () => {
-  console.log("ran")
+  setShow(prev=>!prev)
   let phoneNumberValue = product.brand.business_number;
   if (Platform.OS === 'android') {
     phoneNumberValue = `tel:${product.brand.business_number}`;
@@ -45,6 +54,44 @@ const ProductDetails = ({navigation,route}) => {
     <SafeAreaView style={styles.container}>
     <Header navigation={navigation}/>
     <ScrollView>
+    <Modal isVisible={isModalVisible}>
+    <View style={{ 
+     
+      justifyContent:"center",
+      alignItems:"center",
+      backgroundColor:"white",
+      width:350,
+      height:260,
+      borderRadius:10,
+      marginHorizontal:20
+      }}>
+        <TouchableOpacity onPress={toggleModal}
+         style={{
+          justifyContent:"flex-end",
+          marginLeft:250,
+          marginBottom:20
+        }}>
+
+        <AntDesign name="closecircle" size={24} color={"#337bb7"}   />
+        </TouchableOpacity>
+    <Text style={{fontWeight:"bold"}}>{desc}</Text>
+    <TextInput placeholder={place} style={{ borderWidth:1,width:300, height:80,paddingVertical:10,borderRadius:10,marginVertical:10}}/>
+    <TouchableOpacity style={{
+        backgroundColor:"#337bb7",
+        width:300,
+        paddingVertical:10,
+        borderRadius:8,
+        marginHorizontal:20,
+        marginVertical:10}}>
+        <Text style={{
+          fontWeight:"bold",
+          color:"white",
+          alignSelf:"center"}}>SEND</Text>
+       </TouchableOpacity>
+    
+  </View>
+   </Modal>
+
       <Text 
         style={{
         fontSize:25,
@@ -298,7 +345,10 @@ const ProductDetails = ({navigation,route}) => {
                 borderRadius:5,
                 marginVertical:20
               }}>
-                    <TouchableOpacity 
+             
+            {show ? 
+            <TouchableOpacity 
+            onPress={handleCall}
            style={{
                  backgroundColor:"#337bb7",
                  width:180,
@@ -309,17 +359,45 @@ const ProductDetails = ({navigation,route}) => {
                  alignSelf:"center",
                  flexDirection:"row",
                  justifyContent:"space-evenly"
-                 }}>
+                }}>
                  <FontAwesome name="phone" size={24} color="white" />
         <Text style={{
-          fontWeight:"bold",
-          color:"white",
-          alignSelf:"center",
-          textTransform:"uppercase"
-          }}>Show Contact</Text>
-       </TouchableOpacity>
+            fontWeight:"bold",
+            color:"white",
+            alignSelf:"center",
+            textTransform:"uppercase"
+        }}>Show Contact</Text>
+       </TouchableOpacity>: 
+         <TouchableOpacity 
+         onPress={handleCall}
+        style={{
+              backgroundColor:"#337bb7",
+              width:180,
+              paddingVertical:8,
+              borderRadius:8,
+              marginHorizontal:20,
+              marginVertical:10,
+              alignSelf:"center",
+              flexDirection:"row",
+              justifyContent:"space-evenly"
+             }}>
+              <FontAwesome name="phone" size={24} color="white" />
+     <Text style={{
+         fontWeight:"bold",
+         color:"white",
+         alignSelf:"center",
+         textTransform:"uppercase"
+     }}>{product.brand.business_number}</Text>
+    </TouchableOpacity>
+       
+       }
 
        <TouchableOpacity 
+          onPress={()=>{
+            setDesc("Drop a message for the seller")
+            setPlace("...write a message")
+            toggleModal()
+          }}
            style={{
                  backgroundColor:"#337bb7",
                  width:180,
@@ -342,6 +420,11 @@ const ProductDetails = ({navigation,route}) => {
                    }}>drop a meassage</Text>
             </TouchableOpacity>
             <TouchableOpacity 
+            onPress={()=>{
+              setDesc("Drop your bidding price")
+              toggleModal()
+              setPlace("write down your bid.")
+            }}
            style={{
                  backgroundColor:"#337bb7",
                  width:180,

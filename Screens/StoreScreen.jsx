@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import Header from '../Components/Header'
 import constants from "expo-constants";
 import { ScrollView,Platform } from 'react-native';
@@ -10,20 +10,44 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Linking } from 'react-native';
-
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const StoreScreen = ({navigation,route}) => {
+   const [show,setShow]=useState(true)
+  const handlePress = async () => {
+    try {
+      await Linking.openURL('https://www.facebook.com');
+    } catch (error) {
+      console.error('Error opening URL:', error);
+    }
+  };
+  async function getUserData(){
+    const baseUrl = "https://app.myarigo.com/api/user/notifications"
+    const token = await AsyncStorage.getItem("token")
+    const response = await axios.get(baseUrl,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    console.log(response);
+  }
+  
+  useEffect(()=>{
+    getUserData()
+      }, [])
+
+
     const product=route.params.product
     console.log(product)
 
     const handleCall = async () => {
-        console.log("ran")
+        setShow(prev=>!prev)
         let phoneNumberValue = product.brand.business_number;
         if (Platform.OS === 'android') {
           phoneNumberValue = `tel:${product.brand.business_number}`;
         } else {
           phoneNumberValue = `telprompt:${product.brand.business_number}`;
-        }
-    
+        } 
         await Linking.openURL(phoneNumberValue);
       };
    
@@ -95,6 +119,8 @@ const StoreScreen = ({navigation,route}) => {
                }}>
 
                <TouchableOpacity 
+
+               onPress={handlePress}
            style={{
                backgroundColor:"#337bb7",
                width:240,
@@ -115,6 +141,7 @@ const StoreScreen = ({navigation,route}) => {
                      textTransform:"uppercase"
                     }}>login to follow business</Text>
             </TouchableOpacity>
+            {show ? 
             <TouchableOpacity 
             onPress={handleCall}
            style={{
@@ -135,7 +162,30 @@ const StoreScreen = ({navigation,route}) => {
             alignSelf:"center",
             textTransform:"uppercase"
         }}>Show Contact</Text>
-       </TouchableOpacity>
+       </TouchableOpacity>: 
+         <TouchableOpacity 
+         onPress={handleCall}
+        style={{
+              backgroundColor:"#337bb7",
+              width:240,
+              paddingVertical:8,
+              borderRadius:8,
+              marginHorizontal:20,
+              marginVertical:10,
+              alignSelf:"center",
+              flexDirection:"row",
+              justifyContent:"space-evenly"
+             }}>
+              <FontAwesome name="phone" size={24} color="white" />
+     <Text style={{
+         fontWeight:"bold",
+         color:"white",
+         alignSelf:"center",
+         textTransform:"uppercase"
+     }}>{product.brand.business_number}</Text>
+    </TouchableOpacity>
+       
+       }
               
         </View> 
         </View>
