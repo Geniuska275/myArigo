@@ -4,10 +4,13 @@ import Header from '../Components/Header'
 import { useNavigation } from '@react-navigation/native'
 import SelectDropdown from 'react-native-select-dropdown'
 import Radio from '../Components/Inputs/Radio';
-
-const Business = () => {
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+const Business = ({route}) => {
+  const {plan}=route.params;
+  console.log(plan)
     const navigation=useNavigation();
-    const [subscription, setSubcription] = React.useState('#41,500 -1 month');
+    const [subscription, setSubcription] = React.useState(plan);
     const [sellername, setSellerName] = React.useState('');
     const [businessname, setBusinessName] = React.useState('');
     const [businessphone, setBusinessPhone] = React.useState('');
@@ -15,6 +18,47 @@ const Business = () => {
     const [businessemail, setBusinessEmail] = React.useState('');
     const [Flutterwave, setFlutterwave] = React.useState('');
     const [accountType, setAccountType] = React.useState("");
+
+      
+     const HandleSubmit=async ()=>{ 
+      console.log("ran")
+         const baseUrl="https://myarigo.com/api/user/onboard/bank_transfer"  
+         const Data={
+           sellername,
+           businessname,
+           businessphone,
+           businessaddress,
+           businessemail,
+           subscription,
+           accountType,
+           payment_method:"Bank Transfer",
+         }  
+         navigation.navigate("Information")
+        try {
+            const token = await AsyncStorage.getItem("token")
+            const response = await axios.post(baseUrl,Data,{
+            headers:{
+            Authorization: `Bearer ${token}`
+                }
+            })
+            console.log(response.data)
+
+               
+              } catch (error) {
+                console.log(error)    
+              }
+
+                
+                
+              
+             
+               }
+             
+              
+
+
+
+
 
 
     const emojisWithIcons = [{
@@ -74,7 +118,7 @@ const Business = () => {
                   padding:10,
                   marginVertical:5 }}
                   onChangeText={text => setSubcription(text)}
-                  value={subscription}
+                  value={` #${plan}`}
                   
                   />
 
@@ -347,16 +391,18 @@ const Business = () => {
       </View>
       <TextInput
               style={{ 
-                  height: 140, 
+                  height: 100, 
                   borderWidth: 1,
                   width:350,
                   borderRadius:10,
                   borderColor:"gray",
                   marginHorizontal:20,
+                  alignSelf:"center",
                   marginVertical:5 }}
                   onChangeText={text => setBusinessAddress(text)}
                   value={businessaddress}            
                   />
+{/*                   
        <View style={{
     flexDirection:"row",
     marginHorizontal:20,
@@ -372,21 +418,26 @@ const Business = () => {
       <Radio Options={Options}
            CheckedValue={Flutterwave} 
           style={{marginBottom:15}}
-          onChange={setAccountType}/>
+          onChange={setAccountType}/> */}
 
-<TouchableOpacity style={{
+<TouchableOpacity 
+  onPress={HandleSubmit}
+
+style={{
         backgroundColor:"#337ab7",
         padding:10,
         borderRadius:10,
-        marginHorizontal:20,
-        paddingHorizontal:100,
-        marginVertical:30,
-        marginBottom:20,
-        alignSelf:"center"
+        // marginHorizontal:40,
+        width:340,
+        marginVertical:20,
+       
+        alignSelf:"center",
+        alignItems:"center",
+        justifyContent:"center"
        }}>
         <Text style={{color:"white",fontWeight:"bold"}}>Submit</Text>
        </TouchableOpacity>
-
+    <Text style={{marginVertical:80}}></Text>
 
           
 </ScrollView>

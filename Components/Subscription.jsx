@@ -79,7 +79,7 @@ const Subscription = ({item,navigation}) => {
             marginVertical:20
           }}
 
-          onPress={()=>navigation.navigate("Business")}
+          onPress={()=>navigation.navigate("Business",{plan:item.price})}
         >
             <Text style={{
                 alignSelf:"center",
