@@ -9,13 +9,14 @@ import {
      KeyboardAvoidingView,
      Platform } from 'react-native'
   import AsyncStorage from '@react-native-async-storage/async-storage';
+  
   import React, { useEffect, useState } from 'react'
   import { SafeAreaView } from 'react-native-safe-area-context'
   import Header from '../Components/Header'
   import { useNavigation } from '@react-navigation/native'
   import { TextInput } from 'react-native-gesture-handler';
   import RNPickerSelect from 'react-native-picker-select';
-  import { Entypo } from '@expo/vector-icons';
+  import { Entypo ,AntDesign} from '@expo/vector-icons';
   import * as ImagePicker from "expo-image-picker"
   import { ActivityIndicator } from 'react-native'
   import SelectDropdown from 'react-native-select-dropdown'
@@ -23,8 +24,56 @@ import {
   
   const Information = ({navigation}) => {
       const Navigation=useNavigation();
+      const [images, setImages]=useState([])
+      const[image, setImage]=useState(null)
+
      
-       const HandleSubmit=()=>{}            
+       const HandleSubmit=()=>{}      
+       
+       useEffect(()=>{
+        (async()=>{
+          const galleryStatus=await ImagePicker.requestMediaLibraryPermissionsAsync();
+          setHasGalleryPermission(galleryStatus.status == "granted")
+        })()
+      },[]);
+
+
+
+      const pickImage=async ()=>{
+        if(images.length < 4){
+          let result=await ImagePicker.launchImageLibraryAsync({
+            mediaTypes:ImagePicker.MediaTypeOptions.Images,
+            allowsEditing:true,
+            aspect:[4,4],
+            quality:1
+         })
+         if(!result.canceled){
+            setImages(state=>[...state,result.assets[0].uri]);
+        }else{
+          Alert.alert("Invalid Input", "Can not upload more than 4 images", [
+            { text: "OK", onPress: () => console.log("OK Pressed") },
+          ]);
+        }
+      }
+
+
+      const fetchImageUri=async (uri)=>{
+       console.log("ran")
+       const response=await fetch(uri)
+       const blob= await response.blob()
+       const file= new File([blob], uri, { type: blob.type });
+       return file
+     }}
+     
+
+
+       
+
+
+
+
+
+      
   
     return (
   
@@ -136,15 +185,30 @@ import {
         }}>Proof of Transfer </Text>
         <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 180:270,top:-1}}>*</Text>       
       </View>
-      <TouchableOpacity onPress={()=>{}} 
-        style={{ 
-            marginHorizontal:20,
-            
-          }}>
-       <Image source={require("./image-upload.png")} style={{width:100,height:100}}/>
-    
-      </TouchableOpacity>
 
+       <View style={{
+        flexDirection:"row"
+       }}>
+
+      <TouchableOpacity onPress={pickImage} 
+        style={{ 
+          marginHorizontal:20,      
+        }}>
+       <Image source={require("./image-upload.png")} style={{width:100,height:100}}/> 
+      </TouchableOpacity>
+      {images[0]?  <View style={styles.image}> 
+      <TouchableOpacity  style={{position:"relative",top:5,left:-7,zIndex:999}} onPress={()=>{
+         const  r=images.filter((_,i)=>i !==0)
+         console.log(r)
+         setImages(r)
+       }}>
+        <AntDesign name="closecircleo" size={16} color="#0284c7" />
+       </TouchableOpacity>       
+        <Image source={{uri:images[0]}} style={{width:70,height:70,marginBottom:10}}/>
+       </View>:null}
+
+      
+            </View>
 
 <TouchableOpacity 
   onPress={HandleSubmit}
