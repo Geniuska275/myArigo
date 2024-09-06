@@ -33,7 +33,7 @@ const Business = ({route}) => {
            accountType,
            payment_method:"Bank Transfer",
          }  
-         navigation.navigate("Information")
+         navigation.navigate("Information",{amount:plan})
         try {
             const token = await AsyncStorage.getItem("token")
             const response = await axios.post(baseUrl,Data,{

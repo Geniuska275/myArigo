@@ -63,8 +63,10 @@ const ProductDetails = ({navigation,route}) => {
       width:350,
       height:260,
       borderRadius:10,
-      marginHorizontal:20
-      }}>
+      alignSelf:"center"
+    
+      }}
+      >
         <TouchableOpacity onPress={toggleModal}
          style={{
           justifyContent:"flex-end",

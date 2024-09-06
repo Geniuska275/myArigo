@@ -22,10 +22,11 @@ import {
   import SelectDropdown from 'react-native-select-dropdown'
   import axios from 'axios';
   
-  const Information = ({navigation}) => {
+  const Information = ({navigation,route}) => {
       const Navigation=useNavigation();
       const [images, setImages]=useState([])
       const[image, setImage]=useState(null)
+      const {amount}=route.params;
 
      
        const HandleSubmit=()=>{}      
@@ -110,7 +111,7 @@ import {
               fontSize:25,
               marginBottom:20,
               marginTop:20
-            }}>Pay #41,500 to the account below</Text>  
+            }}>Pay #{amount} to the account below</Text>  
            </View>
            
            <View style={{
