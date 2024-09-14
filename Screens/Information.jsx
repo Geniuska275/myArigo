@@ -25,11 +25,83 @@ import {
   const Information = ({navigation,route}) => {
       const Navigation=useNavigation();
       const [images, setImages]=useState([])
-      const[image, setImage]=useState(null)
-      const {amount}=route.params;
+      const [image, setImage]=useState(null)
+      const [files,setFiles]=useState([])
+      const {amount,duration}=route.params;
+      
 
-     
-       const HandleSubmit=()=>{}      
+      useEffect(()=>{
+        const fetchImages = async () => {
+          const promises = images.map((url) => fetchImageUri(url));
+          const img = await Promise.all(promises);
+          return img;
+        };
+        fetchImages(images || []).then((results) =>{ 
+          setFiles(results)});
+      },[images])
+
+
+       const HandleSubmit= async()=>{
+       
+          console.log("ran")
+           console.log(images[0])
+          const formData=new FormData()
+         
+          const slug = await AsyncStorage.getItem("slug")
+          const imageUri = images[0].replace('file://', '');
+          formData.append('proof',  {
+            uri:imageUri,
+            name:'image.jpg',
+            type:'image/jpg'
+         })
+          formData.append("slug",slug)
+          formData.append('duration',duration)
+          formData.append('amount',amount)
+          const baseUrl=`https://app.myarigo.com/api/user/onboard/bank_transfer` 
+          const obj={
+          proof:formData,
+          slug:slug,
+          duration,
+          amount,   
+          }
+        
+          const token = await AsyncStorage.getItem("token")
+          console.log(formData)
+          // try {
+          //   const token = await AsyncStorage.getItem("token")
+          //   const response = await axios.post(baseUrl,formData,{
+          //     headers:{
+          //       'Content-Type': 'multipart/form-data',
+          //       Authorization: `Bearer ${token}`,
+          //      }
+          //    })                
+          //     console.log(response)         
+          //      } catch (error=> {
+          //        console.log(error)    
+          //      } )
+               
+               axios.post(baseUrl, formData, {
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'multipart/form-data',
+                  Authorization: `Bearer ${token}`,
+                }
+              })
+              .then(response => {
+                console.log('Image uploaded successfully');
+                Alert.alert('Image uploaded successfully', 'Your payment has been made successfully', [
+                  { text: 'OK', onPress: () => Navigation.navigate('Home') },
+                ]);
+                console.log(response.data);
+              })
+              .catch(error => {
+                console.error( error.response.data.errors);
+                Alert.alert('Image failed',`${error.response.data.errors.proof[0]}` , [
+                  { text: 'OK', onPress: () => {}},
+                ]);
+              });
+
+       }      
        
        useEffect(()=>{
         (async()=>{
@@ -55,17 +127,20 @@ import {
             { text: "OK", onPress: () => console.log("OK Pressed") },
           ]);
         }
+        
       }
+      
 
-
-      const fetchImageUri=async (uri)=>{
-       console.log("ran")
-       const response=await fetch(uri)
-       const blob= await response.blob()
-       const file= new File([blob], uri, { type: blob.type });
-       return file
-     }}
-     
+    }
+    
+          const fetchImageUri=async (uri)=>{
+           console.log("run")
+           const response=await fetch(uri)
+           const blob= await response.blob()
+           const file= new File([blob], uri, { type: blob.type });
+           return file
+         }
+    
 
 
        
@@ -73,7 +148,7 @@ import {
 
 
 
-
+     
       
   
     return (

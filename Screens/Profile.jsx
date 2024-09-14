@@ -24,6 +24,8 @@ const Profile = ({navigation}) => {
         Authorization: `Bearer ${token}`
       }
     })
+  
+     AsyncStorage.setItem("slug", response.data.user.slug)
     setUserData(response.data.user);
   }
   
@@ -31,7 +33,7 @@ const Profile = ({navigation}) => {
     getUserData()
 
   }, [])
-
+     
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [name, setName] = useState("")
@@ -40,7 +42,7 @@ const Profile = ({navigation}) => {
   const [state, setState] = useState("")
 
 
-     console.log(userData)
+    
 
     const emojisWithIcons = [{
         title:"Edo State"
@@ -108,11 +110,6 @@ const Profile = ({navigation}) => {
      }}
      
 
-
-
-
-
-console.log(images[0])
 const updateProfile=async ()=>{
 
   pickImage()
@@ -123,7 +120,7 @@ const updateProfile=async ()=>{
     },
     body:images[0]
   })
-  console.log(response)
+ 
 }
 
   return (
