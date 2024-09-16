@@ -9,6 +9,7 @@ import {
      KeyboardAvoidingView,
      Platform } from 'react-native'
   import AsyncStorage from '@react-native-async-storage/async-storage';
+  import ImageResizer from 'react-native-image-resizer';
   
   import React, { useEffect, useState } from 'react'
   import { SafeAreaView } from 'react-native-safe-area-context'
@@ -40,15 +41,27 @@ import {
           setFiles(results)});
       },[images])
 
-
+useEffect(()=>{
+  const resize= async ()=>{
+    const imageUri = images[0].replace('file://', '');
+    const resizedUri = await ImageResizer.createResizedImage(
+      images[0],
+      Math.floor(1024 * maxSizeKB / 8), // Convert KB to bytes
+      0,
+      'HighQuality'
+    );
+    setFiles(resizedUri)
+  }
+  resize()
+},[images])   
+      console.log(files)
        const HandleSubmit= async()=>{
        
-          console.log("ran")
-           console.log(images[0])
-          const formData=new FormData()
-         
-          const slug = await AsyncStorage.getItem("slug")
-          const imageUri = images[0].replace('file://', '');
+         const formData=new FormData()     
+         const slug = await AsyncStorage.getItem("slug")
+         const imageUri = images[0].replace('file://', '');
+     
+
           formData.append('proof',  {
             uri:imageUri,
             name:'image.jpg',
@@ -58,12 +71,7 @@ import {
           formData.append('duration',duration)
           formData.append('amount',amount)
           const baseUrl=`https://app.myarigo.com/api/user/onboard/bank_transfer` 
-          const obj={
-          proof:formData,
-          slug:slug,
-          duration,
-          amount,   
-          }
+         
         
           const token = await AsyncStorage.getItem("token")
           console.log(formData)
