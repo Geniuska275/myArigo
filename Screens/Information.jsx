@@ -96,11 +96,15 @@ useEffect(()=>{
                 }
               })
               .then(response => {
-                console.log('Image uploaded successfully');
+           
                 Alert.alert('Image uploaded successfully', 'Your payment has been made successfully', [
                   { text: 'OK', onPress: () => Navigation.navigate('Home') },
                 ]);
-                console.log(response.data);
+
+                 AsyncStorage.setItem("plan",amount)
+                 AsyncStorage.setItem("duration",toString(duration))
+                 Navigation.navigate('Home')
+
               })
               .catch(error => {
                 console.error( error.response.data.errors);

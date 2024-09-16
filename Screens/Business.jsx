@@ -164,6 +164,7 @@ const Business = ({route}) => {
                   borderRadius:10,
                   borderColor:"gray",
                   marginHorizontal:20,
+                  padding:10,
                   marginVertical:5 }}
                   onChangeText={text => setBusinessName(text)}
                   value={businessname}
@@ -191,6 +192,7 @@ const Business = ({route}) => {
                   borderRadius:10,
                   borderColor:"gray",
                   marginHorizontal:20,
+                  padding:10,
                   marginVertical:5 }}
                   onChangeText={text => setBusinessEmail(text)}
                   value={businessemail}          
@@ -217,6 +219,7 @@ const Business = ({route}) => {
                   borderRadius:10,
                    borderColor:"gray",
                    marginHorizontal:20,
+                   padding:10,
                    marginVertical:5
                 }}
                 onChangeText={text => setBusinessPhone(text)}
@@ -244,6 +247,7 @@ const Business = ({route}) => {
                   borderRadius:10,
                   borderColor:"gray",
                   marginHorizontal:20,
+                  padding:10,
                   marginVertical:5 }}
                   onChangeText={text => setBusinessAddress(text)}
                   value={businessaddress}
@@ -392,6 +396,7 @@ const Business = ({route}) => {
                   borderColor:"gray",
                   marginHorizontal:20,
                   alignSelf:"center",
+                  padding:10,
                   marginVertical:5 }}
                   onChangeText={text => setAbout(text)}
                   value={about}            

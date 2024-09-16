@@ -12,6 +12,9 @@ const DashboardScreen = ({navigation}) => {
     const Navigation = useNavigation()
 
     const [userData, setUserData] = useState({})
+    const [plan, setPlan] = useState("")
+    const [duration, setDuration] = useState("")
+
 
     async function getUserData(){
       const baseUrl = USER_ENDPOINT
@@ -27,8 +30,19 @@ const DashboardScreen = ({navigation}) => {
     
     useEffect(()=>{
       getUserData()
+       getPlan()
+
     }, [])
-    console.log(userData.referral)
+
+    async function getPlan(){
+        
+        const plan = await AsyncStorage.getItem("plan")
+        const duration = await AsyncStorage.getItem("duration")
+             setPlan(plan)
+           setDuration(duration)
+      }
+      
+    console.log(plan)
   return (
    <SafeAreaView style={container}>
     <Header navigation={navigation}/>
@@ -105,6 +119,24 @@ const DashboardScreen = ({navigation}) => {
         </TouchableOpacity>
 
     </View>
+   {plan ? (
+
+   <View style={{borderWidth:1,borderColor:"gray",width:370,marginHorizontal:20,
+        height:140,paddingVertical:40}}>
+
+        <Text style={{color:"red",fontWeight:"bold",alignSelf:"center",marginBottom:10}}>
+            Pending Registration
+        </Text>
+        <Text style={{color:"red",fontWeight:"bold",alignSelf:"center"}}>
+            Plan : {plan} for month {duration}
+        </Text>
+
+        <Text style={{color:"green",fontWeight:"bold",alignSelf:"center",marginBottom:10}}>
+            Your Request has been submitted,
+            please await admin approval.
+        </Text>
+    </View>
+   ):null} 
   </ScrollView>
 
    </SafeAreaView>
