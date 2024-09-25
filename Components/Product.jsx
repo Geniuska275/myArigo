@@ -45,7 +45,7 @@ const Product = () => {
     // Add more items as needed
   ]);
 
-
+  console.log(products)
   return (
     <View style={styles.container}>
         <View style={{

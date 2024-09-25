@@ -42,7 +42,7 @@ const DashboardScreen = ({navigation}) => {
            setDuration(duration)
       }
       
-    console.log(plan)
+
   return (
    <SafeAreaView style={container}>
     <Header navigation={navigation}/>

@@ -10,6 +10,7 @@ import {
      Platform } from 'react-native'
   import AsyncStorage from '@react-native-async-storage/async-storage';
   import ImageResizer from 'react-native-image-resizer';
+  import constants from "expo-constants";
   
   import React, { useEffect, useState } from 'react'
   import { SafeAreaView } from 'react-native-safe-area-context'
@@ -23,96 +24,53 @@ import {
   import SelectDropdown from 'react-native-select-dropdown'
   import axios from 'axios';
   
-  const Information = ({navigation,route}) => {
-      const Navigation=useNavigation();
+  const Information = ({route}) => {
+    const[loading, setLoading]=useState(false);
       const [images, setImages]=useState([])
       const [image, setImage]=useState(null)
-      const [files,setFiles]=useState([])
       const {amount,duration}=route.params;
+      const navigation=useNavigation();
       
 
-      useEffect(()=>{
-        const fetchImages = async () => {
-          const promises = images.map((url) => fetchImageUri(url));
-          const img = await Promise.all(promises);
-          return img;
-        };
-        fetchImages(images || []).then((results) =>{ 
-          setFiles(results)});
-      },[images])
+       const HandleSubmit= async()=>{   
+        setLoading(true)  
+        try {
+          
 
-useEffect(()=>{
-  const resize= async ()=>{
-    const imageUri = images[0].replace('file://', '');
-    const resizedUri = await ImageResizer.createResizedImage(
-      images[0],
-      Math.floor(1024 * maxSizeKB / 8), // Convert KB to bytes
-      0,
-      'HighQuality'
-    );
-    setFiles(resizedUri)
-  }
-  resize()
-},[images])   
-      console.log(files)
-       const HandleSubmit= async()=>{
-       
-         const formData=new FormData()     
-         const slug = await AsyncStorage.getItem("slug")
-         const imageUri = images[0].replace('file://', '');
-     
-
-          formData.append('proof',  {
-            uri:imageUri,
-            name:'image.jpg',
-            type:'image/jpg'
-         })
-          formData.append("slug",slug)
-          formData.append('duration',duration)
-          formData.append('amount',amount)
-          const baseUrl=`https://app.myarigo.com/api/user/onboard/bank_transfer` 
-         
-        
-          const token = await AsyncStorage.getItem("token")
-          console.log(formData)
-          // try {
-          //   const token = await AsyncStorage.getItem("token")
-          //   const response = await axios.post(baseUrl,formData,{
-          //     headers:{
-          //       'Content-Type': 'multipart/form-data',
-          //       Authorization: `Bearer ${token}`,
-          //      }
-          //    })                
-          //     console.log(response)         
-          //      } catch (error=> {
-          //        console.log(error)    
-          //      } )
-               
-               axios.post(baseUrl, formData, {
-                headers: {
-                  Accept: 'application/json',
-                  'Content-Type': 'multipart/form-data',
-                  Authorization: `Bearer ${token}`,
-                }
-              })
-              .then(response => {
-           
+          
+          const formData=new FormData()     
+          const slug = await AsyncStorage.getItem("slug")
+          const imageUri = images[0].replace('file://', '');
+           formData.append('proof',  {
+             uri:imageUri,
+             name:'image.jpg',
+             type:'image/jpg'
+          })
+           formData.append("slug",slug)
+           formData.append('duration',duration)
+           formData.append('amount',amount)
+               const baseUrl=`https://app.myarigo.com/api/user/onboard/bank_transfer`      
+               const token = await AsyncStorage.getItem("token")   
+              const response= await axios.post(baseUrl, formData, {
+                 headers: {
+                   Accept: 'application/json',
+                   'Content-Type': 'multipart/form-data',
+                   Authorization: `Bearer ${token}`,
+                 }
+               })
+                 
                 Alert.alert('Image uploaded successfully', 'Your payment has been made successfully', [
-                  { text: 'OK', onPress: () => Navigation.navigate('Home') },
+                  { text: 'OK'},
                 ]);
-
                  AsyncStorage.setItem("plan",amount)
                  AsyncStorage.setItem("duration",toString(duration))
-                 Navigation.navigate('Home')
-
-              })
-              .catch(error => {
-                console.error( error.response.data.errors);
-                Alert.alert('Image failed',`${error.response.data.errors.proof[0]}` , [
-                  { text: 'OK', onPress: () => {}},
-                ]);
-              });
-
+                loader()
+               } catch (error) {
+          Alert.alert('Image failed',`${error.response.data.errors.proof[0]}` , [
+            { text: 'OK', onPress: () => {}},
+          ]);
+     
+        }   
        }      
        
        useEffect(()=>{
@@ -144,29 +102,28 @@ useEffect(()=>{
       
 
     }
-    
-          const fetchImageUri=async (uri)=>{
-           console.log("run")
-           const response=await fetch(uri)
-           const blob= await response.blob()
-           const file= new File([blob], uri, { type: blob.type });
-           return file
+  
+         const loader=()=>{
+          setLoading(false)
+          navigation.navigate("Home")
          }
-    
-
-
-       
-
-
-
 
      
       
   
     return (
-  
-      <SafeAreaView>
+      <SafeAreaView style={styles.container}>
           <Header navigation={navigation}/>
+          {loading &&(
+          <View style={[StyleSheet.absoluteFill,{
+          backgroundColor:"rgba(0,0,0,0.6)",
+          alignItems:"center",
+          justifyContent:"center",
+          zIndex:30000
+       }   
+       ]}>
+       <ActivityIndicator  color={"#243c56"} animating size={100}/>
+     </View>)}
           
        <KeyboardAvoidingView behavior="padding" >
           <ScrollView>
@@ -271,7 +228,7 @@ useEffect(()=>{
             marginBottom:10,
             marginTop:10
         }}>Proof of Transfer </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 180:270,top:-1}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 180:240,top:-1}}>*</Text>       
       </View>
 
        <View style={{
@@ -357,6 +314,12 @@ style={{
   export default Information
   
   const styles = StyleSheet.create({
+    container:{
+      flex:1,
+      backgroundColor:"#fefefe",
+     
+     
+     },
     dropdownButtonStyle: {
       width: 360,
       height: 40,

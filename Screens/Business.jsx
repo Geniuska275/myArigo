@@ -4,11 +4,12 @@ import Header from '../Components/Header'
 import { useNavigation } from '@react-navigation/native'
 import SelectDropdown from 'react-native-select-dropdown'
 import Radio from '../Components/Inputs/Radio';
+import constants from "expo-constants";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 const Business = ({route}) => {
-  const {plan, duration}=route.params;
-  console.log(plan)
+  const {plan, duration}=route?.params;
+  
     const navigation=useNavigation();
     const [data,setData]=useState([])
     const [subscription, setSubcription] = React.useState(plan);
@@ -95,14 +96,11 @@ const Business = ({route}) => {
         title:"8"
       },
       ];
-
-    console.log(data.address)
-
   return (
-    <SafeAreaView style={{
+    <SafeAreaView style={[ styles.container,{
         backgroundColor:"white"
-    }}>
-        <Header/>
+    }]}>
+        <Header navigation={navigation}/>
         <Text style={styles.text}>Business Information</Text>
         <ScrollView>
 
@@ -132,7 +130,7 @@ const Business = ({route}) => {
               style={{ 
                   height: 40, 
                   borderWidth: 1,
-                  width:350,
+                  width:330,
                   borderRadius:10,
                   borderColor:"gray",
                   marginHorizontal:20,
@@ -153,14 +151,14 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business Name</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:240,top:-10}}>*</Text> 
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?265:235,top:-10}}>*</Text> 
  
       </View>
       <TextInput
               style={{ 
                   height: 40, 
                   borderWidth: 1,
-                  width:350,
+                  width:330,
                   borderRadius:10,
                   borderColor:"gray",
                   marginHorizontal:20,
@@ -182,13 +180,13 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business Email</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:240,top:-10}}>*</Text>  
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?265:235,top:-10}}>*</Text>  
       </View>
       <TextInput
               style={{ 
                   height: 40, 
                   borderWidth: 1,
-                  width:350,
+                  width:330,
                   borderRadius:10,
                   borderColor:"gray",
                   marginHorizontal:20,
@@ -209,13 +207,13 @@ const Business = ({route}) => {
              color:"#565b64"
             }}
             >Business Phone</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:240,top:-10}}>*</Text>  
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:235,top:-10}}>*</Text>  
       </View>
       <TextInput
               style={{ 
                   height: 40, 
                   borderWidth: 1,
-                  width:350,
+                  width:330,
                   borderRadius:10,
                    borderColor:"gray",
                    marginHorizontal:20,
@@ -236,14 +234,14 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business/Office Address</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?210:240,top:-10}}>*</Text> 
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?210:220,top:-10}}>*</Text> 
  
       </View>
       <TextInput
               style={{ 
                   height: 40, 
                   borderWidth: 1,
-                  width:350,
+                  width:330,
                   borderRadius:10,
                   borderColor:"gray",
                   marginHorizontal:20,
@@ -264,7 +262,7 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business State </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?270:270,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?270:255,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={states}
@@ -304,7 +302,7 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business City </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:270,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?280:255,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={states}
@@ -346,7 +344,7 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business Market</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?250:270,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:255,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={states}
@@ -384,18 +382,18 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>About Business</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?250:240,top:-10}}>*</Text> 
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:235,top:-10}}>*</Text> 
  
       </View>
       <TextInput
               style={{ 
                   height: 100, 
                   borderWidth: 1,
-                  width:350,
+                  width:330,
                   borderRadius:10,
                   borderColor:"gray",
                   marginHorizontal:20,
-                  alignSelf:"center",
+                  // alignSelf:"center",
                   padding:10,
                   marginVertical:5 }}
                   onChangeText={text => setAbout(text)}
@@ -426,11 +424,11 @@ style={{
         backgroundColor:"#337ab7",
         padding:10,
         borderRadius:10,
-        // marginHorizontal:40,
+        marginHorizontal:20,
         width:340,
         marginVertical:20,
        
-        alignSelf:"center",
+        // alignSelf:"center",
         alignItems:"center",
         justifyContent:"center"
        }}>
@@ -447,6 +445,12 @@ style={{
 export default Business
 
 const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor:"#fefefe",
+    marginTop: constants.statusBarHeight,
+   
+   },
     text:{
         textAlign:"center",
         shadowOffset: { width: 2, height: 2 },
@@ -461,7 +465,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#fafafa"
     },
     dropdownButtonStyle: {
-        width: 360,
+        width: 330,
         height: 40,
         marginHorizontal:20,
         backgroundColor: '#E9ECEF',
