@@ -33,6 +33,13 @@
       "eas": {
         "projectId": "fd477695-9867-428a-8ce6-fa4af656d383"
       }
+    },
+    "expo": {
+      "permissions": [
+        "CAMERA",
+        "CAMERA_ROLL"
+      ],
+      "platforms": ["ios", "android"]
     }
   }
 }

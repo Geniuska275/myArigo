@@ -11,6 +11,8 @@ import {
   import AsyncStorage from '@react-native-async-storage/async-storage';
   import ImageResizer from 'react-native-image-resizer';
   import constants from "expo-constants";
+  import * as ImageManipulator from 'expo-image-manipulator';
+ 
   
   import React, { useEffect, useState } from 'react'
   import { SafeAreaView } from 'react-native-safe-area-context'
@@ -20,8 +22,10 @@ import {
   import RNPickerSelect from 'react-native-picker-select';
   import { Entypo ,AntDesign} from '@expo/vector-icons';
   import * as ImagePicker from "expo-image-picker"
+  import { launchImageLibrary } from 'react-native-image-picker';
   import { ActivityIndicator } from 'react-native'
   import SelectDropdown from 'react-native-select-dropdown'
+  import * as FileSystem from 'expo-file-system';
   import axios from 'axios';
   
   const Information = ({route}) => {
@@ -30,35 +34,43 @@ import {
       const [image, setImage]=useState(null)
       const {amount,duration}=route.params;
       const navigation=useNavigation();
+      const [base64Txt, setBase64Txt] = useState(null);
+
       
+      const HandleSubmit= async()=>{  
+            setLoading(true)
 
-       const HandleSubmit= async()=>{   
-        setLoading(true)  
-        try {
-          
-
-          
-          const formData=new FormData()     
+        try {    
           const slug = await AsyncStorage.getItem("slug")
-          const imageUri = images[0].replace('file://', '');
-           formData.append('proof',  {
-             uri:imageUri,
-             name:'image.jpg',
-             type:'image/jpg'
-          })
-           formData.append("slug",slug)
-           formData.append('duration',duration)
-           formData.append('amount',amount)
-               const baseUrl=`https://app.myarigo.com/api/user/onboard/bank_transfer`      
-               const token = await AsyncStorage.getItem("token")   
-              const response= await axios.post(baseUrl, formData, {
-                 headers: {
-                   Accept: 'application/json',
-                   'Content-Type': 'multipart/form-data',
-                   Authorization: `Bearer ${token}`,
-                 }
-               })
+   
+            const data={
+               proof:image,
+               slug:slug,
+               duration:duration,
+               amount:amount
+               }
+                    
+          const baseUrl=`https://app.myarigo.com/api/user/onboard/bank_transfer`      
+          const token = await AsyncStorage.getItem("token")   
+          const res = await fetch(baseUrl, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+           // include, *omit, same-origin, exclude
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}` // Add authorization if needed
+            },
+            // no-referrer, *no-referrer-when-downgrade, no-referrer
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+          });
+        
+          // const response= await axios.post(baseUrl,data, {
+          //        headers: {
+          //          Authorization: `Bearer ${token}`,
+          //         'Content-Type': 'application/json',              
+          //        }
                  
+          //      })
+                 console.log(res)
                 Alert.alert('Image uploaded successfully', 'Your payment has been made successfully', [
                   { text: 'OK'},
                 ]);
@@ -88,10 +100,49 @@ import {
             mediaTypes:ImagePicker.MediaTypeOptions.Images,
             allowsEditing:true,
             aspect:[4,4],
-            quality:1
+            quality:1,
+         
          })
-         if(!result.canceled){
-            setImages(state=>[...state,result.assets[0].uri]);
+         if(!result.canceled){    
+          const { uri } = result.assets[0];
+          setImages(prev=>[...prev ,uri])
+
+          if (Platform.OS === "web") {
+            const response = await fetch(uri);
+            const blob = await response.blob();
+            const reader = new FileReader();
+    
+            reader.onloadend = () => {
+              const base64Image = reader.result
+              setImage(base64Image);
+              setBase64Txt(base64Image);
+            };
+    
+            reader.readAsDataURL(blob);
+          } else {
+            const fileInfo = await FileSystem.getInfoAsync(uri);
+            const mimeType = fileInfo.uri.split(".").pop();
+            const mediaType =
+              mimeType === "jpg" || mimeType === "jpeg"
+                ? "image/jpeg"
+                : mimeType === "png"
+                ? "image/png"
+                : mimeType === "gif"
+                ? "image/gif"
+                : "image/jpeg";
+    
+            const base64 = await FileSystem.readAsStringAsync(uri, {
+              encoding: FileSystem.EncodingType.Base64,
+            });
+    
+            // const base64Image = ⁠ `data:${mediaType};base64,${base64}` 
+            const base64Image = `data:${mediaType};base64,${base64}`;
+           
+    
+            setImage(base64Image);
+            setBase64Txt(base64Image);
+          }
+    
         }else{
           Alert.alert("Invalid Input", "Can not upload more than 4 images", [
             { text: "OK", onPress: () => console.log("OK Pressed") },
@@ -108,7 +159,18 @@ import {
           navigation.navigate("Home")
          }
 
-     
+         const convertImageToBase64 = async (fileUri) => {
+          try {
+            const base64Data = await FileSystem.readAsStringAsync(fileUri, {
+              encoding: FileSystem.EncodingType.Base64,
+            });
+            ;
+            return base64Data;
+          } catch (error) {
+            console.error('Error converting image to base64:', error);
+            return null;
+          }
+        };
       
   
     return (
