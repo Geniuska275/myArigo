@@ -151,7 +151,7 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business Name</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?265:235,top:-10}}>*</Text> 
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?265:230,top:-10}}>*</Text> 
  
       </View>
       <TextInput
@@ -180,7 +180,7 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business Email</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?265:235,top:-10}}>*</Text>  
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?265:230,top:-10}}>*</Text>  
       </View>
       <TextInput
               style={{ 
@@ -207,7 +207,7 @@ const Business = ({route}) => {
              color:"#565b64"
             }}
             >Business Phone</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:235,top:-10}}>*</Text>  
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:225,top:-10}}>*</Text>  
       </View>
       <TextInput
               style={{ 
@@ -234,7 +234,7 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business/Office Address</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?210:220,top:-10}}>*</Text> 
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?210:175,top:-10}}>*</Text> 
  
       </View>
       <TextInput
@@ -262,7 +262,7 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business State </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?270:255,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?270:235,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={states}
@@ -302,7 +302,7 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business City </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?280:255,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?280:245,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={states}
@@ -344,7 +344,7 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>Business Market</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:255,top:-10}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:225,top:-10}}>*</Text>       
       </View>
       <SelectDropdown
     data={states}
@@ -382,7 +382,7 @@ const Business = ({route}) => {
         <Text style={{
             color:"#565b64"
         }}>About Business</Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:235,top:-10}}>*</Text> 
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"?260:230,top:-10}}>*</Text> 
  
       </View>
       <TextInput

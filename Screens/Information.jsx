@@ -290,7 +290,7 @@ import {
             marginBottom:10,
             marginTop:10
         }}>Proof of Transfer </Text>
-        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 180:240,top:-1}}>*</Text>       
+        <Text style={{color:"red",fontSize:30,position:"absolute",right:Platform.OS==="ios"? 180:170,top:-1}}>*</Text>       
       </View>
 
        <View style={{

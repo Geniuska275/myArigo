@@ -114,7 +114,7 @@ const DashboardScreen = ({navigation}) => {
         <Text style={{textAlign:"justify",marginHorizontal:10,marginTop:15}}>
           -Turn your bussiness into a global market.
         </Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={()=>Navigation.navigate("Subscription")}>
             <Text style={{color:"white",fontWeight:"bold"}}> Register your Business/brand/Service</Text>
         </TouchableOpacity>
 
