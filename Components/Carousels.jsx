@@ -20,11 +20,8 @@ const MyCarousel = ({text , navigate}) => {
     const baseUrl = "https://app.myarigo.com/api/posts"
     try {
       const token = await AsyncStorage.getItem("token")
-      const response = await axios.get(baseUrl,{
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      })
+      const response = await axios.get(baseUrl)
+      console.log(response.data.data.posts.data)
       setPosts(response.data.data.posts.data)
 
     } catch (error) {
