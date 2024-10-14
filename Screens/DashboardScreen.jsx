@@ -12,9 +12,11 @@ const DashboardScreen = ({navigation}) => {
     const Navigation = useNavigation()
 
     const [userData, setUserData] = useState({})
+    const [userMessages, setUserMessages] = useState([])
+    const [userSub,setUserSub] = useState()
     const [plan, setPlan] = useState("")
     const [duration, setDuration] = useState("")
-
+    console.log(userMessages)
 
     async function getUserData(){
       const baseUrl = USER_ENDPOINT
@@ -28,12 +30,41 @@ const DashboardScreen = ({navigation}) => {
       setUserData(response.data.user)
     }
     
+
+    async function getUserMessages(){
+        const baseUrl = "https://app.myarigo.com/api/user/messages"
+        const token = await AsyncStorage.getItem("token")
+        const response = await axios.get(baseUrl,{
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        })
+      
+        setUserMessages(response.data.messages)
+      }
+      
+
+      async function getUserSub(){
+        const baseUrl = `https://app.myarigo.com/api/user/onboard/41500/3`
+        const token = await AsyncStorage.getItem("token")
+        const response = await axios.get(baseUrl,{
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        })
+        console.log(response.data.data)
+        setUserSub(response.data.data.plan)
+      }
+      
     useEffect(()=>{
       getUserData()
        getPlan()
+       getUserMessages()
+       getUserSub()
 
     }, [])
-
+    console.log(userSub.price)
+     
     async function getPlan(){
         
         const plan = await AsyncStorage.getItem("plan")
@@ -59,7 +90,7 @@ const DashboardScreen = ({navigation}) => {
                 alignItems:"center",
                 borderWidth:2
             }}>
-                <Text style={{color:"white"}}>0</Text>
+                <Text style={{color:"white"}}>{userData.total_products}</Text>
             </View>
             <Text style={{fontWeight:"bold",color:"#fefefe"}}>Products</Text>
 
@@ -89,29 +120,29 @@ const DashboardScreen = ({navigation}) => {
                 alignItems:"center",
                 borderWidth:2
             }}>
-                <Text style={{color:"white"}}>0</Text>
+                <Text style={{color:"white"}}>{userMessages?.length}</Text>
             </View>
             <Text style={{fontWeight:"bold",color:"#fefefe"}}>Messages</Text>
 
         </TouchableOpacity>
     </View>
     <View style={styles.box}>
-        <Text style={{textAlign:"justify",marginHorizontal:10,marginTop:15}}>
+        <Text style={{marginHorizontal:10,marginTop:15}}>
             Welcome to Myarigo,register  for our premium packages and enjoy the following;
         </Text>
-        <Text style={{textAlign:"justify",marginHorizontal:10,marginTop:15}}>
+        <Text style={{marginHorizontal:10,marginTop:15}}>
            -Unlimited Visibility
         </Text>
-        <Text style={{textAlign:"justify",marginHorizontal:10,marginTop:15}}>
+        <Text style={{marginHorizontal:10,marginTop:15}}>
             -Connect with millions of verified brands,services,businesses,buyers and sellers.
         </Text>
-        <Text style={{textAlign:"justify",marginHorizontal:10,marginTop:15}}>
+        <Text style={{marginHorizontal:10,marginTop:15}}>
             -Give your brand an identity, and give your clients and customers multiple reasons to trust you
         </Text>
-        <Text style={{textAlign:"justify",marginHorizontal:10,marginTop:15}}>
+        <Text style={{marginHorizontal:10,marginTop:15}}>
             -Advertise your business to the right people at the right time.
         </Text>
-        <Text style={{textAlign:"justify",marginHorizontal:10,marginTop:15}}>
+        <Text style={{marginHorizontal:10,marginTop:15}}>
           -Turn your bussiness into a global market.
         </Text>
         <TouchableOpacity style={styles.button} onPress={()=>Navigation.navigate("Subscription")}>
@@ -119,10 +150,47 @@ const DashboardScreen = ({navigation}) => {
         </TouchableOpacity>
 
     </View>
-   {plan ? (
+   {userSub? (
 
-   <View style={{borderWidth:1,borderColor:"gray",width:370,marginHorizontal:20,
-        height:140,paddingVertical:40}}>
+   <View style={{borderWidth:1,
+        borderColor:"gray",
+        width:360,
+        marginHorizontal:20,
+        alignSelf:"center",
+        height:140,
+        paddingVertical:40,
+        borderWidth:0.5,
+        borderRadius:5,
+        elevation:4,
+        
+        }}>
+        <View>
+            <Text style={{alignSelf:"center",color:"#337bb7",marginBottom:10,fontWeight:"bold"}}> Subscription Plan  #{userSub.price}</Text>
+
+            <Text style={{alignSelf:"center",color:"#337bb7",marginBottom:10,fontWeight:"bold"}}> Duration : {userSub.duration} - Month(s)</Text>
+            <Text style={{alignSelf:"center",color:"#337bb7",marginBottom:10,fontWeight:"bold"}}>
+                
+                 Next Billing on December 5th, 2024.
+                 </Text>
+
+            
+
+        </View>
+       
+    </View>
+   ):(
+    <View style={{borderWidth:1,
+        borderColor:"gray",
+        width:360,
+        marginHorizontal:20,
+        alignSelf:"center",
+        height:140,
+        paddingVertical:40,
+        borderWidth:0.5,
+        borderRadius:5,
+        elevation:4,
+        
+        }}>
 
         <Text style={{color:"red",fontWeight:"bold",alignSelf:"center",marginBottom:10}}>
             Pending Registration
@@ -136,7 +204,7 @@ const DashboardScreen = ({navigation}) => {
             please await admin approval.
         </Text>
     </View>
-   ):null} 
+   )} 
   </ScrollView>
 
    </SafeAreaView>
