@@ -47,7 +47,7 @@ const PostScreen = ({navigation}) => {
           Authorization: `Bearer ${token}`
         }
       })
-      setPosts(response.data.data.posts.data[0])
+      setPosts(response.data.data.posts.data)
 
     } catch (error) {
       console.error('Error:', error);

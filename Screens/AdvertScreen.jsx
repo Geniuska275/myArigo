@@ -53,10 +53,17 @@ const AdvertScreen = ({}) => {
   style={styles.gridView}
   renderItem={({ item }) => (
     <ImageBackground source={{uri:item.image}} style={styles.backgroundImage}>
-    <View style={{position:"absolute",
+    <View 
+    style={{
+      position:"absolute",
       top:15,left:10,
       flexDirection:"row",
-      borderRadius:20,backgroundColor:"white",padding:5,gap:10,alignItems:"center"}}>
+      borderRadius:20,
+      backgroundColor:"white",
+      padding:5,
+      gap:10,
+      alignItems:"center"
+      }}>
     <Octicons name="dot-fill" size={24} color="#337ab7" />
       <Text  style={{fontWeight:"bold",color:"black",width:80}}
       numberOfLines={1}

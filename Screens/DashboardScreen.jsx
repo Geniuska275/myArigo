@@ -63,12 +63,12 @@ const DashboardScreen = ({navigation}) => {
        getUserSub()
 
     }, [])
-    console.log(userSub.price)
+    
      
     async function getPlan(){
         
-        const plan = await AsyncStorage.getItem("plan")
-        const duration = await AsyncStorage.getItem("duration")
+        const plan = await AsyncStorage?.getItem("plan")
+        const duration = await AsyncStorage?.getItem("duration")
              setPlan(plan)
            setDuration(duration)
       }

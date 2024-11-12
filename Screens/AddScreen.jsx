@@ -7,14 +7,14 @@ import {
    Alert, 
    Image,
    KeyboardAvoidingView,
-   Platform } from 'react-native'
+   Platform
+   } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../Components/Header'
 import { useNavigation } from '@react-navigation/native'
 import { TextInput } from 'react-native-gesture-handler';
-import RNPickerSelect from 'react-native-picker-select';
 import { Entypo } from '@expo/vector-icons';
 import * as ImagePicker from "expo-image-picker"
 import { ActivityIndicator } from 'react-native'
@@ -45,27 +45,12 @@ const AddScreen = ({navigation}) => {
     const[type, setType]=useState("");
     const[schooling, setSchooling]=useState("");
     const[qualification, setQualification]=useState("");
-
-
-
     const [age, setAge] = useState("")
-    const [experience, setExperience]=useState([]);
-    const [status, setStatus]=useState("");
-    const [marital, setMarital]=useState("");
-    const [certificate,setCert]=useState("")
-    const [gender,setGender]=useState("")
-
-
-
-    console.log(company)
-    console.log(endDate)
-    console.log(startDate)
-    console.log(experience)
-
-
-
-
-
+    const [experience, setExperience] = useState([]);
+    const [status, setStatus] = useState("");
+    const [marital, setMarital] = useState("");
+    const [certificate, setCert] = useState("")
+    const [gender, setGender] = useState("")
     
     useEffect(()=>{
         (async()=>{

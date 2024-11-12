@@ -9,6 +9,7 @@ import Icon from "react-native-vector-icons/Ionicons"
 import ProductCategoryDetails from '../Screens/ProductCategoryDetails';
 import DashboardScreen from '../Screens/DashboardScreen';
 import { MaterialIcons } from '@expo/vector-icons';
+import Adverts from '../Screens/Adverts';
 
 
 
@@ -54,7 +55,7 @@ function BottomTabs() {
     }>
        <Tab.Screen name="Dashboard" component={DashboardScreen} />
        <Tab.Screen name="Categories" component={ProductCategoryDetails} />
-       <Tab.Screen name="Adverts" component={AdvertsScreen} />
+       <Tab.Screen name="Adverts" component={Adverts} />
        <Tab.Screen name="Auctions" component={AuctionScreen} /> 
        <Tab.Screen name="Post" component={PostScreen} />
        <Tab.Screen name="Services" component={Services} />
