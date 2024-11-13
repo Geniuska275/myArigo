@@ -53,7 +53,8 @@ const Products = ({navigation}) => {
     <SafeAreaView style={container}>
     <Header navigation={navigation}/>
     <Text style={styles.text}>Products</Text>
-  
+       <ScrollView>
+
       <Text style={{
         fontWeight:"bold",
         marginHorizontal:20,
@@ -169,7 +170,7 @@ const Products = ({navigation}) => {
     }}
     showsVerticalScrollIndicator={false}
     dropdownStyle={styles.dropdownMenuStyle}
-  />
+    />
 
     
      
@@ -237,7 +238,7 @@ const Products = ({navigation}) => {
     }}
     showsVerticalScrollIndicator={false}
     dropdownStyle={styles.dropdownMenuStyle}
-  />
+    />
 
     
      
@@ -255,14 +256,14 @@ const Products = ({navigation}) => {
                  marginHorizontal:20,
                  marginVertical:10,
                  marginLeft:Platform.OS==="ios" ?28:25,
-                 }}>
+                }}>
                 
         <Text style={{
           fontWeight:"bold",
           color:"white",
           alignSelf:"center",
           textTransform:"uppercase"
-          }}>Search</Text>
+        }}>Search</Text>
        </TouchableOpacity>
          
 
@@ -272,7 +273,7 @@ const Products = ({navigation}) => {
       style={styles.gridView}
       spacing={2}
       renderItem={({ item }) => (
-       <TouchableOpacity
+        <TouchableOpacity
         onPress={()=>{
           navigation.navigate('ProductDetails',{product:item})
         }}
@@ -284,10 +285,10 @@ const Products = ({navigation}) => {
          borderRadius:10,
          margin:10,
          position:"relative"
-       
-       }}>
+         
+        }}>
         {item.images.map((image)=>(
-
+          
           <Image 
           source={{
             uri:image.image_url
@@ -297,8 +298,8 @@ const Products = ({navigation}) => {
             height:"50%",
             borderTopLeftRadius:10,
             borderTopRightRadius:10,
-            }}/>
-  ))}
+          }}/>
+        ))}
 
 
         <Text numberOfLines={1} style={{
@@ -322,7 +323,7 @@ const Products = ({navigation}) => {
         <Text style={{
           textAlign:"center",
           fontSize:12,
-       
+          
         }}>{item.view}</Text>
         </View>
        
@@ -332,13 +333,14 @@ const Products = ({navigation}) => {
 
        </TouchableOpacity>
       )}
-    />
+      />
 
 
 
 
     
     
+</ScrollView>
   </SafeAreaView>
   )
 }
