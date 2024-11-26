@@ -322,25 +322,13 @@ const Products = ({navigation}) => {
         <FontAwesome name="eye" size={24} color="black"/>
         <Text style={{
           textAlign:"center",
-          fontSize:12,
-          
+          fontSize:12,          
         }}>{item.view}</Text>
         </View>
-       
-       
-
-
-
        </TouchableOpacity>
       )}
       />
-
-
-
-
-    
-    
-</ScrollView>
+    </ScrollView>
   </SafeAreaView>
   )
 }

@@ -19,6 +19,7 @@ import Auction from "../Screens/Auction";
 import Post from "../Screens/Post";
 import Information from "../Screens/Information";
 import Adverts from "../Screens/Adverts";
+import Details from "../Screens/Details";
 
 
 
@@ -52,6 +53,7 @@ function AuthStack(){
             <Stack.Screen name="Auction" component={Auction} />
             <Stack.Screen name="Post" component={Post} />
             <Stack.Screen name="Information" component={Information} />
+            <Stack.Screen name="Details" component={Details} />
 
 
 

@@ -58,7 +58,9 @@ const Product = () => {
      spacing={10}
   style={styles.gridView}
   renderItem={({ item }) => (
-    <View style={{
+    <TouchableOpacity
+       onPress={()=>navigation.navigate('ProductDetails',{product:item})}
+    style={{
       width:160,
       height:180,
       borderWidth:0.5,
@@ -117,7 +119,7 @@ const Product = () => {
 
 
 
-    </View>
+    </TouchableOpacity>
 
 
   )}
