@@ -1,12 +1,11 @@
 {
-   "expo": {
-    "name": "my Arigo",     
-    "slug": "myarigo",
+  "expo": {
+    "name": "my Arigo",
+    "slug": "arigo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./Components/ar.png",
     "userInterfaceStyle": "light",
-    
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -31,7 +30,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "fd477695-9867-428a-8ce6-fa4af656d383"
+        "projectId": "82fe49c5-9a5e-458c-9dab-6807244e476a"
       }
     },
     "expo": {
@@ -39,7 +38,11 @@
         "CAMERA",
         "CAMERA_ROLL"
       ],
-      "platforms": ["ios", "android"]
-    }
+      "platforms": [
+        "ios",
+        "android"
+      ]
+    },
+    "owner": "geniuska"
   }
 }

@@ -106,7 +106,7 @@ import { useNavigation } from "@react-navigation/native";
                 
               }}
             >
-              {userData.name}
+              {userData?.name}
             </Text>
           </View>
           <Divider width={0.5} />

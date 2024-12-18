@@ -26,14 +26,14 @@ const LoginScreen = () => {
       password:Password
     }
     try {
-       const response = await axios.post(baseUrl,userData);
+      const response = await axios.post(baseUrl,userData);
       await AsyncStorage.setItem("token", response.data.token)
       AsyncStorage.setItem("isLoggeedIn",JSON.stringify(true))
       Alert.alert(
         'Login',
         'Signedin successfully',
-        navigation.navigate("Home")
       );
+      navigation.navigate("Home")
     } catch (error) {
       console.log(error)
       console.log(error.message)

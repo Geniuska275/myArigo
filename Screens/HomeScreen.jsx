@@ -7,9 +7,11 @@ import Sponsored from '../Components/Sponsored';
 import MyCarousel from '../Components/Carousels';
 import Product from '../Components/Product';
 import Enquires from '../Components/Enquires';
+import { useNavigation } from '@react-navigation/native';
 
 
 const HomeScreen = () => {
+  const navigation=useNavigation()
     const {image, container} = styles;
   return (
     <SafeAreaView style={container}>
@@ -104,7 +106,12 @@ const HomeScreen = () => {
         marginBottom:20,
         alignSelf:"center"
        }}>
-        <Text style={{color:"white",fontWeight:"bold"}}>More</Text>
+
+        <TouchableOpacity 
+        onPress={()=>navigation.navigate('Products')}
+       >
+          <Text style={{color:"white",fontWeight:"bold",padding:5}}>More</Text>
+        </TouchableOpacity>
        </TouchableOpacity>
        <Enquires/>
         

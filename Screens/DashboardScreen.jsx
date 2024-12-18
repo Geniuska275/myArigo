@@ -16,7 +16,7 @@ const DashboardScreen = ({navigation}) => {
     const [userSub,setUserSub] = useState()
     const [plan, setPlan] = useState("")
     const [duration, setDuration] = useState("")
-    console.log(userMessages)
+    
 
     async function getUserData(){
       const baseUrl = USER_ENDPOINT
@@ -90,12 +90,14 @@ const DashboardScreen = ({navigation}) => {
                 alignItems:"center",
                 borderWidth:2
             }}>
-                <Text style={{color:"white"}}>{userData.total_products}</Text>
+                <Text style={{color:"white"}}>{userData?.total_products}</Text>
             </View>
             <Text style={{fontWeight:"bold",color:"#fefefe"}}>Products</Text>
 
         </TouchableOpacity>
-        <TouchableOpacity style={touchy}>
+        <TouchableOpacity style={touchy}  
+        onPress={()=>Navigation.navigate("Refferals")}
+        >
             <View style={{
                 width:40,
                 height:40,
@@ -105,7 +107,7 @@ const DashboardScreen = ({navigation}) => {
                 alignItems:"center",
                 borderWidth:2
             }}>
-                <Text style={{color:"white"}}>{userData.referral}</Text>
+                <Text style={{color:"white"}}>{userData?.referral}</Text>
             </View>
             <Text style={{fontWeight:"bold",color:"#fefefe"}}>Refferals</Text>
 
