@@ -6,7 +6,7 @@ const Select = ({newoptions,setSelectedState}) => {
     const [show, setShow] = useState(true)
     const [modalVisible, setModalVisible] = useState(false);
     
-    const [value,setValue]=useState('')
+    const [value,setValue]=useState(newoptions[0])
     const [options, setOptions] = useState(newoptions)
 
     const handleSelect=(option)=>{
@@ -15,13 +15,13 @@ const Select = ({newoptions,setSelectedState}) => {
        setSelectedState(selected)
        setModalVisible(false)
     }
-    console.log(value)
+  
   return (
-    <View style={{
-       
-        backgroundColor:"#e8ecec",
-        flex:1,
-        
+    <View style={{        
+    //   flex:1 
+    marginLeft:15,
+    marginTop:8,
+     
     }}>
         <TouchableOpacity style={{
             flexDirection:'row',

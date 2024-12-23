@@ -11,23 +11,22 @@ import { useNavigation } from '@react-navigation/native';
 import { nigeriaStatesAndLGAs } from '../data/states';
 import { Picker } from "@react-native-picker/picker";
 
-import RNPickerSelect from 'react-native-picker-select';
 import Select from '../Components/select';
 const HomeScreen = () => {
   const navigation=useNavigation()
     const {image, container} = styles;
     const [states,setState]=useState(nigeriaStatesAndLGAs)
-    const [selectedState,setSelectedState]=useState()
+    const[text, setText]=useState(null)
+    const [selectedState,setSelectedState]=useState('Products')
     const[options,setOptions]=useState([
-      'Posts','Businesses','Products','Cvs'
+      'Products','Businesses','Posts','Cvs'
     ])
+      const HandleCahnge=()=>{
+        navigation.navigate(`${selectedState}`,{value: `${text}`})
+      }
 
-    
-    useEffect(()=>{
-      navigation.navigate(`${selectedState}`,{value: `${setSelectedState}`})
-    },[selectedState])
-
-    
+      console.log(text)
+   
     
   return (
     <SafeAreaView style={container}>
@@ -62,45 +61,40 @@ const HomeScreen = () => {
               color:"white"
             }}>Nigeria</Text>
             </View>
-  
-{/* 
-
-            <Picker
-        selectedValue={selectedState}
-        onValueChange={(itemValue) => setSelectedState(itemValue)}
-        style={styles.picker}
-      >
-        <Picker.Item label="Select a State" value="Nigeria" />
-        {states.map((state, index) => (
-          <Picker.Item key={index} label={state} value={state} />
-        ))}
-      </Picker> */}
-
 
            </View>
            <View style={{
             position:"absolute",
-            top:100,
+            top:120,
             flexDirection:"row",
             justifyContent:"space-between",
             gap:5,
-            width:350,
+            width:400,
             backgroundColor:"white",
             alignSelf:"center",
-            paddingVertical:15,
-            borderRadius:30
+            paddingVertical:10,
+            borderRadius:30,
+            height:50,
+
            }}>
             <Select newoptions={options} setSelectedState={setSelectedState}/>
 
-            <TextInput style={{width:120,padding:10}} placeholder="Search here..."
-            value={selectedState} />
+            <TextInput style={{width:130,padding:10}} placeholder={`Seach ${selectedState}`}
+              onChangeText={text => setText(text)}
+            
+             />
             <TouchableOpacity style={{
               backgroundColor:"#337ab7",
               paddingVertical:10,
               borderRadius:30,
+              height:35,
               paddingHorizontal:20,
-              marginRight:5
-            }}>
+              width:100,
+              marginRight:8
+             
+            }}
+            
+            onPress={()=>HandleCahnge()}>
               <Text style={{
                 color:"white"
               }}>Search</Text>
@@ -119,33 +113,36 @@ const HomeScreen = () => {
             paddingVertical:10,
             alignSelf:"center",
             borderRadius:10
-           }}>
+           }}
+           onPress={()=>navigation.navigate('Assist')}
+           
+           >
             <Text style={{textAlign:"center",color:"white",fontWeight:"bold",}}>Let's Assist you</Text>
            </TouchableOpacity>
            </View>
         </ImageBackground>
-        <Sponsored/>
         <MyCarousel text={"Posts"} navigate={"Post"}/>
 
         <MyCarousel  text={"Auction"} navigate={"Auction"}/>
         <Product/>
        <TouchableOpacity style={{
-        backgroundColor:"#337ab7",
-        padding:10,
+         backgroundColor:"#337ab7",
+         padding:10,
         borderRadius:10,
         marginHorizontal:20,
         paddingHorizontal:30,
         marginVertical:30,
         marginBottom:20,
         alignSelf:"center"
-       }}>
+      }}>
 
         <TouchableOpacity 
-        onPress={()=>navigation.navigate('Products')}
-       >
+        onPress={()=>navigation.navigate('Products',{value:""})}
+        >
           <Text style={{color:"white",fontWeight:"bold",padding:5}}>More</Text>
         </TouchableOpacity>
        </TouchableOpacity>
+         <Sponsored/> 
        <Enquires/>
         
 

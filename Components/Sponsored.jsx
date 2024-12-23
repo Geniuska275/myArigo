@@ -5,7 +5,8 @@ import { Octicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { FlatGrid } from 'react-native-super-grid';
 
-const Sponsored = () => {
+const Sponsored = ({navigate}) => {
+  
   const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation();
     const [selected,setSelected]=useState({})
@@ -45,8 +46,9 @@ const Sponsored = () => {
       }
   return (
     <View style={{
-        backgroundColor:"#e8ecec",
+        backgroundColor:"white",
         flex:1,
+        marginBottom:20
     }}>
        <Modal visible={modalVisible} 
         style={{ flex: 1 }}
@@ -113,7 +115,7 @@ const Sponsored = () => {
         alignItems:"center",
         marginRight:10   
       }}
-      onPress={()=>navigation.navigate("Advert")}
+      onPress={()=>navigation.navigate("Sponsor")}
       >
         <Text style={{
             color:"#337ab7"

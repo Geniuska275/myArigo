@@ -14,8 +14,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {CV_ENDPOINT} from "@env"
 import { FontAwesome } from '@expo/vector-icons';
 
-const Products = ({navigation}) => {
+const Products = ({navigation,route}) => {
   const [products, setProducts] = useState([])
+  const {value}=route?.params;
+ 
 
   const getAllProducts = async ()=>{
     const baseUrl = "https://app.myarigo.com/api/products"
@@ -74,9 +76,9 @@ const Products = ({navigation}) => {
           borderColor:"black",
           width:150,
           height:40,
-          marginVertical:10
+          marginVertical:10,
           
-        }}/>
+        }} value={value}/>
         <SelectDropdown
     data={emojisWithIcons}
     onSelect={(selectedItem, index) => {
