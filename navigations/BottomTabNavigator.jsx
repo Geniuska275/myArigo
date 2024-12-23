@@ -57,7 +57,7 @@ function BottomTabs() {
        <Tab.Screen name="Categories" component={ProductCategoryDetails} />
        <Tab.Screen name="Adverts" component={Adverts} />
        <Tab.Screen name="Auctions" component={AuctionScreen} /> 
-       <Tab.Screen name="Post" component={PostScreen} />
+       <Tab.Screen name="Posts" component={PostScreen} />
        <Tab.Screen name="Services" component={Services} />
     </Tab.Navigator>
   );

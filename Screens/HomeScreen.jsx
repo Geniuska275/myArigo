@@ -1,5 +1,5 @@
 import { ImageBackground, SafeAreaView, StyleSheet, Text, View,TextInput,TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NewHeader from '../Components/NewHeader'
 import constants from "expo-constants";
 import { Entypo } from '@expo/vector-icons';
@@ -8,11 +8,27 @@ import MyCarousel from '../Components/Carousels';
 import Product from '../Components/Product';
 import Enquires from '../Components/Enquires';
 import { useNavigation } from '@react-navigation/native';
+import { nigeriaStatesAndLGAs } from '../data/states';
+import { Picker } from "@react-native-picker/picker";
 
-
+import RNPickerSelect from 'react-native-picker-select';
+import Select from '../Components/select';
 const HomeScreen = () => {
   const navigation=useNavigation()
     const {image, container} = styles;
+    const [states,setState]=useState(nigeriaStatesAndLGAs)
+    const [selectedState,setSelectedState]=useState()
+    const[options,setOptions]=useState([
+      'Posts','Businesses','Products','Cvs'
+    ])
+
+    
+    useEffect(()=>{
+      navigation.navigate(`${selectedState}`,{value: `${setSelectedState}`})
+    },[selectedState])
+
+    
+    
   return (
     <SafeAreaView style={container}>
         <NewHeader/>
@@ -46,6 +62,20 @@ const HomeScreen = () => {
               color:"white"
             }}>Nigeria</Text>
             </View>
+  
+{/* 
+
+            <Picker
+        selectedValue={selectedState}
+        onValueChange={(itemValue) => setSelectedState(itemValue)}
+        style={styles.picker}
+      >
+        <Picker.Item label="Select a State" value="Nigeria" />
+        {states.map((state, index) => (
+          <Picker.Item key={index} label={state} value={state} />
+        ))}
+      </Picker> */}
+
 
            </View>
            <View style={{
@@ -57,10 +87,13 @@ const HomeScreen = () => {
             width:350,
             backgroundColor:"white",
             alignSelf:"center",
-            paddingVertical:10,
+            paddingVertical:15,
             borderRadius:30
            }}>
-            <TextInput style={{width:250,padding:10}} placeholder="Search here..." />
+            <Select newoptions={options} setSelectedState={setSelectedState}/>
+
+            <TextInput style={{width:120,padding:10}} placeholder="Search here..."
+            value={selectedState} />
             <TouchableOpacity style={{
               backgroundColor:"#337ab7",
               paddingVertical:10,

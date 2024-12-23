@@ -40,7 +40,7 @@ export default function DrawerStack() {
       <Drawer.Screen name="BusinessFollowed" component={BusinessFollowed} />
       <Drawer.Screen name="FollowedBusiness" component={FollowedBusiness} />
       <Drawer.Screen name="Messsages" component={Messages} />
-      <Drawer.Screen name="My Cv" component={Mycv} />
+      <Drawer.Screen name="CVs" component={Mycv} />
 
 
 

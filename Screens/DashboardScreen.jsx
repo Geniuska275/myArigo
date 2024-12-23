@@ -6,6 +6,7 @@ import constants from "expo-constants";
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {USER_ENDPOINT} from "@env"
+import Select from '../Components/select';
 
 const DashboardScreen = ({navigation}) => {
     const {touch, container, touchy, touches} = styles;
@@ -128,6 +129,7 @@ const DashboardScreen = ({navigation}) => {
 
         </TouchableOpacity>
     </View>
+    
     <View style={styles.box}>
         <Text style={{marginHorizontal:10,marginTop:15}}>
             Welcome to Myarigo,register  for our premium packages and enjoy the following;
