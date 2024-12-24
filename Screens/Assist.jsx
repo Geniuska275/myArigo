@@ -331,7 +331,7 @@ marginVertical:5
         }}>
 
         </View>
-        <Text style={styles.label}>By Applying for this service you agree to our <Text style={{color}}> Terms and Conditions.
+        <Text style={styles.label}>By Applying for this service you agree to our <Text style={{color:"red"}}> Terms and Conditions.
             </Text>
             </Text>
       </View>

@@ -69,7 +69,7 @@ const HomeScreen = () => {
             flexDirection:"row",
             justifyContent:"space-between",
             gap:5,
-            width:400,
+            width:370,
             backgroundColor:"white",
             alignSelf:"center",
             paddingVertical:10,
@@ -79,7 +79,7 @@ const HomeScreen = () => {
            }}>
             <Select newoptions={options} setSelectedState={setSelectedState}/>
 
-            <TextInput style={{width:130,padding:10}} placeholder={`Seach ${selectedState}`}
+            <TextInput style={{width:130,padding:10,paddingVertical:20}} placeholder={`Seach ${selectedState}`}
               onChangeText={text => setText(text)}
             
              />
